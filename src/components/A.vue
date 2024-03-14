@@ -1,27 +1,23 @@
 <template>
-    <div
-        class="py-22 px-22 max-w-sm mx-auto bg-red rounded-xl shadow-lg space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6">
-        <div class="text-center space-y-2 sm:text-left">
-            <div class="space-y-0.5">
-                <p class="text-lg text-black font-semibold">
-                    Erin Lindford
-                </p>
-                <p class="text-slate-500 font-large">
-                    Product Engineer
-                </p>
-            </div>
-            <button
-                class="px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">Message</button>
-        </div>
-
-    </div>
     <h1 class="px-36 font-medium underline">
         Hello world!
     </h1>
+    <div v-for="(item,index) in data" :key="index" class="ml-5">
+        <input type="checkbox" v-model="item.checked"><span>{{ item.name }}</span>
+        <A :data="item.children" v-if="item?.children"></A>
+    </div>
 </template>
 
-<script setup lang="ts">
-
+<script setup lang="ts" name="A">
+import { defineProps } from 'vue'
+interface Tree {
+    name: string,
+    checked: boolean,
+    children?: Tree[]
+}
+defineProps<{
+    data?: Tree[]
+}>();
 </script>
 
 <style scoped></style>
