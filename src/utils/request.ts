@@ -13,16 +13,16 @@ const axiosRequest = axios.create({
 });
 //第二部，给实例添加请求拦截器
 
-axiosRequest.interceptors.request.use((config) => {
+axiosRequest.interceptors.request.use((req) => {
 	//config配置对象，headers属性请求头，给服务器端携带公共参数用,主要是token
 	//请求拦截器这里，获取一下仓库里的token，带给服务器,这样就成功的获取了用户信息
 	const userStore = useUserStore()
 	//后台系统的token基本都是这样操作的
 	if(userStore.token){
-		config.headers.token = userStore.token
+		requestIdleCallback.headers.token = userStore.token
 	}
 	
-	return config;
+	return req;
 });
 
 //第三步，配置响应拦截器
