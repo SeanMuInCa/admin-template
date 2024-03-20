@@ -1,5 +1,5 @@
 <script setup lang="ts" name="App">
-import A from './components/A.vue'
+
 import {reactive} from 'vue'
 interface Tree{
   name:string,
@@ -49,7 +49,6 @@ const data =reactive<Tree[]>([
 <template>
   <div>
     <h1 class="font-bold text-lg hover:bg-purple-600 hover:text-yellow-600">HelloWorld</h1>
-    <A :data="data"></A>
   </div>
 </template>
 
