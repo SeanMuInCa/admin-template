@@ -19,7 +19,7 @@ defineProps<{
   data?: Tree[];
 }>();
 
-const print = (item) => {
+const print = (item: any) => {
   console.log(item);
 };
 </script>

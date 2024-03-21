@@ -19,7 +19,7 @@ axiosRequest.interceptors.request.use((req) => {
   const userStore = useUserStore();
   //后台系统的token基本都是这样操作的
   if (userStore.token) {
-    requestIdleCallback.headers.token = userStore.token;
+    req.headers.token = userStore.token;
   }
 
   return req;

@@ -1,11 +1,12 @@
 <script setup lang="ts" name="App">
+import axios from 'axios';
 import { reactive } from 'vue';
 interface Tree {
   name: string;
   checked: boolean;
   children?: Tree[];
 }
-import SvgIcon from '@/components/SvgIcon/index.vue';
+//@ts-expect-error we know
 const data = reactive<Tree[]>([
   {
     name: '1',
@@ -42,12 +43,29 @@ const data = reactive<Tree[]>([
     ],
   },
 ]);
+
+// axios({
+//   url: '/api/user/login',//请求地址
+//   method: 'post',//请求方式
+//   data:{
+//     username:'admin',
+//     password:'111111'
+//   }
+// })
+
+
 </script>
 
 <template>
   <div>
     <SvgIcon name="head" width="64px" height="64px"></SvgIcon>
+    <h1 >ceshi1</h1>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+h1{
+  font-size: $size;
+  color: $color;
+}
+</style>
