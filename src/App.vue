@@ -52,19 +52,17 @@ const data = reactive<Tree[]>([
 //     password:'111111'
 //   }
 // })
-
-
 </script>
 
 <template>
   <div>
     <SvgIcon name="head" width="64px" height="64px"></SvgIcon>
-    <h1 >ceshi1</h1>
+    <h1>ceshi1</h1>
   </div>
 </template>
 
 <style scoped lang="scss">
-h1{
+h1 {
   font-size: $size;
   color: $color;
 }
