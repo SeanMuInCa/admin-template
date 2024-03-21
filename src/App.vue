@@ -5,7 +5,7 @@ interface Tree {
   checked: boolean;
   children?: Tree[];
 }
-
+import SvgIcon from '@/components/SvgIcon/index.vue';
 const data = reactive<Tree[]>([
   {
     name: '1',
@@ -46,7 +46,7 @@ const data = reactive<Tree[]>([
 
 <template>
   <div>
-    <h1 class="font-bold text-lg hover:bg-purple-600 hover:text-yellow-600">HelloWorld</h1>
+    <SvgIcon name="head" width="64px" height="64px"></SvgIcon>
   </div>
 </template>
 
