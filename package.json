@@ -17,7 +17,8 @@
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "axios": "^1.6.7",
-    "vue": "^3.4.21"
+    "vue": "^3.4.21",
+    "element-plus": "2.6.1"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.23.10",
