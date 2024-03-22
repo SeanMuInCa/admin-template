@@ -10,13 +10,13 @@ import 'virtual:svg-icons-register';
 //引入仓库
 //import pinia from '@/store';
 import globaleComponent from '@/components/index.ts';
-//import { router } from '@/router/index';
+import { router } from '@/router/index';
 import '@/styles/index.scss';
 //import '@/permission';
 const app = createApp(App);
 app.use(ElementPlus);
 app.use(globaleComponent);
 
-//app.use(router);
+app.use(router);
 //app.use(pinia);
 app.mount('#app');

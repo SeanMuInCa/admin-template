@@ -46,8 +46,7 @@ const data = reactive<Tree[]>([
 
 <template>
   <div>
-    <SvgIcon name="head" width="64px" height="64px"></SvgIcon>
-    <h1>ceshi1</h1>
+    <router-view></router-view>
   </div>
 </template>
 
