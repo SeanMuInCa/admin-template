@@ -7,7 +7,7 @@ export interface loginData {
 
 interface dataType {
   token?: string;
-  message?:string;
+  message?: string;
 }
 
 export interface loginReturnData {
