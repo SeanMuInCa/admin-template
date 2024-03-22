@@ -6,7 +6,7 @@ export interface loginData {
 }
 
 interface dataType {
-  token?: string;
+  token: string;
   message?: string;
 }
 
