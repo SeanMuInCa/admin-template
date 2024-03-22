@@ -25,9 +25,9 @@
 <script setup lang="ts">
 import { User, Lock } from '@element-plus/icons-vue';
 import { reactive, ref } from 'vue';
-import {useRouter} from 'vue-router'
+import { useRouter } from 'vue-router';
 import { ElNotification } from 'element-plus';
-import useUserStore from '@/store/modules/user'
+import useUserStore from '@/store/modules/user';
 let $router = useRouter();
 const useStore = useUserStore();
 const loading = ref(false);
@@ -38,28 +38,31 @@ const loginInfo = reactive({
 
 const handleLogin = () => {
   loading.value = true;
-  useStore.userLogin(loginInfo).then(() => {
-    $router.push('/');
+  useStore
+    .userLogin(loginInfo)
+    .then(() => {
+      $router.push('/');
 
-    loading.value = false;
-    ElNotification({
-      type: 'success',
-      message: 'Welcome back',
+      loading.value = false;
+      ElNotification({
+        type: 'success',
+        message: 'Welcome back',
+      });
+    })
+    .catch((reason: string) => {
+      loading.value = false;
+      ElNotification({
+        type: 'error',
+        message: reason,
+      });
     });
-  }).catch((reason:string) => {
-    loading.value = false;
-    ElNotification({
-      type: 'error',
-      message: reason,
-    });
-  })
 };
 
 document.body.onkeyup = (e) => {
   if (e.key === 'Enter') {
     handleLogin();
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
