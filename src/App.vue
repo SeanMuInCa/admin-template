@@ -1,6 +1,6 @@
 <script setup lang="ts" name="App">
-import axios from 'axios';
-import { reactive } from 'vue';
+
+import { reactive,onMounted } from 'vue';
 interface Tree {
   name: string;
   checked: boolean;
@@ -44,14 +44,20 @@ const data = reactive<Tree[]>([
   },
 ]);
 
-// axios({
-//   url: '/api/user/login',//请求地址
-//   method: 'post',//请求方式
-//   data:{
-//     username:'admin',
-//     password:'111111'
-//   }
-// })
+import axiosRequest from '@/utils/request'
+onMounted(() => {
+  axiosRequest({
+    url: '/user/login',
+    method: 'post',
+    data:{
+      username:'admin',
+      password:'111111'
+    }
+  }).then((res) => {
+    console.log(res);
+    
+  })
+});
 </script>
 
 <template>
