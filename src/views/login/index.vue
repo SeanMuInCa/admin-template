@@ -36,14 +36,14 @@ const loginInfo = reactive({
   username: '',
   password: '',
 });
-const validateUsername = (rule: any, value: any, callback: any) => {
+const validateUsername = (_rule: any, value: any, callback: any) => {
   if (value.length < 5) {
     callback(new Error('the username at least has 5 characters'));
   } else if (value.length > 10) {
     callback(new Error('the username can not longer than 10 characters'));
   } else callback();
 };
-const validatePassword = (rule: any, value: any, callback: any) => {
+const validatePassword = (_rule: any, value: any, callback: any) => {
   if (/^(?:[a-zA-Z]{6,12}|\d{6,12})$/.test(value)) callback();
   else callback(new Error('the password requires 6-12 characters long'));
 };
