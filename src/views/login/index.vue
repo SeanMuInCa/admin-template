@@ -28,7 +28,7 @@ import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { ElNotification } from 'element-plus';
 import useUserStore from '@/store/modules/user';
-import {getWelcome} from '@/utils/time'
+import { getWelcome } from '@/utils/time';
 let $router = useRouter();
 const useStore = useUserStore();
 const loading = ref(false);
@@ -39,12 +39,13 @@ const loginInfo = reactive({
 
 const handleLogin = () => {
   loading.value = true;
-  useStore.userLogin(loginInfo)
+  useStore
+    .userLogin(loginInfo)
     .then(() => {
       $router.push('/');
       ElNotification({
         type: 'success',
-        title:getWelcome(),
+        title: getWelcome(),
         message: 'Welcome back',
       });
       loading.value = false;
@@ -57,7 +58,6 @@ const handleLogin = () => {
       });
     });
 };
-
 
 document.body.onkeyup = (e) => {
   if (e.key === 'Enter') {
