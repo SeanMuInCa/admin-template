@@ -43,7 +43,6 @@ const handleLogin = () => {
     .then(() => {
       $router.push('/');
 
-      
       ElNotification({
         type: 'success',
         message: 'Welcome back',
