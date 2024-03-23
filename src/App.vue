@@ -51,8 +51,5 @@ const data = reactive<Tree[]>([
 </template>
 
 <style scoped lang="scss">
-h1 {
-  font-size: $size;
-  color: $color;
-}
+
 </style>
