@@ -14,8 +14,7 @@
             <!-- <div class="view" @click="handleView"></div> -->
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" style="width: 100%; height: 40px" @click="handleLogin"
-              :loading="loading">Login</el-button>
+            <el-button type="primary" style="width: 100%; height: 40px" @click="handleLogin" :loading="loading">Login</el-button>
           </el-form-item>
         </el-form>
       </el-col>
@@ -37,64 +36,60 @@ const loginInfo = reactive({
   username: '',
   password: '',
 });
-const validateUsername = (rule:any,value:any,callback:any) => {
-  if(value.length < 5)
-  {
-    callback(new Error('the username at least has 5 characters'))
-  }else if(value.length > 10)
-  {
-    callback(new Error('the username can not longer than 10 characters'))
-  }else callback();
-}
-const validatePassword = (rule:any,value:any,callback:any) => {
-  if(/^(?:[a-zA-Z]{6,12}|\d{6,12})$/.test(value)) callback();
-  else callback(new Error('the password requires 6-12 characters long'))
-}
+const validateUsername = (rule: any, value: any, callback: any) => {
+  if (value.length < 5) {
+    callback(new Error('the username at least has 5 characters'));
+  } else if (value.length > 10) {
+    callback(new Error('the username can not longer than 10 characters'));
+  } else callback();
+};
+const validatePassword = (rule: any, value: any, callback: any) => {
+  if (/^(?:[a-zA-Z]{6,12}|\d{6,12})$/.test(value)) callback();
+  else callback(new Error('the password requires 6-12 characters long'));
+};
 //表单校验对象
 const rules = reactive({
   username: [
     {
       validator: validateUsername,
-      trigger: 'change'
-    }
+      trigger: 'change',
+    },
   ],
   password: [
     {
       validator: validatePassword,
-      trigger: 'change'
-    }
-  ]
-})
-
-
+      trigger: 'change',
+    },
+  ],
+});
 
 let loginForm = ref();
 const handleLogin = async () => {
   //校验表单
-  await loginForm.value.validate().then(() => {
-    loading.value = true;
-    useStore
-      .userLogin(loginInfo)
-      .then(() => {
-        $router.push('/');
-        ElNotification({
-          type: 'success',
-          title: getWelcome(),
-          message: 'Welcome back',
+  await loginForm.value
+    .validate()
+    .then(() => {
+      loading.value = true;
+      useStore
+        .userLogin(loginInfo)
+        .then(() => {
+          $router.push('/');
+          ElNotification({
+            type: 'success',
+            title: getWelcome(),
+            message: 'Welcome back',
+          });
+          loading.value = false;
+        })
+        .catch((reason: string) => {
+          loading.value = false;
+          ElNotification({
+            type: 'error',
+            message: reason,
+          });
         });
-        loading.value = false;
-      })
-      .catch((reason: string) => {
-        loading.value = false;
-        ElNotification({
-          type: 'error',
-          message: reason,
-        });
-      });
-  }).catch(() => {
-
-  })
-
+    })
+    .catch(() => {});
 };
 
 document.body.onkeyup = (e) => {
