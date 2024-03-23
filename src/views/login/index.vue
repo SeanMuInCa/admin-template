@@ -43,11 +43,12 @@ const handleLogin = () => {
     .then(() => {
       $router.push('/');
 
-      loading.value = false;
+      
       ElNotification({
         type: 'success',
         message: 'Welcome back',
       });
+      loading.value = false;
     })
     .catch((reason: string) => {
       loading.value = false;
