@@ -3,18 +3,19 @@
     <el-row>
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
-        <el-form class="login_form">
+        <el-form class="login_form" :model="loginInfo" :rules="rules" ref="loginForm">
           <h1>Hello!</h1>
           <h2>Welcome to Saskatoon</h2>
-          <el-form-item>
+          <el-form-item prop="username">
             <el-input :prefix-icon="User" v-model="loginInfo.username"></el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item prop="password">
             <el-input type="password" :prefix-icon="Lock" v-model="loginInfo.password" :show-password="true"></el-input>
             <!-- <div class="view" @click="handleView"></div> -->
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" style="width: 100%; height: 40px" @click="handleLogin" :loading="loading">Login</el-button>
+            <el-button type="primary" style="width: 100%; height: 40px" @click="handleLogin"
+              :loading="loading">Login</el-button>
           </el-form-item>
         </el-form>
       </el-col>
@@ -36,27 +37,64 @@ const loginInfo = reactive({
   username: '',
   password: '',
 });
+const validateUsername = (rule:any,value:any,callback:any) => {
+  if(value.length < 5)
+  {
+    callback(new Error('the username at least has 5 characters'))
+  }else if(value.length > 10)
+  {
+    callback(new Error('the username can not longer than 10 characters'))
+  }else callback();
+}
+const validatePassword = (rule:any,value:any,callback:any) => {
+  if(/^(?:[a-zA-Z]{6,12}|\d{6,12})$/.test(value)) callback();
+  else callback(new Error('the password requires 6-12 characters long'))
+}
+//表单校验对象
+const rules = reactive({
+  username: [
+    {
+      validator: validateUsername,
+      trigger: 'change'
+    }
+  ],
+  password: [
+    {
+      validator: validatePassword,
+      trigger: 'change'
+    }
+  ]
+})
 
-const handleLogin = () => {
-  loading.value = true;
-  useStore
-    .userLogin(loginInfo)
-    .then(() => {
-      $router.push('/');
-      ElNotification({
-        type: 'success',
-        title: getWelcome(),
-        message: 'Welcome back',
+
+
+let loginForm = ref();
+const handleLogin = async () => {
+  //校验表单
+  await loginForm.value.validate().then(() => {
+    loading.value = true;
+    useStore
+      .userLogin(loginInfo)
+      .then(() => {
+        $router.push('/');
+        ElNotification({
+          type: 'success',
+          title: getWelcome(),
+          message: 'Welcome back',
+        });
+        loading.value = false;
+      })
+      .catch((reason: string) => {
+        loading.value = false;
+        ElNotification({
+          type: 'error',
+          message: reason,
+        });
       });
-      loading.value = false;
-    })
-    .catch((reason: string) => {
-      loading.value = false;
-      ElNotification({
-        type: 'error',
-        message: reason,
-      });
-    });
+  }).catch(() => {
+
+  })
+
 };
 
 document.body.onkeyup = (e) => {
