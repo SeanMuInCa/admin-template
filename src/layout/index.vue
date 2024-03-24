@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import Logo from '@/layout/logo.vue';
-import Menu from '@/layout/menu.vue';
+import Menu from '@/layout/Menu.vue';
 
 import useRoutesStore from '@/store/modules/menuRoutes';
 
@@ -36,7 +36,9 @@ const menuRoutes = useRoutesStore();
 
     .scrollbar {
       height: calc(100vh - $logo_height);
-
+    .el-menu{
+        border-right: none;
+    }
       .title {
         font-size: 18px;
       }
