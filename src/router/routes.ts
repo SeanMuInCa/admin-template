@@ -6,7 +6,7 @@ export const staticRoutes = [
     meta: {
       title: 'Login',
       showInMenu: true,
-      icon: 'House'
+      icon: 'House',
     },
   },
   {
@@ -16,7 +16,7 @@ export const staticRoutes = [
     meta: {
       title: 'Layout',
       showInMenu: true,
-      icon:'Edit'
+      icon: 'Edit',
     },
     children: [
       {
@@ -26,7 +26,7 @@ export const staticRoutes = [
         meta: {
           title: 'Home',
           showInMenu: true,
-          icon: 'Plus'
+          icon: 'Plus',
         },
       },
       {
@@ -36,7 +36,7 @@ export const staticRoutes = [
         meta: {
           title: 'Home1',
           showInMenu: true,
-          icon: 'Connection'
+          icon: 'Connection',
         },
       },
     ],

@@ -1,6 +1,6 @@
 //注册全局组件
 import SvgIcon from '@/components/SvgIcon/index.vue';
-import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 const allGlobalComponents = {
   SvgIcon,
 };
@@ -11,7 +11,7 @@ export default {
       app.component(key, allGlobalComponents[key]);
     });
     for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-      app.component(key, component)
+      app.component(key, component);
     }
   },
 };

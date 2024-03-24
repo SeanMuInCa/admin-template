@@ -21,8 +21,6 @@ import Menu from '@/layout/Menu.vue';
 import useRoutesStore from '@/store/modules/menuRoutes';
 
 const menuRoutes = useRoutesStore();
-
-
 </script>
 
 <style scoped lang="scss">
