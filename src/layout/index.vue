@@ -36,9 +36,9 @@ const menuRoutes = useRoutesStore();
 
     .scrollbar {
       height: calc(100vh - $logo_height);
-    .el-menu{
+      .el-menu {
         border-right: none;
-    }
+      }
       .title {
         font-size: 18px;
       }
