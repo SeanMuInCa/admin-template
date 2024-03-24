@@ -29,6 +29,8 @@ import { useRouter } from 'vue-router';
 import { ElNotification } from 'element-plus';
 import useUserStore from '@/store/modules/user';
 import { getWelcome } from '@/utils/time';
+import useRoutesStore from '@/store/modules/menuRoutes';
+const menuRoutes = useRoutesStore();
 let $router = useRouter();
 const useStore = useUserStore();
 const loading = ref(false);
