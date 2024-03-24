@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts" name="Menu">
-import { meta } from '@typescript-eslint/eslint-plugin';
+
 import { defineProps } from 'vue';
 defineProps(['menuList']);
 </script>
