@@ -2,10 +2,10 @@
   <div class="menu">
     <el-menu v-for="(item, index) in menuList" :key="item.path">
       <template v-if="!item.children">
-        <el-menu-item v-if="item.showInMenu" :index="item.path">
+        <el-menu-item v-if="item.meta.showInMenu" :index="item.path">
           <template #title>
             <span>xxx</span>
-            {{ item.meta.title }}
+            {{ item.meta.title }}11
           </template>
         </el-menu-item>
       </template>
@@ -33,6 +33,7 @@
 </template>
 
 <script setup lang="ts" name="Menu">
+
 import { defineProps } from 'vue';
 defineProps(['menuList']);
 </script>

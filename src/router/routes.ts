@@ -5,7 +5,8 @@ export const staticRoutes = [
     name: 'login',
     meta: {
       title: 'Login',
-      showInMenu: false,
+      showInMenu: true,
+      icon: 'House'
     },
   },
   {
@@ -15,6 +16,7 @@ export const staticRoutes = [
     meta: {
       title: 'Layout',
       showInMenu: true,
+      icon:'Edit'
     },
     children: [
       {
@@ -24,6 +26,17 @@ export const staticRoutes = [
         meta: {
           title: 'Home',
           showInMenu: true,
+          icon: 'Plus'
+        },
+      },
+      {
+        path: '/home1',
+        component: () => import('@/views/home/index.vue'),
+        name: 'home1',
+        meta: {
+          title: 'Home1',
+          showInMenu: true,
+          icon: 'Connection'
         },
       },
     ],
@@ -34,7 +47,7 @@ export const staticRoutes = [
     name: '404',
     meta: {
       title: '404',
-      showInMenu: false,
+      showInMenu: true,
     },
   },
   {
@@ -43,7 +56,7 @@ export const staticRoutes = [
     name: 'redirect404',
     meta: {
       title: 'Redirect404',
-      showInMenu: false,
+      showInMenu: true,
     },
   },
 ];
