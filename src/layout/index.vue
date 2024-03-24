@@ -1,31 +1,66 @@
 <template>
     <div class="layout_container">
         <!-- 左侧菜单 -->
-        <div class="layout_left">1111</div>
+        <div class="layout_left">
+            <Logo></Logo>
+            <el-scrollbar class="scrollbar">
+                <Menu></Menu>
+                <el-menu default-active="1" background-color="#87b679" text-color="white" unique-opened=true active-text-color="#517047">
+                    <el-menu-item index="1">
+                        <span class="title">首页</span>
+                    </el-menu-item>
+                    <el-menu-item index="2">
+                        大屏
+                    </el-menu-item>
+                    <el-sub-menu index="3">
+                        <template #title>
+                            商品
+                        </template>
+                        <el-menu-item index="3-1">sku</el-menu-item>
+                    </el-sub-menu>
+                    <el-sub-menu index="4">
+                        <template #title>
+                            商品
+                        </template>
+                        <el-menu-item index="4-1">sku</el-menu-item>
+                    </el-sub-menu>
+                </el-menu>
+            </el-scrollbar>
+        </div>
         <!-- 顶部菜单 -->
         <div class="layout_top">2222</div>
         <!-- 右侧内容 -->
-        <div class="layout_main">
-            <p style="height: 10000px;">333</p>
-        </div>
+        <div class="layout_main">333</div>
     </div>
 </template>
 
 <script setup lang="ts">
-
+import Logo from '@/layout/logo.vue';
+import Menu from '@/layout/menu.vue'
 </script>
 
 <style scoped lang="scss">
-.layout_container{
+.layout_container {
+    
     width: 100%;
     height: 100vh;
     background-color: red;
-    .layout_left{
+    
+    .layout_left {
         width: $slider_width;
-        height: 100vh;
         background-color: $slider_color;
+        color:white;
+        .scrollbar {
+            
+            height: calc(100vh - $logo_height);
+            .title{
+                font-size: 18px;
+            }
+        }
+
     }
-    .layout_top{
+
+    .layout_top {
         width: calc(100% - $slider_width);
         height: $top_height;
         background-color: cyan;
@@ -33,7 +68,8 @@
         top: 0;
         left: $slider_width;
     }
-    .layout_main{
+
+    .layout_main {
         width: calc(calc(100% - $slider_width));
         height: calc(100vh - $top_height);
         background-color: rgb(115, 255, 0);
@@ -44,7 +80,5 @@
         scroll-behavior: smooth;
         overflow: auto;
     }
-    
 }
-
 </style>
