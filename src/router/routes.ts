@@ -71,7 +71,7 @@ export const staticRoutes = [
     },
     children: [
       {
-        path: '/user',
+        path: '/acl/user',
         component: () => import('@/views/acl/User.vue'),
         name: 'User',
         meta: {
@@ -81,7 +81,7 @@ export const staticRoutes = [
         },
       },
       {
-        path: '/roler',
+        path: '/acl/roler',
         component: () => import('@/views/acl/Roler.vue'),
         name: 'Roler',
         meta: {
@@ -91,13 +91,65 @@ export const staticRoutes = [
         },
       },
       {
-        path: '/permission',
+        path: '/acl/permission',
         component: () => import('@/views/acl/Permission.vue'),
         name: 'Permission',
         meta: {
           title: 'Permission Management',
           showInMenu: true,
           icon: 'Grid',
+        },
+      },
+    ],
+  },
+  {
+    path: '/product',
+    component: () => import('@/layout/index.vue'),
+    name: 'Product',
+    meta: {
+      title: 'Product Management',
+      showInMenu: true,
+      icon: 'Goods',
+    },
+    children: [
+      {
+        path: '/product/brand',
+        component: () => import('@/views/product/Brand.vue'),
+        name: 'Brand',
+        meta: {
+          title: 'Brand Management',
+          showInMenu: true,
+          icon: 'Suitcase',
+        },
+      },
+      {
+        path: '/product/attitude',
+        component: () => import('@/views/product/Attitude.vue'),
+        name: 'Attitude',
+        meta: {
+          title: 'Attitude Management',
+          showInMenu: true,
+          icon: 'Compass',
+        },
+      },
+      {
+        path: '/product/spu',
+        component: () => import('@/views/product/SPU.vue'),
+        name: 'SPU',
+        meta: {
+          title: 'SPU Management',
+          showInMenu: true,
+          icon: 'ShoppingBag',
+        },
+      },
+      {
+        path: '/product/sku',
+        component: () => import('@/views/product/SKU.vue'),
+        name: 'SKU',
+        meta: {
+          title: 'SKU Management',
+          showInMenu: true,
+          icon: 'ShoppingCart',
         },
       },
     ],

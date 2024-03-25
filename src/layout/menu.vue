@@ -42,16 +42,13 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="Menu">
 import { router } from '@/router';
 //假设从服务器上获取的路由列表
 defineProps(['menuList']);
 // let $router = useRoute()
 const goRoute = (item: any) => {
-  console.log(router);
   router.push(item.index);
-  // console.log(item, item.index, '@@@@@');
-  console.log(item.index);
 };
 </script>
 <script lang="ts">
@@ -71,6 +68,11 @@ export default {
   span {
     font-size: 16px;
   }
+  .el-sub-menu{
+    .el-menu{
+        --el-menu-level: 1;
+    }
+  }
 }
 
 // .is-active {
@@ -79,6 +81,6 @@ export default {
 // }
 
 .is-opened {
-  background-color: #fff;
+//   background-color: #fff;
 }
 </style>

@@ -10,13 +10,16 @@
     <!-- 顶部菜单 -->
     <div class="layout_top">2222</div>
     <!-- 右侧内容 -->
-    <div class="layout_main">333</div>
+    <div class="layout_main">
+      <Main></Main>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import Logo from '@/layout/logo.vue';
 import Menu from '@/layout/Menu.vue';
+import Main from '@/layout/Main.vue';
 
 import useRoutesStore from '@/store/modules/menuRoutes';
 
