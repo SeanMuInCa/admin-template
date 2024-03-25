@@ -4,11 +4,15 @@
     <div class="layout_left">
       <Logo></Logo>
       <el-scrollbar class="scrollbar">
-        <Menu :menuList="menuRoutes.menuRoutes"></Menu>
+        <el-menu background-color="#87b679" text-color="white" :default-active="url">
+          <Menu :menuList="menuRoutes.menuRoutes" :url="url"></Menu>
+        </el-menu>
       </el-scrollbar>
     </div>
     <!-- 顶部菜单 -->
-    <div class="layout_top">2222</div>
+    <div class="layout_top">
+      <TopBar></TopBar>
+    </div>
     <!-- 右侧内容 -->
     <div class="layout_main">
       <Main></Main>
@@ -20,8 +24,13 @@
 import Logo from '@/layout/logo.vue';
 import Menu from '@/layout/Menu.vue';
 import Main from '@/layout/Main.vue';
-
+import TopBar from '@/layout/TopBar.vue'
+import { router } from '@/router';
 import useRoutesStore from '@/store/modules/menuRoutes';
+
+console.log(router.currentRoute.value.path);
+
+const url = router.currentRoute.value.path;
 
 const menuRoutes = useRoutesStore();
 </script>
