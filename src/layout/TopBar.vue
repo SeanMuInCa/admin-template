@@ -18,6 +18,7 @@
 
 <script setup lang="ts">
 import { ArrowRight, FullScreen } from '@element-plus/icons-vue';
+
 defineProps(['url']);
 </script>
 
