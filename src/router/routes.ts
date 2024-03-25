@@ -70,6 +70,7 @@ export const staticRoutes = [
     path: '/acl',
     component: () => import('@/layout/index.vue'),
     name: 'Acl',
+    redirect:'/acl/user',
     meta: {
       id: '6',
       title: 'Management',
@@ -116,6 +117,7 @@ export const staticRoutes = [
     path: '/product',
     component: () => import('@/layout/index.vue'),
     name: 'Product',
+    redirect:'/product/brand',
     meta: {
       id: '7',
       title: 'Product Management',

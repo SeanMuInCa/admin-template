@@ -11,7 +11,7 @@
     </div>
     <!-- 顶部菜单 -->
     <div class="layout_top">
-      <TopBar></TopBar>
+      <TopBar :url="url"></TopBar>
     </div>
     <!-- 右侧内容 -->
     <div class="layout_main">
@@ -39,7 +39,7 @@ const menuRoutes = useRoutesStore();
 .layout_container {
   width: 100%;
   height: 100vh;
-  background-color: red;
+  // background-color: red;
 
   .layout_left {
     width: $slider_width;
@@ -60,7 +60,7 @@ const menuRoutes = useRoutesStore();
   .layout_top {
     width: calc(100% - $slider_width);
     height: $top_height;
-    background-color: cyan;
+    color: black;
     position: fixed;
     top: 0;
     left: $slider_width;
