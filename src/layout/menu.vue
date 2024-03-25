@@ -1,6 +1,6 @@
 <template>
   <div class="menulist">
-    <el-menu v-for="item in menuList" :key="item.path">
+    <el-menu v-for="item in menuList" :key="item.path" active-text-color="#ffd04b">
       <template v-if="!item.children">
         <el-menu-item :index="item.path" v-if="item.meta.showInMenu" @click="goRoute">
           <el-icon :size="100">
@@ -49,7 +49,7 @@ defineProps(['menuList']);
 // let $router = useRoute()
 const goRoute = (item: any) => {
   console.log(router);
-  //   router.push(item.index)
+    router.push(item.index)
   // console.log(item, item.index, '@@@@@');
   console.log(item.index);
 };
@@ -73,10 +73,10 @@ export default {
   }
 }
 
-.is-active {
-  background-color: orange;
-  color: #fff;
-}
+// .is-active {
+//   background-color: orange;
+//   color: #fff;
+// }
 
 .is-opened {
   background-color: #fff;

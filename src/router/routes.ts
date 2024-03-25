@@ -5,7 +5,7 @@ export const staticRoutes = [
     name: 'login',
     meta: {
       title: 'Login',
-      showInMenu: true,
+      showInMenu: false,
       icon: 'House',
     },
   },
@@ -16,8 +16,9 @@ export const staticRoutes = [
     meta: {
       title: 'Layout',
       showInMenu: true,
-      icon: 'Edit',
+      icon: 'HomeFilled',
     },
+    redirect:'/home',
     children: [
       {
         path: '/home',
@@ -26,19 +27,10 @@ export const staticRoutes = [
         meta: {
           title: 'Home',
           showInMenu: true,
-          icon: 'Plus',
+          icon: 'HomeFilled',
         },
       },
-      {
-        path: '/home1',
-        component: () => import('@/views/home/index.vue'),
-        name: 'home1',
-        meta: {
-          title: 'Home1',
-          showInMenu: true,
-          icon: 'Connection',
-        },
-      },
+      
     ],
   },
   {
@@ -47,7 +39,7 @@ export const staticRoutes = [
     name: '404',
     meta: {
       title: '404',
-      showInMenu: true,
+      showInMenu: false,
     },
   },
   {
@@ -56,7 +48,59 @@ export const staticRoutes = [
     name: 'redirect404',
     meta: {
       title: 'Redirect404',
-      showInMenu: true,
+      showInMenu: false,
     },
   },
+  {
+    path: '/screen',
+    component: () => import('@/views/screen/index.vue'),
+    name: 'Screen',
+    meta: {
+      title: 'Screen',
+      showInMenu: true,
+      icon: 'Platform'
+    },
+  },
+  {
+    path: '/acl',
+    component: ()=>import('@/layout/index.vue'),
+    name: 'Acl',
+    meta:{
+      title:'Management',
+      showInMenu: true,
+      icon: 'Lock'
+    },
+    children:[
+      {
+        path: '/user',
+        component: () => import('@/views/acl/User.vue'),
+        name: 'User',
+        meta: {
+          title: 'User Management',
+          showInMenu: true,
+          icon: 'User',
+        },
+      },
+      {
+        path: '/roler',
+        component: () => import('@/views/acl/Roler.vue'),
+        name: 'Roler',
+        meta: {
+          title: 'Roles Management',
+          showInMenu: true,
+          icon: 'Avatar',
+        },
+      },
+      {
+        path: '/permission',
+        component: () => import('@/views/acl/Permission.vue'),
+        name: 'Permission',
+        meta: {
+          title: 'Permission Management',
+          showInMenu: true,
+          icon: 'Grid',
+        },
+      },
+    ]
+  }
 ];
