@@ -18,7 +18,7 @@ export const staticRoutes = [
       showInMenu: true,
       icon: 'HomeFilled',
     },
-    redirect:'/home',
+    redirect: '/home',
     children: [
       {
         path: '/home',
@@ -30,7 +30,6 @@ export const staticRoutes = [
           icon: 'HomeFilled',
         },
       },
-      
     ],
   },
   {
@@ -58,19 +57,19 @@ export const staticRoutes = [
     meta: {
       title: 'Screen',
       showInMenu: true,
-      icon: 'Platform'
+      icon: 'Platform',
     },
   },
   {
     path: '/acl',
-    component: ()=>import('@/layout/index.vue'),
+    component: () => import('@/layout/index.vue'),
     name: 'Acl',
-    meta:{
-      title:'Management',
+    meta: {
+      title: 'Management',
       showInMenu: true,
-      icon: 'Lock'
+      icon: 'Lock',
     },
-    children:[
+    children: [
       {
         path: '/user',
         component: () => import('@/views/acl/User.vue'),
@@ -101,6 +100,6 @@ export const staticRoutes = [
           icon: 'Grid',
         },
       },
-    ]
-  }
+    ],
+  },
 ];

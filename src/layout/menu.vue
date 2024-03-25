@@ -49,7 +49,7 @@ defineProps(['menuList']);
 // let $router = useRoute()
 const goRoute = (item: any) => {
   console.log(router);
-    router.push(item.index)
+  router.push(item.index);
   // console.log(item, item.index, '@@@@@');
   console.log(item.index);
 };
