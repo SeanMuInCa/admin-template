@@ -1,6 +1,6 @@
 <template>
   <div class="menulist">
-    <template v-for="(item,index) in menuList" :key="index" >
+    <template v-for="(item, index) in menuList" :key="index">
       <template v-if="!item.children">
         <el-menu-item :index="item.path" v-if="item.meta.showInMenu" @click="goRoute">
           <el-icon :size="100">
@@ -12,7 +12,7 @@
             </span>
           </template>
         </el-menu-item>
-     </template>
+      </template>
       <template v-if="item.children && item.children.length === 1">
         <el-menu-item :index="item.path" v-if="item.children[0].meta.showInMenu" @click="goRoute">
           <el-icon :size="100">
@@ -45,12 +45,12 @@
 <script setup lang="ts" name="Menu">
 import { router } from '@/router';
 //假设从服务器上获取的路由列表
-defineProps(['menuList','url']);
+defineProps(['menuList', 'url']);
 // let $router = useRoute()
 const goRoute = (item: any) => {
-    console.log(item.index);
-    
-    router.push(item.index);
+  console.log(item.index);
+
+  router.push(item.index);
 };
 </script>
 <script lang="ts">

@@ -4,7 +4,7 @@ export const staticRoutes = [
     component: () => import('@/views/login/index.vue'),
     name: 'login',
     meta: {
-      id:'1',
+      id: '1',
       title: 'Login',
       showInMenu: false,
       icon: 'House',
@@ -15,7 +15,7 @@ export const staticRoutes = [
     component: () => import('@/layout/index.vue'),
     name: 'layout',
     meta: {
-      id:'2',
+      id: '2',
       title: 'Layout',
       showInMenu: true,
       icon: 'HomeFilled',
@@ -23,7 +23,7 @@ export const staticRoutes = [
     redirect: '/home',
     children: [
       {
-        id:'2-1',
+        id: '2-1',
         path: '/home',
         component: () => import('@/views/home/index.vue'),
         name: 'home',
@@ -40,7 +40,7 @@ export const staticRoutes = [
     component: () => import('@/views/404/index.vue'),
     name: '404',
     meta: {
-      id:'3',
+      id: '3',
       title: '404',
       showInMenu: false,
     },
@@ -50,7 +50,7 @@ export const staticRoutes = [
     redirect: '/404',
     name: 'redirect404',
     meta: {
-      id:'4',
+      id: '4',
       title: 'Redirect404',
       showInMenu: false,
     },
@@ -60,7 +60,7 @@ export const staticRoutes = [
     component: () => import('@/views/screen/index.vue'),
     name: 'Screen',
     meta: {
-      id:'5',
+      id: '5',
       title: 'Screen',
       showInMenu: true,
       icon: 'Platform',
@@ -71,7 +71,7 @@ export const staticRoutes = [
     component: () => import('@/layout/index.vue'),
     name: 'Acl',
     meta: {
-      id:'6',
+      id: '6',
       title: 'Management',
       showInMenu: true,
       icon: 'Lock',
@@ -82,7 +82,7 @@ export const staticRoutes = [
         component: () => import('@/views/acl/User.vue'),
         name: 'User',
         meta: {
-          id:'6-1',
+          id: '6-1',
           title: 'User Management',
           showInMenu: true,
           icon: 'User',
@@ -93,7 +93,7 @@ export const staticRoutes = [
         component: () => import('@/views/acl/Roler.vue'),
         name: 'Roler',
         meta: {
-          id:'6-2',
+          id: '6-2',
           title: 'Roles Management',
           showInMenu: true,
           icon: 'Avatar',
@@ -104,7 +104,7 @@ export const staticRoutes = [
         component: () => import('@/views/acl/Permission.vue'),
         name: 'Permission',
         meta: {
-          id:'6-3',
+          id: '6-3',
           title: 'Permission Management',
           showInMenu: true,
           icon: 'Grid',
@@ -117,7 +117,7 @@ export const staticRoutes = [
     component: () => import('@/layout/index.vue'),
     name: 'Product',
     meta: {
-      id:'7',
+      id: '7',
       title: 'Product Management',
       showInMenu: true,
       icon: 'Goods',
@@ -128,7 +128,7 @@ export const staticRoutes = [
         component: () => import('@/views/product/Brand.vue'),
         name: 'Brand',
         meta: {
-          id:'7-1',
+          id: '7-1',
           title: 'Brand Management',
           showInMenu: true,
           icon: 'Suitcase',
@@ -139,7 +139,7 @@ export const staticRoutes = [
         component: () => import('@/views/product/Attitude.vue'),
         name: 'Attitude',
         meta: {
-          id:'7-2',
+          id: '7-2',
           title: 'Attitude Management',
           showInMenu: true,
           icon: 'Compass',
@@ -150,7 +150,7 @@ export const staticRoutes = [
         component: () => import('@/views/product/SPU.vue'),
         name: 'SPU',
         meta: {
-          id:'7-3',
+          id: '7-3',
           title: 'SPU Management',
           showInMenu: true,
           icon: 'ShoppingBag',
@@ -161,7 +161,7 @@ export const staticRoutes = [
         component: () => import('@/views/product/SKU.vue'),
         name: 'SKU',
         meta: {
-          id:'7-4',
+          id: '7-4',
           title: 'SKU Management',
           showInMenu: true,
           icon: 'ShoppingCart',

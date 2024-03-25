@@ -24,7 +24,7 @@
 import Logo from '@/layout/logo.vue';
 import Menu from '@/layout/Menu.vue';
 import Main from '@/layout/Main.vue';
-import TopBar from '@/layout/TopBar.vue'
+import TopBar from '@/layout/TopBar.vue';
 import { router } from '@/router';
 import useRoutesStore from '@/store/modules/menuRoutes';
 
