@@ -1,13 +1,7 @@
 <template>
-    <div>
-        SKU
-    </div>
+  <div>SKU</div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts"></script>
 
-</script>
-
-<style scoped>
-
-</style>
+<style scoped></style>

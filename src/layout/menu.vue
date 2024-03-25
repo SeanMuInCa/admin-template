@@ -68,9 +68,9 @@ export default {
   span {
     font-size: 16px;
   }
-  .el-sub-menu{
-    .el-menu{
-        --el-menu-level: 1;
+  .el-sub-menu {
+    .el-menu {
+      --el-menu-level: 1;
     }
   }
 }
@@ -81,6 +81,6 @@ export default {
 // }
 
 .is-opened {
-//   background-color: #fff;
+  //   background-color: #fff;
 }
 </style>
