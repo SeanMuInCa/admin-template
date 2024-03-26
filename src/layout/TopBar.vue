@@ -16,7 +16,7 @@
       </el-breadcrumb>
     </div>
     <div class="right">
-      <el-button :icon="Refresh" circle />
+      <el-button :icon="Refresh" circle @click="goRefresh"/>
       <el-button :icon="FullScreen" circle />
       <el-button :icon="Setting" circle />
       <div class="user">
@@ -43,10 +43,13 @@ import { ref, toRef } from 'vue';
 import useSettingStore from '@/store/modules/setting';
 import { router } from '@/router';
 const settingStore = useSettingStore();
-console.log(router.currentRoute.value.matched);
+
 
 defineProps(['url']);
-
+const goRefresh = () => {
+    console.log(router);
+    router.go(router.currentRoute.fullPath)
+}
 const collapse = () => {
   settingStore.isFold = !settingStore.isFold;
 };
