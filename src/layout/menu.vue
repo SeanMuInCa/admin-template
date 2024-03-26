@@ -16,7 +16,7 @@
       <template v-if="item.children && item.children.length === 1">
         <el-menu-item :index="item.path" v-if="item.children[0].meta.showInMenu" @click="goRoute">
           <el-icon :size="100">
-            <component :is="item.meta.icon"></component>
+            <component :is="item.children[0].meta.icon"></component>
           </el-icon>
           <template #title>
             <span>

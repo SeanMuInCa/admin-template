@@ -7,7 +7,7 @@
         <component :is="settingStore.isFold ? 'Expand' : 'Fold'"></component>
       </el-icon>
       <el-breadcrumb :separator-icon="ArrowRight" style="margin-left: 10px">
-        <el-breadcrumb-item v-for="(item, index) in router.currentRoute.value.matched" :key="index" class="bread">
+        <el-breadcrumb-item :to="item.path" v-for="(item, index) in router.currentRoute.value.matched" :key="index" class="bread" v-show="item.meta.title">
           <el-icon size="18">
             <component :is="item.meta.icon"></component>
           </el-icon>

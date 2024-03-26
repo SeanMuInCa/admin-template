@@ -16,7 +16,7 @@ export const staticRoutes = [
     name: 'layout',
     meta: {
       id: '2',
-      title: 'Layout',
+      title: '',
       showInMenu: false,
       icon: 'HomeFilled',
     },
