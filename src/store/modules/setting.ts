@@ -1,17 +1,15 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 const useSettingStore = defineStore('Setting', {
-    state: () => {
-        return {
-            isFold: false
-        };
-    },
+  state: () => {
+    return {
+      isFold: false,
+    };
+  },
 
-    actions: {
-
-    },
-    getters: {},
-})
+  actions: {},
+  getters: {},
+});
 
 export default useSettingStore;

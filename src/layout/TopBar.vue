@@ -4,7 +4,7 @@
       <el-icon size="24" @click="collapse">
         <!-- <Fold v-if="!isFold" ></Fold>
         <Expand v-else ></Expand> -->
-        <component :is="settingStore.isFold ? 'Expand': 'Fold'"></component>
+        <component :is="settingStore.isFold ? 'Expand' : 'Fold'"></component>
       </el-icon>
       <el-breadcrumb :separator-icon="ArrowRight" style="margin-left: 10px">
         <el-breadcrumb-item v-for="(item, index) in url.substring(1).split('/')" :key="index">{{ item }}</el-breadcrumb-item>
@@ -38,13 +38,12 @@ import { ref, toRef } from 'vue';
 import useSettingStore from '@/store/modules/setting';
 
 const settingStore = useSettingStore();
-let isFold = settingStore.isFold
+let isFold = settingStore.isFold;
 defineProps(['url']);
 
 const collapse = () => {
-    settingStore.isFold = !settingStore.isFold
-    
-}
+  settingStore.isFold = !settingStore.isFold;
+};
 </script>
 
 <style scoped lang="scss">
