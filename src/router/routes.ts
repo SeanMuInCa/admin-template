@@ -17,7 +17,7 @@ export const staticRoutes = [
     meta: {
       id: '2',
       title: 'Layout',
-      showInMenu: true,
+      showInMenu: false,
       icon: 'HomeFilled',
     },
     redirect: '/home',
@@ -26,7 +26,7 @@ export const staticRoutes = [
         id: '2-1',
         path: '/home',
         component: () => import('@/views/home/index.vue'),
-        name: 'home',
+        name: 'Home',
         meta: {
           title: 'Home',
           showInMenu: true,
