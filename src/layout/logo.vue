@@ -2,12 +2,16 @@
   <div class="logo_container">
     <h1>
       <img src="../assets/images/logo.png" alt="" />
-      <p>Raina的家</p>
+      <p v-show="!settingStore.isFold">Raina的家</p>
     </h1>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import useSettingStore from '@/store/modules/setting';
+
+const settingStore = useSettingStore();
+</script>
 
 <style scoped lang="scss">
 .logo_container {

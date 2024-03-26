@@ -1,20 +1,20 @@
 <template>
-  <div class="layout_container">
+  <div class="layout_container" >
     <!-- 左侧菜单 -->
-    <div class="layout_left">
+    <div class="layout_left" :class="{fold: settingStore.isFold?true:false}">
       <Logo></Logo>
       <el-scrollbar class="scrollbar">
-        <el-menu background-color="#87b679" text-color="white" :default-active="url">
+        <el-menu background-color="#87b679" text-color="white" :default-active="url" :collapse="settingStore.isFold">
           <Menu :menuList="menuRoutes.menuRoutes" :url="url"></Menu>
         </el-menu>
       </el-scrollbar>
     </div>
     <!-- 顶部菜单 -->
-    <div class="layout_top">
+    <div class="layout_top" :class="{topFold: settingStore.isFold?true:false}">
       <TopBar :url="url"></TopBar>
     </div>
     <!-- 右侧内容 -->
-    <div class="layout_main">
+    <div class="layout_main" :class="{mainFold: settingStore.isFold?true:false}">
       <Main></Main>
     </div>
   </div>
@@ -27,6 +27,11 @@ import Main from '@/layout/Main.vue';
 import TopBar from '@/layout/TopBar.vue';
 import { router } from '@/router';
 import useRoutesStore from '@/store/modules/menuRoutes';
+import useSettingStore from '@/store/modules/setting';
+
+const settingStore = useSettingStore();
+
+
 
 console.log(router.currentRoute.value.path);
 
@@ -45,7 +50,7 @@ const menuRoutes = useRoutesStore();
     width: $slider_width;
     background-color: $slider_color;
     color: white;
-
+    transition: all .3s;
     .scrollbar {
       height: calc(100vh - $logo_height);
       .el-menu {
@@ -54,6 +59,9 @@ const menuRoutes = useRoutesStore();
       .title {
         font-size: 18px;
       }
+    }
+    &.fold{
+      width: $slider_min_width;
     }
   }
 
@@ -64,6 +72,11 @@ const menuRoutes = useRoutesStore();
     position: fixed;
     top: 0;
     left: $slider_width;
+    transition: all .3s;
+    &.topFold{
+      width: calc(100% - $slider_min_width);
+      left: $slider_min_width;
+    }
   }
 
   .layout_main {
@@ -76,6 +89,11 @@ const menuRoutes = useRoutesStore();
     padding: 20px;
     scroll-behavior: smooth;
     overflow: auto;
+    transition: all .3s;
+    &.mainFold{
+      width: calc(100% - $slider_min_width);
+      left: $slider_min_width;
+    }
   }
 }
 </style>
