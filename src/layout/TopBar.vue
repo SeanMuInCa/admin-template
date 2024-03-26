@@ -16,7 +16,7 @@
       </el-breadcrumb>
     </div>
     <div class="right">
-      <el-button :icon="Refresh" circle @click="goRefresh"/>
+      <el-button :icon="Refresh" circle @click="goRefresh" />
       <el-button :icon="FullScreen" circle />
       <el-button :icon="Setting" circle />
       <div class="user">
@@ -44,12 +44,11 @@ import useSettingStore from '@/store/modules/setting';
 import { router } from '@/router';
 const settingStore = useSettingStore();
 
-
 defineProps(['url']);
 const goRefresh = () => {
-    console.log(router);
-    router.go(router.currentRoute.fullPath)
-}
+  console.log(router);
+  router.go(router.currentRoute.fullPath);
+};
 const collapse = () => {
   settingStore.isFold = !settingStore.isFold;
 };
