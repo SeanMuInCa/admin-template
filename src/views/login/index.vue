@@ -25,13 +25,20 @@
 <script setup lang="ts">
 import { User, Lock } from '@element-plus/icons-vue';
 import { reactive, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter,useRoute } from 'vue-router';
 import { ElNotification } from 'element-plus';
 import useUserStore from '@/store/modules/user';
 import { getWelcome } from '@/utils/time';
 import useRoutesStore from '@/store/modules/menuRoutes';
+import { router } from '@/router';//导航路由
+
+
+
+const $route = useRoute();//路由
+
+
 const menuRoutes = useRoutesStore();
-let $router = useRouter();
+let $router = useRouter();//路由器
 const userStore = useUserStore();
 const loading = ref(false);
 const loginInfo = reactive({
@@ -75,7 +82,7 @@ const handleLogin = async () => {
       userStore
         .userLogin(loginInfo)
         .then(() => {
-          $router.push('/');
+          $router.push($route.query.redirect === undefined ? '/' : $route.query.redirect);
           ElNotification({
             type: 'success',
             title: getWelcome(),

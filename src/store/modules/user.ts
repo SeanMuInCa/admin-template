@@ -23,6 +23,8 @@ const useUserStore = defineStore('User', {
       const data: loginReturnData = await loginRequest(loginInfo);
 
       if (data.code === 200) {
+        console.log(data);
+        
         this.token = data.data.token as string; //断言
         SET_TOKEN(data.data.token);
         return Promise.resolve(data.code);
@@ -40,6 +42,15 @@ const useUserStore = defineStore('User', {
         this.userInfo.roles = data.data.checkUser.roles;
         this.userInfo.avatar = data.data.checkUser.avatar;
       } else {
+      }
+    },
+    userLogout(){
+      this.token= null,
+      this.userInfo= {
+        desc: '',
+        roles: [],
+        username: '',
+        avatar: '',
       }
     },
   },

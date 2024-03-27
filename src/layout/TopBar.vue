@@ -43,6 +43,7 @@ import { ref, toRef } from 'vue';
 import useSettingStore from '@/store/modules/setting';
 import useUserStore from '@/store/modules/user';
 import { router } from '@/router';
+import {DEL_TOKEN} from '@/utils/token';
 const settingStore = useSettingStore();
 const userStore = useUserStore();
 defineProps(['url']);
@@ -63,8 +64,18 @@ const collapse = () => {
   settingStore.isFold = !settingStore.isFold;
 };
 
+
+
+
 const handleCommand = () => {
-  console.log(1);
+  DEL_TOKEN();
+  userStore.userLogout();
+  router.push({
+    path:'/login',
+    query:{
+        redirect: router.currentRoute.value.path
+    }
+  });
 };
 </script>
 
