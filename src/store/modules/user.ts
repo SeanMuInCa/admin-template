@@ -1,7 +1,7 @@
 //create user store
 
 import { defineStore } from 'pinia';
-import { loginRequest } from '@/api/user';
+import { loginRequest, infoRequest } from '@/api/user';
 import { UserState } from './types/type';
 import { loginData, loginReturnData } from '@/api/user/type';
 import { SET_TOKEN, GET_TOKEN } from '@/utils/token';
@@ -24,6 +24,17 @@ const useUserStore = defineStore('User', {
         return Promise.reject(data.data.message);
       }
     },
+
+    async requestInfo(){
+      const data = await infoRequest();
+      console.log(data);
+      
+      if(data.code === 200)
+      {
+        console.log(data);
+        
+      }
+    }
   },
   getters: {},
 });
