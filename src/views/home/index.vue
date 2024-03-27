@@ -1,5 +1,7 @@
 <template>
-  <div>home.vue</div>
+  <div>
+    <h1>Welcome back <span>{{ userStore.userInfo.username }}</span> [<span v-for="(item,index) in userStore.userInfo.roles" :key="index">{{ item }}</span>]</h1>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -13,4 +15,8 @@ onMounted(() => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+span{
+margin: 0, 5px;
+}
+</style>

@@ -32,7 +32,7 @@ import { getWelcome } from '@/utils/time';
 import useRoutesStore from '@/store/modules/menuRoutes';
 const menuRoutes = useRoutesStore();
 let $router = useRouter();
-const useStore = useUserStore();
+const userStore = useUserStore();
 const loading = ref(false);
 const loginInfo = reactive({
   username: '',
@@ -72,14 +72,14 @@ const handleLogin = async () => {
     .validate()
     .then(() => {
       loading.value = true;
-      useStore
+      userStore
         .userLogin(loginInfo)
         .then(() => {
           $router.push('/');
           ElNotification({
             type: 'success',
             title: getWelcome(),
-            message: 'Welcome back',
+            message: `Welcome back ${userStore.userInfo.username}`,
           });
           loading.value = false;
         })
