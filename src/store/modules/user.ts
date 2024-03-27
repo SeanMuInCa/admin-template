@@ -39,8 +39,7 @@ const useUserStore = defineStore('User', {
         this.userInfo.desc = data.data.checkUser.desc;
         this.userInfo.roles = data.data.checkUser.roles;
         this.userInfo.avatar = data.data.checkUser.avatar;
-      }else{
-        
+      } else {
       }
     },
   },
