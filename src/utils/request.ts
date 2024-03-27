@@ -3,7 +3,7 @@
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
 //引入用户配置数据仓库
-//import useUserStore from '@/store/modules/user';
+import useUserStore from '@/store/modules/user';
 //第一步，axios.create，去创建axios实例，目的是可以配置一些如路径，超时时间等
 
 const axiosRequest = axios.create({
@@ -16,11 +16,11 @@ const axiosRequest = axios.create({
 axiosRequest.interceptors.request.use((req) => {
   //config配置对象，headers属性请求头，给服务器端携带公共参数用,主要是token
   //请求拦截器这里，获取一下仓库里的token，带给服务器,这样就成功的获取了用户信息
-  //const userStore = useUserStore();
+  const userStore = useUserStore();
   //后台系统的token基本都是这样操作的
-  // if (userStore.token) {
-  //   req.headers.token = userStore.token;
-  // }
+  if (userStore.token) {
+    req.headers.token = userStore.token;
+  }
 
   return req;
 });

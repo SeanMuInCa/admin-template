@@ -20,10 +20,10 @@
       <el-button :icon="FullScreen" circle @click="goFullScreen" />
       <el-button :icon="Setting" circle />
       <div class="user">
-        <img src="../assets/images/LOGO.png" alt="" style="width: 24px; height: 24px" />
+        <img :src="userStore.userInfo.avatar" alt="" style="width: 32px; height: 32px;border-radius: 50%;" />
         <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">
-            <span>username</span>
+            <span>{{ userStore.userInfo.username }}</span>
             <el-icon class="el-icon--right"><arrow-down /></el-icon>
           </span>
           <template #dropdown>
@@ -41,9 +41,10 @@
 import { ArrowRight, FullScreen, Refresh, Setting } from '@element-plus/icons-vue';
 import { ref, toRef } from 'vue';
 import useSettingStore from '@/store/modules/setting';
+import useUserStore from '@/store/modules/user';
 import { router } from '@/router';
 const settingStore = useSettingStore();
-
+const userStore = useUserStore();
 defineProps(['url']);
 
 const goRefresh = () => {
