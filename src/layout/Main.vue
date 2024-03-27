@@ -17,6 +17,7 @@ watch(
   () => {
     if (settingStore.refresh === true) {
       nextTick(() => {
+        //dom完毕
         settingStore.refresh = false;
       });
     }

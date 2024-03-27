@@ -17,7 +17,7 @@
     </div>
     <div class="right">
       <el-button :icon="Refresh" circle @click="goRefresh" />
-      <el-button :icon="FullScreen" circle />
+      <el-button :icon="FullScreen" circle @click="goFullScreen" />
       <el-button :icon="Setting" circle />
       <div class="user">
         <img src="../assets/images/LOGO.png" alt="" style="width: 24px; height: 24px" />
@@ -48,6 +48,14 @@ defineProps(['url']);
 
 const goRefresh = () => {
   settingStore.refresh = !settingStore.refresh;
+};
+
+const goFullScreen = () => {
+  console.log(document.fullscreenElement); //fullscreen mode is on or off
+  let isFull = document.fullscreenElement;
+  if (!isFull) {
+    document.documentElement.requestFullscreen();
+  } else document.exitFullscreen();
 };
 
 const collapse = () => {
