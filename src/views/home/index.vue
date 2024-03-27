@@ -10,9 +10,7 @@ const userStore = useUserStore();
 
 onMounted(() => {
   userStore.requestInfo();
-})
+});
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

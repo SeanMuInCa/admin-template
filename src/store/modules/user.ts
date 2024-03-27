@@ -25,16 +25,14 @@ const useUserStore = defineStore('User', {
       }
     },
 
-    async requestInfo(){
+    async requestInfo() {
       const data = await infoRequest();
       console.log(data);
-      
-      if(data.code === 200)
-      {
+
+      if (data.code === 200) {
         console.log(data);
-        
       }
-    }
+    },
   },
   getters: {},
 });
