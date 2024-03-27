@@ -14,7 +14,7 @@
       <TopBar :url="url"></TopBar>
     </div>
     <!-- 右侧内容 -->
-    <div class="layout_main" :class="{ mainFold: settingStore.isFold ? true : false }" >
+    <div class="layout_main" :class="{ mainFold: settingStore.isFold ? true : false }">
       <Main></Main>
     </div>
   </div>

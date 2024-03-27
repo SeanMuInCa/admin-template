@@ -55,9 +55,8 @@ const collapse = () => {
 };
 
 const handleCommand = () => {
-    console.log(1);
-    
-}
+  console.log(1);
+};
 </script>
 
 <style scoped lang="scss">

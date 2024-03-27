@@ -70,13 +70,13 @@ export const staticRoutes = [
     path: '/acl',
     component: () => import('@/layout/index.vue'),
     name: 'Acl',
-    redirect: '/acl/user',
     meta: {
       id: '6',
       title: 'Management',
       showInMenu: true,
       icon: 'Lock',
     },
+    redirect: '/acl/user',
     children: [
       {
         path: '/acl/user',
