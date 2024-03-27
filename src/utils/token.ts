@@ -8,5 +8,5 @@ export const GET_TOKEN = () => {
 };
 
 export const DEL_TOKEN = () => {
-  return localStorage.removeItem('token')
+  return localStorage.removeItem('token');
 };

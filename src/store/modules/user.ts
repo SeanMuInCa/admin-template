@@ -24,7 +24,7 @@ const useUserStore = defineStore('User', {
 
       if (data.code === 200) {
         console.log(data);
-        
+
         this.token = data.data.token as string; //断言
         SET_TOKEN(data.data.token);
         return Promise.resolve(data.code);
@@ -44,14 +44,14 @@ const useUserStore = defineStore('User', {
       } else {
       }
     },
-    userLogout(){
-      this.token= null,
-      this.userInfo= {
-        desc: '',
-        roles: [],
-        username: '',
-        avatar: '',
-      }
+    userLogout() {
+      (this.token = null),
+        (this.userInfo = {
+          desc: '',
+          roles: [],
+          username: '',
+          avatar: '',
+        });
     },
   },
   getters: {},
