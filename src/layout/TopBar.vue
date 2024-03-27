@@ -20,7 +20,7 @@
       <el-button :icon="FullScreen" circle @click="goFullScreen" />
       <el-button :icon="Setting" circle />
       <div class="user">
-        <img :src="userStore.userInfo.avatar" alt="" style="width: 32px; height: 32px;border-radius: 50%;" />
+        <img :src="userStore.userInfo.avatar" alt="" style="width: 32px; height: 32px; border-radius: 50%" />
         <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">
             <span>{{ userStore.userInfo.username }}</span>

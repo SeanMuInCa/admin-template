@@ -9,11 +9,11 @@ const useUserStore = defineStore('User', {
   state: (): UserState => {
     return {
       token: GET_TOKEN(),
-      userInfo:{
-        desc: "",
-        roles:[],
-        username:'',
-        avatar:''
+      userInfo: {
+        desc: '',
+        roles: [],
+        username: '',
+        avatar: '',
       },
     };
   },
@@ -35,11 +35,11 @@ const useUserStore = defineStore('User', {
       const data = await infoRequest();
       if (data.code === 200) {
         console.log(data);
-        this.userInfo.username = data.data.checkUser.username
-        this.userInfo.desc = data.data.checkUser.desc
-        this.userInfo.roles = data.data.checkUser.roles
-        this.userInfo.avatar = data.data.checkUser.avatar
-        this.avatar = data.data.checkUser.avatar
+        this.userInfo.username = data.data.checkUser.username;
+        this.userInfo.desc = data.data.checkUser.desc;
+        this.userInfo.roles = data.data.checkUser.roles;
+        this.userInfo.avatar = data.data.checkUser.avatar;
+        this.avatar = data.data.checkUser.avatar;
       }
     },
   },
