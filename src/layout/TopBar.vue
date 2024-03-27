@@ -45,13 +45,19 @@ import { router } from '@/router';
 const settingStore = useSettingStore();
 
 defineProps(['url']);
+
 const goRefresh = () => {
-  console.log(router);
-  router.go(router.currentRoute.fullPath);
+  settingStore.refresh = !settingStore.refresh;
 };
+
 const collapse = () => {
   settingStore.isFold = !settingStore.isFold;
 };
+
+const handleCommand = () => {
+    console.log(1);
+    
+}
 </script>
 
 <style scoped lang="scss">

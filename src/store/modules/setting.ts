@@ -5,6 +5,7 @@ const useSettingStore = defineStore('Setting', {
   state: () => {
     return {
       isFold: false,
+      refresh: false,
     };
   },
 
