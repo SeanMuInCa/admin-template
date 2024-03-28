@@ -4,7 +4,7 @@ import { defineStore } from 'pinia';
 import { loginRequest, infoRequest } from '@/api/user';
 import { UserState } from './types/type';
 import { loginData, loginReturnData } from '@/api/user/type';
-import { SET_TOKEN, GET_TOKEN } from '@/utils/token';
+import { SET_TOKEN, GET_TOKEN, DEL_TOKEN } from '@/utils/token';
 const useUserStore = defineStore('User', {
   state: (): UserState => {
     return {
@@ -41,7 +41,9 @@ const useUserStore = defineStore('User', {
         this.userInfo.desc = data.data.checkUser.desc;
         this.userInfo.roles = data.data.checkUser.roles;
         this.userInfo.avatar = data.data.checkUser.avatar;
+        return Promise.resolve(data.code);
       } else {
+        return Promise.reject('failed to get user info');
       }
     },
     userLogout() {
@@ -51,7 +53,8 @@ const useUserStore = defineStore('User', {
           roles: [],
           username: '',
           avatar: '',
-        });
+        })
+        DEL_TOKEN();
     },
   },
   getters: {},
