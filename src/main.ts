@@ -12,11 +12,12 @@ import pinia from '@/store';
 import globaleComponent from '@/components/index.ts';
 import { router } from '@/router/index';
 import '@/styles/index.scss';
-//import '@/permission';
+import '@/permission';
 const app = createApp(App);
 app.use(ElementPlus);
 app.use(globaleComponent);
 
 app.use(router);
 app.use(pinia);
+
 app.mount('#app');
