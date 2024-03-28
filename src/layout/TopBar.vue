@@ -82,7 +82,7 @@ const handleCommand = () => {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-    background-color: white;
+  background-color: white;
   .left {
     display: flex;
     justify-content: space-evenly;

@@ -1,7 +1,7 @@
 <template>
   <div class="layout_container">
     <!-- 左侧菜单 -->
-    <div class="layout_left" >
+    <div class="layout_left">
       <Logo></Logo>
       <el-scrollbar class="scrollbar">
         <el-menu background-color="#87b679" text-color="white" :default-active="url" :collapse="settingStore.isFold ? true : false">
