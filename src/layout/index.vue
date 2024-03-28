@@ -1,7 +1,7 @@
 <template>
   <div class="layout_container">
     <!-- 左侧菜单 -->
-    <div class="layout_left" :class="{ fold: settingStore.isFold ? true : false }">
+    <div class="layout_left" >
       <Logo></Logo>
       <el-scrollbar class="scrollbar">
         <el-menu background-color="#87b679" text-color="white" :default-active="url" :collapse="settingStore.isFold ? true : false">
@@ -48,7 +48,7 @@ const menuRoutes = useRoutesStore();
     width: $slider_width;
     background-color: $slider_color;
     color: white;
-    transition: all 0.3s;
+    // transition: all 0.3s;
     .scrollbar {
       height: calc(100vh - $logo_height);
       .el-menu {
