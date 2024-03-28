@@ -6,14 +6,14 @@ import 'nprogress/nprogress.css';
 import pinia from '@/store';
 import useUserStore from '@/store/modules/user';
 
-nprogress.configure({showSpinner: false})
+nprogress.configure({ showSpinner: false });
 const userStore = useUserStore(pinia); //不加入pinia会报错
 
 //全局守卫
 
 //前置守卫
 router.beforeEach(async (to: any, from: any, next: any) => {
-    document.title = `Raina's Home - ${to.meta.title}`
+  document.title = `Raina's Home - ${to.meta.title}`;
   // to and from are both route objects. must call `next`.
   const token = userStore.token;
   const username = userStore.userInfo.username;
@@ -28,18 +28,18 @@ router.beforeEach(async (to: any, from: any, next: any) => {
         next();
       } else {
         try {
-            await userStore.requestInfo();
-            next();
+          await userStore.requestInfo();
+          next();
         } catch (error) {
-            //发了请求又没有获取到用户信息，说明只能是token过期
-            //或者是token被修改了，验证没通过
-            userStore.userLogout();
-            router.push({
-              path: '/login',
-              query: {
-                redirect: to.path,
-              },
-            });
+          //发了请求又没有获取到用户信息，说明只能是token过期
+          //或者是token被修改了，验证没通过
+          userStore.userLogout();
+          router.push({
+            path: '/login',
+            query: {
+              redirect: to.path,
+            },
+          });
         }
         // await userStore
         //   .requestInfo()

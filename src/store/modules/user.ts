@@ -53,8 +53,8 @@ const useUserStore = defineStore('User', {
           roles: [],
           username: '',
           avatar: '',
-        })
-        DEL_TOKEN();
+        });
+      DEL_TOKEN();
     },
   },
   getters: {},
