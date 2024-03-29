@@ -2,16 +2,18 @@
   <el-card style="width: 100%; height: 100%">
     <el-button type="primary" icon="Plus">add a brand</el-button>
     <!-- main data table -->
-    <el-table :data="tableData" style="width: 100%; margin: 20px 0" height="600" border>
-      <el-table-column fixed prop="id" label="No." width="100" align="center" />
+    <el-table :data="tableData" style="width: 100%; margin: 20px 0" height="660" border>
+      <el-table-column fixed type= 'index' prop="index" label="No." width="100" align="center" />
       <el-table-column prop="tmName" label="Brand name" />
-      <el-table-column prop="logoUrl" label="Brand Logo">
-        <template #default="scope">
-          <img :src="scope.logoUrl" alt="" style="width: 218px" />
+      <el-table-column prop="logoUrl" label="Brand Logo" style="height: '220px'">
+        <template #="{row}">
+          <div style="height: 180px;">
+            <img :src="handleUrl(row.logoUrl)" alt="" style="width: 218px; height: 100%" />
+          </div>
         </template>
       </el-table-column>
       <el-table-column fixed="right" label="Operations">
-        <template #default="scope">
+        <template #default>
           <el-button type="warning" icon="Edit"></el-button>
           <el-button type="danger" icon="Delete"></el-button>
         </template>
@@ -42,23 +44,34 @@ import useProductStore from '@/store/modules/product';
 const productStore = useProductStore();
 const currentPage = ref<number>(1);
 const pageSize = ref<number>(3);
-const total = ref(0);
-const tableData = ref(null);
+const total = ref<number>(0);
+const tableData = ref<object>([]);
 
-const handleSizeChange = () => {
-  console.log(pageSize.value);
+const handleUrl = (url:string) => {
+  if(url.startsWith('http')) return url;
+  return `http://${url}`;
+}
+
+const handleSizeChange = async () => {
+  await getData();
 };
 
-const handleCurrentChange = () => {
-  console.log(currentPage.value);
+const handleCurrentChange = async () => {
+  await getData();
 };
 
 onMounted(async () => {
-  const data = await productStore.getProdcution(currentPage.value, pageSize.value);
-  console.log(data);
-  total.value = data.total;
-  tableData.value = data.records;
+  await getData();
 });
+
+const getData = async() => {
+  await productStore.getProdcution(currentPage.value, pageSize.value).then((data:any) => {
+    console.log(data);
+    total.value = data.total;
+    tableData.value = data.records;
+  }).catch(() => {
+  })
+}
 </script>
 
 <style scoped lang="scss">
