@@ -44,16 +44,15 @@ const useUserStore = defineStore('User', {
     },
     async userLogout() {
       const data = await logoutRequest();
-      console.log(data)
-      if(data.code === 200)
-      {
+      console.log(data);
+      if (data.code === 200) {
         this.token = null;
         this.userInfo.username = '';
         this.userInfo.avatar = '';
         this.userInfo.roles = [];
         DEL_TOKEN();
         return Promise.resolve(data.code);
-      }else{
+      } else {
         return Promise.reject('failed to logout');
       }
       // DEL_TOKEN();
