@@ -22,14 +22,11 @@ const useUserStore = defineStore('User', {
     async userLogin(loginInfo: any) {
       const data: any = await loginRequest(loginInfo);
       if (data.code === 200) {
-        console.log("@@@@",data.data);
-
-        this.token = (data.data as string); //断言
-        SET_TOKEN((data.data as string));
+        this.token = data.data as string; //断言
+        SET_TOKEN(data.data as string);
         return Promise.resolve(data.ok);
       } else {
-        
-        return Promise.reject("failed to login, please check your username and password");
+        return Promise.reject('failed to login, please check your username and password');
       }
     },
 
@@ -45,15 +42,21 @@ const useUserStore = defineStore('User', {
         return Promise.reject('failed to get user info');
       }
     },
-    userLogout() {
-      (this.token = null),
-        (this.userInfo = {
-          desc: '',
-          roles: [],
-          username: '',
-          avatar: '',
-        });
-      DEL_TOKEN();
+    async userLogout() {
+      const data = await logoutRequest();
+      console.log(data)
+      if(data.code === 200)
+      {
+        this.token = null;
+        this.userInfo.username = '';
+        this.userInfo.avatar = '';
+        this.userInfo.roles = [];
+        DEL_TOKEN();
+        return Promise.resolve(data.code);
+      }else{
+        return Promise.reject('failed to logout');
+      }
+      // DEL_TOKEN();
     },
   },
   getters: {},

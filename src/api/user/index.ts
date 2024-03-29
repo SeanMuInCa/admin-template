@@ -17,4 +17,4 @@ export const userInfoRequest = () => axiosRequest.get<any>(API.USERINFO_URL);
 
 //logout
 
-export const logoutRequest = () => axiosRequest.post<any,any>(API.LOGOUT_URL);
+export const logoutRequest = () => axiosRequest.post<any, any>(API.LOGOUT_URL);
