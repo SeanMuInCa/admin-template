@@ -1,5 +1,5 @@
 <template>
-  <div class="topBar" style="border-bottom: 1px solid;">
+  <div class="topBar" style="border-bottom: 1px solid">
     <div class="left">
       <el-icon size="24" @click="collapse">
         <!-- <Fold v-if="!isFold" ></Fold>
