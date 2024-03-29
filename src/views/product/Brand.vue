@@ -40,7 +40,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import useProductStore from '@/store/modules/product';
-import {getBrandReturnType} from '@/api/production/type'
+import { getBrandReturnType } from '@/api/production/type';
 const productStore = useProductStore();
 const currentPage = ref<number>(1);
 const pageSize = ref<number>(3);
@@ -67,7 +67,7 @@ onMounted(async () => {
 const getData = async () => {
   await productStore
     .getProdcution(currentPage.value, pageSize.value)
-    .then((data:getBrandReturnType["data"]) => {
+    .then((data: getBrandReturnType['data']) => {
       console.log(data);
       total.value = data.total;
       tableData.value = data.records;
@@ -75,13 +75,8 @@ const getData = async () => {
     .catch(() => {});
 };
 
-const editBrand = () => {
-
-}
-const deleteBrand = () => {
-
-}
-
+const editBrand = () => {};
+const deleteBrand = () => {};
 </script>
 
 <style scoped lang="scss">
