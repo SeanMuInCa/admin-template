@@ -5,7 +5,6 @@ export interface UserState {
 }
 
 interface userInfo {
-  desc: string;
   roles: string[];
   username: string;
   avatar: string;

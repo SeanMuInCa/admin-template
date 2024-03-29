@@ -33,7 +33,7 @@ router.beforeEach(async (to: any, from: any, next: any) => {
         } catch (error) {
           //发了请求又没有获取到用户信息，说明只能是token过期
           //或者是token被修改了，验证没通过
-          userStore.userLogout();
+          await userStore.userLogout();
           router.push({
             path: '/login',
             query: {

@@ -5,32 +5,36 @@ export interface loginData {
   password: string;
 }
 
-interface dataType {
-  token: string;
-  message?: string;
+
+//定义共用返回数据类型接口
+export interface returnDataTypeCommon {
+  code: number,
+  message: string,
+  ok: boolean
 }
 
-export interface loginReturnData {
-  code: number;
-  data: dataType;
+
+
+//login return type
+export interface loginReturnData extends returnDataTypeCommon {
+  data: string,
 }
 
 //userinfo data type
 interface userinfo {
-  userId: number;
-  avatar: string;
-  username: string;
-  password: string;
-  desc: string;
-  roles: string[];
-  buttons: string[];
-  routes: string[];
-  token: string;
+  routes:string[],
+  buttons:string[],
+  roles: string[],
+  name:string,
+  avatar:string
 }
-interface user {
-  checkUser: userinfo;
+
+//user info return type
+export interface userinfoData extends returnDataTypeCommon{
+  data:userinfo
 }
-export interface userinfoData {
-  code: number;
-  data: user;
+
+//logout return type
+export interface logoutReturnData extends returnDataTypeCommon {
+  data: null
 }

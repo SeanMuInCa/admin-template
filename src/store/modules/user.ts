@@ -3,11 +3,11 @@
 import { defineStore } from 'pinia';
 import { loginRequest, userInfoRequest, logoutRequest } from '@/api/user';
 import { UserState } from './types/type';
-// import { loginData, loginReturnData } from '@/api/user/type';
+import type { loginData,loginReturnData,userinfoData,logoutReturnData } from '@/api/user/type';
 import { SET_TOKEN, GET_TOKEN, DEL_TOKEN } from '@/utils/token';
 
 const useUserStore = defineStore('User', {
-  state: () => {
+  state: ():UserState => {
     return {
       token: GET_TOKEN(),
       userInfo: {
@@ -19,8 +19,8 @@ const useUserStore = defineStore('User', {
   },
 
   actions: {
-    async userLogin(loginInfo: any) {
-      const data: any = await loginRequest(loginInfo);
+    async userLogin(loginInfo: loginData) {
+      const data: loginReturnData = await loginRequest(loginInfo);
       if (data.code === 200) {
         this.token = data.data as string; //断言
         SET_TOKEN(data.data as string);
@@ -31,9 +31,8 @@ const useUserStore = defineStore('User', {
     },
 
     async userInfoRequest() {
-      const data = await userInfoRequest();
+      const data:userinfoData = await userInfoRequest();
       if (data.code === 200) {
-        console.log(data);
         this.userInfo.username = data.data.name;
         this.userInfo.roles = data.data.roles;
         this.userInfo.avatar = data.data.avatar;
@@ -43,8 +42,7 @@ const useUserStore = defineStore('User', {
       }
     },
     async userLogout() {
-      const data = await logoutRequest();
-      console.log(data);
+      const data:logoutReturnData = await logoutRequest();
       if (data.code === 200) {
         this.token = null;
         this.userInfo.username = '';
@@ -55,7 +53,6 @@ const useUserStore = defineStore('User', {
       } else {
         return Promise.reject('failed to logout');
       }
-      // DEL_TOKEN();
     },
   },
   getters: {},
