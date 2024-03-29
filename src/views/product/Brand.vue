@@ -3,11 +3,11 @@
     <el-button type="primary" icon="Plus">add a brand</el-button>
     <!-- main data table -->
     <el-table :data="tableData" style="width: 100%; margin: 20px 0" height="660" border>
-      <el-table-column fixed type= 'index' prop="index" label="No." width="100" align="center" />
+      <el-table-column fixed type="index" prop="index" label="No." width="100" align="center" />
       <el-table-column prop="tmName" label="Brand name" />
       <el-table-column prop="logoUrl" label="Brand Logo" style="height: '220px'">
-        <template #="{row}">
-          <div style="height: 180px;">
+        <template #="{ row }">
+          <div style="height: 180px">
             <img :src="handleUrl(row.logoUrl)" alt="" style="width: 218px; height: 100%" />
           </div>
         </template>
@@ -47,10 +47,10 @@ const pageSize = ref<number>(3);
 const total = ref<number>(0);
 const tableData = ref<object>([]);
 
-const handleUrl = (url:string) => {
-  if(url.startsWith('http')) return url;
+const handleUrl = (url: string) => {
+  if (url.startsWith('http')) return url;
   return `http://${url}`;
-}
+};
 
 const handleSizeChange = async () => {
   await getData();
@@ -64,14 +64,16 @@ onMounted(async () => {
   await getData();
 });
 
-const getData = async() => {
-  await productStore.getProdcution(currentPage.value, pageSize.value).then((data:any) => {
-    console.log(data);
-    total.value = data.total;
-    tableData.value = data.records;
-  }).catch(() => {
-  })
-}
+const getData = async () => {
+  await productStore
+    .getProdcution(currentPage.value, pageSize.value)
+    .then((data: any) => {
+      console.log(data);
+      total.value = data.total;
+      tableData.value = data.records;
+    })
+    .catch(() => {});
+};
 </script>
 
 <style scoped lang="scss">
