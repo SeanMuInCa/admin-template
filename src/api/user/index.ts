@@ -1,24 +1,21 @@
 //统一管理项目用户相关的接口
 import axiosRequest from '@/utils/request';
 
-import { loginData, loginReturnData, userinfoData } from './type';
+
 //统一管理接口
 
 enum API {
-  LOGIN_URL = '/user/login',
-  USERINFO_URL = '/user/info',
+  LOGIN_URL = '/admin/acl/index/login',
+  USERINFO_URL = '/admin/acl/index/info',
+  LOGOUT_URL = '/admin/acl/index/logout'
 }
 
-//对外暴露请求函数
-//login method
+//login
+export const loginRequest = (data:any) => axiosRequest.post<any,any>(API.LOGIN_URL, data);
 
-export const loginRequest = (data: loginData) => {
-  //data:用户登录需要的数据
-  return axiosRequest.post<any, loginReturnData>(API.LOGIN_URL, data);
-};
+//userinfo
+export const requestInfo = () => axiosRequest.get<any>(API.USERINFO_URL);
 
-//userinfo method
+//logout
 
-export const infoRequest = () => {
-  return axiosRequest.get<any, userinfoData>(API.USERINFO_URL);
-};
+export const logoutRequest = () => axiosRequest.get<any>(API.LOGOUT_URL);
