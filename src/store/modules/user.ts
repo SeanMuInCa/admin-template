@@ -3,11 +3,11 @@
 import { defineStore } from 'pinia';
 import { loginRequest, userInfoRequest, logoutRequest } from '@/api/user';
 import { UserState } from './types/type';
-import type { loginData,loginReturnData,userinfoData,logoutReturnData } from '@/api/user/type';
+import type { loginData, loginReturnData, userinfoData, logoutReturnData } from '@/api/user/type';
 import { SET_TOKEN, GET_TOKEN, DEL_TOKEN } from '@/utils/token';
 
 const useUserStore = defineStore('User', {
-  state: ():UserState => {
+  state: (): UserState => {
     return {
       token: GET_TOKEN(),
       userInfo: {
@@ -31,7 +31,7 @@ const useUserStore = defineStore('User', {
     },
 
     async userInfoRequest() {
-      const data:userinfoData = await userInfoRequest();
+      const data: userinfoData = await userInfoRequest();
       if (data.code === 200) {
         this.userInfo.username = data.data.name;
         this.userInfo.roles = data.data.roles;
@@ -42,7 +42,7 @@ const useUserStore = defineStore('User', {
       }
     },
     async userLogout() {
-      const data:logoutReturnData = await logoutRequest();
+      const data: logoutReturnData = await logoutRequest();
       if (data.code === 200) {
         this.token = null;
         this.userInfo.username = '';
