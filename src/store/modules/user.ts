@@ -1,16 +1,16 @@
 //create user store
 
 import { defineStore } from 'pinia';
-import { loginRequest, infoRequest } from '@/api/user';
+import { loginRequest, userInfoRequest, logoutRequest } from '@/api/user';
 import { UserState } from './types/type';
-import { loginData, loginReturnData } from '@/api/user/type';
+// import { loginData, loginReturnData } from '@/api/user/type';
 import { SET_TOKEN, GET_TOKEN, DEL_TOKEN } from '@/utils/token';
+
 const useUserStore = defineStore('User', {
-  state: (): UserState => {
+  state: () => {
     return {
       token: GET_TOKEN(),
       userInfo: {
-        desc: '',
         roles: [],
         username: '',
         avatar: '',
@@ -19,28 +19,27 @@ const useUserStore = defineStore('User', {
   },
 
   actions: {
-    async userLogin(loginInfo: loginData) {
-      const data: loginReturnData = await loginRequest(loginInfo);
-
+    async userLogin(loginInfo: any) {
+      const data: any = await loginRequest(loginInfo);
       if (data.code === 200) {
-        console.log(data);
+        console.log("@@@@",data.data);
 
-        this.token = data.data.token as string; //断言
-        SET_TOKEN(data.data.token);
-        return Promise.resolve(data.code);
+        this.token = (data.data as string); //断言
+        SET_TOKEN((data.data as string));
+        return Promise.resolve(data.ok);
       } else {
-        return Promise.reject(data.data.message);
+        
+        return Promise.reject("failed to login, please check your username and password");
       }
     },
 
-    async requestInfo() {
-      const data = await infoRequest();
+    async userInfoRequest() {
+      const data = await userInfoRequest();
       if (data.code === 200) {
         console.log(data);
-        this.userInfo.username = data.data.checkUser.username;
-        this.userInfo.desc = data.data.checkUser.desc;
-        this.userInfo.roles = data.data.checkUser.roles;
-        this.userInfo.avatar = data.data.checkUser.avatar;
+        this.userInfo.username = data.data.name;
+        this.userInfo.roles = data.data.roles;
+        this.userInfo.avatar = data.data.avatar;
         return Promise.resolve(data.code);
       } else {
         return Promise.reject('failed to get user info');

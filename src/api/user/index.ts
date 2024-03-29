@@ -13,8 +13,8 @@ enum API {
 export const loginRequest = (data: any) => axiosRequest.post<any, any>(API.LOGIN_URL, data);
 
 //userinfo
-export const requestInfo = () => axiosRequest.get<any>(API.USERINFO_URL);
+export const userInfoRequest = () => axiosRequest.get<any>(API.USERINFO_URL);
 
 //logout
 
-export const logoutRequest = () => axiosRequest.get<any>(API.LOGOUT_URL);
+export const logoutRequest = () => axiosRequest.post<any,any>(API.LOGOUT_URL);

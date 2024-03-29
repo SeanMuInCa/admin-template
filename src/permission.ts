@@ -28,7 +28,7 @@ router.beforeEach(async (to: any, from: any, next: any) => {
         next();
       } else {
         try {
-          await userStore.requestInfo();
+          await userStore.userInfoRequest();
           next();
         } catch (error) {
           //发了请求又没有获取到用户信息，说明只能是token过期

@@ -83,7 +83,7 @@ const handleLogin = async () => {
           ElNotification({
             type: 'success',
             title: getWelcome(),
-            message: `Welcome back ${userStore.userInfo.username}`,
+            message: `Welcome back`,
           });
           loading.value = false;
         })
