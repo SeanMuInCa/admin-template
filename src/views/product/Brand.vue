@@ -6,7 +6,7 @@
       <el-table-column fixed type="index" prop="index" label="No." width="100" align="center" />
       <el-table-column prop="tmName" label="Brand name" />
       <el-table-column prop="logoUrl" label="Brand Logo" style="height: '220px'">
-        <template #="{ row }">
+        <template #default="{ row }">
           <div style="height: 180px">
             <img :src="handleUrl(row.logoUrl)" alt="" style="width: 218px; height: 100%" />
           </div>
@@ -14,8 +14,8 @@
       </el-table-column>
       <el-table-column fixed="right" label="Operations">
         <template #default>
-          <el-button type="warning" icon="Edit"></el-button>
-          <el-button type="danger" icon="Delete"></el-button>
+          <el-button type="warning" icon="Edit" @click="editBrand"></el-button>
+          <el-button type="danger" icon="Delete" @click="deleteBrand"></el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -40,7 +40,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import useProductStore from '@/store/modules/product';
-
+import {getBrandReturnType} from '@/api/production/type'
 const productStore = useProductStore();
 const currentPage = ref<number>(1);
 const pageSize = ref<number>(3);
@@ -67,13 +67,21 @@ onMounted(async () => {
 const getData = async () => {
   await productStore
     .getProdcution(currentPage.value, pageSize.value)
-    .then((data: any) => {
+    .then((data:getBrandReturnType["data"]) => {
       console.log(data);
       total.value = data.total;
       tableData.value = data.records;
     })
     .catch(() => {});
 };
+
+const editBrand = () => {
+
+}
+const deleteBrand = () => {
+
+}
+
 </script>
 
 <style scoped lang="scss">
