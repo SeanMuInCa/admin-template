@@ -80,7 +80,7 @@ const menuRoutes = useRoutesStore();
   .layout_main {
     width: calc(calc(100% - $slider_width));
     height: calc(100vh - $top_height);
-    background-color: rgb(115, 255, 0);
+    
     position: absolute;
     top: $top_height;
     left: $slider_width;
