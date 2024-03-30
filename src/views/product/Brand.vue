@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import {  onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import useProductStore from '@/store/modules/product';
 import type { getBrandReturnType, brandType } from '@/api/production/type';
 import Dialog from './Dialog.vue';
@@ -49,17 +49,16 @@ const pageSize = ref<number>(3);
 const total = ref<number>(0);
 const tableData = ref<brandType[]>([]);
 const show = ref(false);
-const title = ref('')
+const title = ref('');
 const addFlag = ref(true);
 const handleAdd = () => {
   show.value = true;
-  title.value = 'Add New Brand'
-  addFlag.value = true
+  title.value = 'Add New Brand';
+  addFlag.value = true;
 };
 const getStatus = (value) => {
   show.value = value;
-  
-}
+};
 
 const handleUrl = (url: string) => {
   if (url.startsWith('http')) return url;

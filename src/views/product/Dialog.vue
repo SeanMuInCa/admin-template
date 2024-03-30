@@ -4,26 +4,32 @@
       <h2>{{ title }}</h2>
     </template>
     <el-form :model="dynamicValidateForm" style="max-width: 600px">
-      <el-form-item label="Brand Name" :rules="[
-        {
-            required :true,
+      <el-form-item
+        label="Brand Name"
+        :rules="[
+          {
+            required: true,
             message: 'brand name required at least two characters',
-            trigger: 'change,blur'
-        }
-      ]">
-        <el-input v-model="dynamicValidateForm.brandName" placeholder="please input your new brand name" style="padding: 0 10px"/>  
-    </el-form-item>
-    <el-form-item label="Brand Logo" :rules="[
-        {
-            required :true,
+            trigger: 'change,blur',
+          },
+        ]"
+      >
+        <el-input v-model="dynamicValidateForm.brandName" placeholder="please input your new brand name" style="padding: 0 10px" />
+      </el-form-item>
+      <el-form-item
+        label="Brand Logo"
+        :rules="[
+          {
+            required: true,
             message: 'must upload a logo image',
-            trigger: 'change'
-        }
-    ]">
+            trigger: 'change',
+          },
+        ]"
+      >
         <el-upload>
-            <el-icon class="el-icon--upload" size="64"><upload-filled /></el-icon>
+          <el-icon class="el-icon--upload" size="64"><upload-filled /></el-icon>
         </el-upload>
-    </el-form-item>
+      </el-form-item>
     </el-form>
     <template #footer>
       <div class="dialog-footer">
@@ -37,20 +43,18 @@
 <script setup lang="ts">
 import { ref, toRef } from 'vue';
 import { ElMessageBox } from 'element-plus';
-const props = defineProps(['title','show','getStatus','flag']);
-
+const props = defineProps(['title', 'show', 'getStatus', 'flag']);
 
 const dialogVisible = props.show;
 console.log(props);
 
 const dynamicValidateForm = ref({
-    brandName: '',
-
-})
+  brandName: '',
+});
 
 const handleCancel = () => {
-    props.getStatus(false);
-}
+  props.getStatus(false);
+};
 const handleClose = (done: () => void) => {
   ElMessageBox.confirm('Are you sure to close this dialog?')
     .then(() => {
