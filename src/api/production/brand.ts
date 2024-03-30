@@ -1,5 +1,5 @@
 import axiosRequest from '@/utils/request';
-import { getBrandReturnType } from './type';
+import type { getBrandReturnType } from './type';
 enum API {
   GET_PRODUCTION_URL = `/admin/product/baseTrademark/`,
 }

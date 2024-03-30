@@ -1,5 +1,5 @@
 <template>
-  <Dialog></Dialog>
+  <Dialog :title="title" :show="show" :getStatus="getStatus" :flag="addFlag" v-if="show"></Dialog>
   <el-card style="width: 100%; height: 100%">
     <el-button type="primary" icon="Plus" @click="handleAdd">add a brand</el-button>
     <!-- main data table -->
@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, onMounted, ref } from 'vue';
+import {  onMounted, ref } from 'vue';
 import useProductStore from '@/store/modules/product';
 import type { getBrandReturnType, brandType } from '@/api/production/type';
 import Dialog from './Dialog.vue';
@@ -49,9 +49,17 @@ const pageSize = ref<number>(3);
 const total = ref<number>(0);
 const tableData = ref<brandType[]>([]);
 const show = ref(false);
+const title = ref('')
+const addFlag = ref(true);
 const handleAdd = () => {
   show.value = true;
+  title.value = 'Add New Brand'
+  addFlag.value = true
 };
+const getStatus = (value) => {
+  show.value = value;
+  
+}
 
 const handleUrl = (url: string) => {
   if (url.startsWith('http')) return url;
@@ -82,7 +90,11 @@ const getData = async () => {
     .catch(() => {});
 };
 
-const editBrand = () => {};
+const editBrand = () => {
+  title.value = 'Edit Brand';
+  show.value = true;
+  addFlag.value = false;
+};
 const deleteBrand = () => {};
 </script>
 

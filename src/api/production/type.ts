@@ -5,10 +5,20 @@ export interface returnDataTypeCommon {
   ok: boolean;
 }
 
+//brand data type
+export interface brandType {
+  id?: number;
+  tmName: string;
+  logoUrl: string;
+}
 //brand list return type
 export interface getBrandReturnType extends returnDataTypeCommon {
   data: {
-    records: object[];
+    records: brandType[];
     total: number;
+    size: number;
+    current: number;
+    searchCount: boolean;
+    pages: number;
   };
 }
