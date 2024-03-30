@@ -41,8 +41,8 @@
 <script setup lang="ts">
 import { nextTick, onMounted, ref } from 'vue';
 import useProductStore from '@/store/modules/product';
-import type { getBrandReturnType,brandType } from '@/api/production/type';
-import Dialog from './Dialog.vue'
+import type { getBrandReturnType, brandType } from '@/api/production/type';
+import Dialog from './Dialog.vue';
 const productStore = useProductStore();
 const currentPage = ref<number>(1);
 const pageSize = ref<number>(3);
@@ -50,8 +50,8 @@ const total = ref<number>(0);
 const tableData = ref<brandType[]>([]);
 const show = ref(false);
 const handleAdd = () => {
-  show.value = true
-}
+  show.value = true;
+};
 
 const handleUrl = (url: string) => {
   if (url.startsWith('http')) return url;
@@ -61,7 +61,6 @@ const handleUrl = (url: string) => {
 const handleSizeChange = async () => {
   currentPage.value = 1;
   await getData();
-  
 };
 
 const handleCurrentChange = async () => {
