@@ -14,7 +14,7 @@
         </template>
       </el-table-column>
       <el-table-column fixed="right" label="Operations">
-        <template #default="{row}">
+        <template #default="{ row }">
           <el-button type="warning" icon="Edit" @click="editBrand(row)"></el-button>
           <el-button type="danger" icon="Delete" @click="deleteBrand"></el-button>
         </template>
@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref,reactive } from 'vue';
+import { onMounted, ref, reactive } from 'vue';
 import useProductStore from '@/store/modules/product';
 import type { getBrandReturnType, brandType } from '@/api/production/type';
 import Dialog from './Dialog.vue';
@@ -52,7 +52,6 @@ const show = ref(false);
 const title = ref('');
 const addFlag = ref(true);
 let rowData = reactive({});
-
 
 const handleAdd = () => {
   show.value = true;

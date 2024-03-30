@@ -13,11 +13,11 @@ const useProductStore = defineStore('productStore', {
     },
     async addNewBrand(newBrandData: any) {
       const data: any = await addProductionRequest(newBrandData);
-      console.log('add',data);
+      console.log('add', data);
     },
     async updateBrand(newBrandData: any) {
       const data: any = await updateProductionRequest(newBrandData);
-      console.log('update',data);
+      console.log('update', data);
     },
   },
   getters: {},
