@@ -56,7 +56,7 @@ const handleAdd = () => {
   title.value = 'Add New Brand';
   addFlag.value = true;
 };
-const getStatus = (value) => {
+const getStatus = (value:boolean) => {
   show.value = value;
 };
 
