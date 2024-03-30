@@ -1,5 +1,5 @@
 <template>
-  <Dialog :title="title" :show="show" :getStatus="getStatus" :flag="addFlag" v-if="show"></Dialog>
+  <Dialog :title="title" :show="show" :getStatus="getStatus" :flag="addFlag" v-if="show" :getData="getData" :rowData="rowData"></Dialog>
   <el-card style="width: 100%; height: 100%">
     <el-button type="primary" icon="Plus" @click="handleAdd">add a brand</el-button>
     <!-- main data table -->
@@ -14,8 +14,8 @@
         </template>
       </el-table-column>
       <el-table-column fixed="right" label="Operations">
-        <template #default>
-          <el-button type="warning" icon="Edit" @click="editBrand"></el-button>
+        <template #default="{row}">
+          <el-button type="warning" icon="Edit" @click="editBrand(row)"></el-button>
           <el-button type="danger" icon="Delete" @click="deleteBrand"></el-button>
         </template>
       </el-table-column>
@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref,reactive } from 'vue';
 import useProductStore from '@/store/modules/product';
 import type { getBrandReturnType, brandType } from '@/api/production/type';
 import Dialog from './Dialog.vue';
@@ -51,6 +51,9 @@ const tableData = ref<brandType[]>([]);
 const show = ref(false);
 const title = ref('');
 const addFlag = ref(true);
+let rowData = reactive({});
+
+
 const handleAdd = () => {
   show.value = true;
   title.value = 'Add New Brand';
@@ -89,10 +92,11 @@ const getData = async () => {
     .catch(() => {});
 };
 
-const editBrand = () => {
+const editBrand = (row) => {
   title.value = 'Edit Brand';
   show.value = true;
   addFlag.value = false;
+  rowData = row;
 };
 const deleteBrand = () => {};
 </script>
