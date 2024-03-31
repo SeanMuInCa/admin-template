@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { getProductionRequest, addProductionRequest, updateProductionRequest } from '@/api/production/brand';
+import { getProductionRequest, addProductionRequest, updateProductionRequest, deleteProductionRequest } from '@/api/production/brand';
 import { getBrandReturnType } from '@/api/production/type';
 const useProductStore = defineStore('productStore', {
   state: () => {
@@ -14,11 +14,21 @@ const useProductStore = defineStore('productStore', {
     async addNewBrand(newBrandData: any) {
       const data: any = await addProductionRequest(newBrandData);
       console.log('add', data);
+      if (data.code == 200) return Promise.resolve(data);
+      return Promise.reject('failed to add production');
     },
     async updateBrand(newBrandData: any) {
       const data: any = await updateProductionRequest(newBrandData);
       console.log('update', data);
+      if (data.code == 200) return Promise.resolve(data);
+      return Promise.reject('failed to update production');
     },
+    async deleteBrand(id:number){
+        const data: any = await deleteProductionRequest(id);
+        console.log('delete', data);
+        if (data.code == 200) return Promise.resolve(data);
+        return Promise.reject('failed to delete production');
+    }
   },
   getters: {},
 });
