@@ -105,7 +105,7 @@ const handleConfirm = async () => {
       .updateBrand(newBrandDataParams)
       .then(async () => {
         await props.getData();
-        ElMessage.success('edit brand success')
+        ElMessage.success('edit brand success');
       })
       .catch(() => {
         ElMessage.error('server error');
@@ -115,7 +115,7 @@ const handleConfirm = async () => {
       .addNewBrand(newBrandDataParams)
       .then(async () => {
         await props.getData();
-        ElMessage.success('add new brand success')
+        ElMessage.success('add new brand success');
       })
       .catch(() => {
         ElMessage.error('server error');

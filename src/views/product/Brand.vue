@@ -18,7 +18,7 @@
           <el-button type="warning" icon="Edit" @click="editBrand(row)"></el-button>
           <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirm(row)">
             <template #reference>
-              <el-button type="danger" icon="Delete" ></el-button>
+              <el-button type="danger" icon="Delete"></el-button>
             </template>
           </el-popconfirm>
         </template>
