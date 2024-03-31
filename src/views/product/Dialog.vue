@@ -7,6 +7,7 @@
       <el-form-item
         label-width="110"
         label="Brand Name"
+        prop="Brand Name"
         :rules="[
           {
             required: true,
@@ -25,11 +26,12 @@
       <el-form-item
         label-width="110"
         label="Brand Logo"
+        prop="Brand Logo"
         :rules="[
           {
             required: true,
             message: 'must upload a logo image',
-            trigger: 'change',
+            trigger: 'change,blur',
           },
         ]"
       >
@@ -103,6 +105,7 @@ const handleConfirm = async () => {
       .updateBrand(newBrandDataParams)
       .then(async () => {
         await props.getData();
+        ElMessage.success('edit brand success')
       })
       .catch(() => {
         ElMessage.error('server error');
@@ -112,6 +115,7 @@ const handleConfirm = async () => {
       .addNewBrand(newBrandDataParams)
       .then(async () => {
         await props.getData();
+        ElMessage.success('add new brand success')
       })
       .catch(() => {
         ElMessage.error('server error');
