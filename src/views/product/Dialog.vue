@@ -52,14 +52,14 @@
 
 <script setup lang="ts">
 import type { UploadProps } from 'element-plus';
-import {  reactive, onMounted } from 'vue';
+import { reactive, onMounted } from 'vue';
 import { ElMessage } from 'element-plus';
 import type { brandType } from '@/api/production/type';
 import useProductStore from '@/store/modules/product';
 
 const productStore = useProductStore();
 
-const props:any = defineProps(['title', 'show', 'getStatus', 'flag', 'getData', 'rowData']);
+const props: any = defineProps(['title', 'show', 'getStatus', 'flag', 'getData', 'rowData']);
 
 const dialogVisible = props.show;
 
@@ -75,7 +75,7 @@ onMounted(() => {
     newBrandDataParams.id = props.rowData.id;
   }
 });
-const handleAvatarSuccess: UploadProps['onSuccess'] = async (response:any) => {
+const handleAvatarSuccess: UploadProps['onSuccess'] = async (response: any) => {
   const data = await response;
   if (data.code == 200) {
     newBrandDataParams.logoUrl = data.data;
@@ -83,7 +83,7 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = async (response:any) => {
     ElMessage.error('upload failed, please try again!');
   }
 };
-const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile:any) => {
+const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile: any) => {
   if (rawFile.type == 'image/jpeg' || rawFile.type == 'image/png' || rawFile.type == 'image/gif') {
     if (rawFile.size / 1024 / 1024 > 2) {
       ElMessage.error('Logo picture size can not exceed 2MB!');

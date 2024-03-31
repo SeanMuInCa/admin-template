@@ -23,12 +23,12 @@ const useProductStore = defineStore('productStore', {
       if (data.code == 200) return Promise.resolve(data);
       return Promise.reject('failed to update production');
     },
-    async deleteBrand(id:number){
-        const data: any = await deleteProductionRequest(id);
-        console.log('delete', data);
-        if (data.code == 200) return Promise.resolve(data);
-        return Promise.reject('failed to delete production');
-    }
+    async deleteBrand(id: number) {
+      const data: any = await deleteProductionRequest(id);
+      console.log('delete', data);
+      if (data.code == 200) return Promise.resolve(data);
+      return Promise.reject('failed to delete production');
+    },
   },
   getters: {},
 });

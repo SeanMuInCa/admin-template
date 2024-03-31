@@ -1,6 +1,5 @@
 <template>
-  <Dialog :title="title" :show="show" :getStatus="getStatus" :flag="addFlag" v-if="show" :getData="getData"
-    :rowData="rowData"></Dialog>
+  <Dialog :title="title" :show="show" :getStatus="getStatus" :flag="addFlag" v-if="show" :getData="getData" :rowData="rowData"></Dialog>
   <el-card style="width: 100%; height: 100%">
     <el-button type="primary" icon="Plus" @click="handleAdd">add a brand</el-button>
     <!-- main data table -->
@@ -17,12 +16,10 @@
       <el-table-column fixed="right" label="Operations">
         <template #default="{ row }">
           <el-button type="warning" icon="Edit" @click="editBrand(row)"></el-button>
-          <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled"
-            icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirm(row)">
+          <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirm(row)">
             <template #reference>
               <el-button type="danger" icon="Delete" @click="deleteBrand(row)"></el-button>
             </template>
-            
           </el-popconfirm>
         </template>
       </el-table-column>
@@ -31,9 +28,16 @@
     <!-- pagination -->
     <div class="demo-pagination-block">
       <div class="demonstration"></div>
-      <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" :page-sizes="[3, 5, 7, 10]"
-        :background="true" layout="prev, pager, next, jumper,->,sizes,total" :total="total"
-        @size-change="handleSizeChange" @current-change="handleCurrentChange" />
+      <el-pagination
+        v-model:current-page="currentPage"
+        v-model:page-size="pageSize"
+        :page-sizes="[3, 5, 7, 10]"
+        :background="true"
+        layout="prev, pager, next, jumper,->,sizes,total"
+        :total="total"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+      />
     </div>
   </el-card>
 </template>
@@ -89,22 +93,25 @@ const getData = async () => {
       total.value = data.total;
       tableData.value = data.records;
     })
-    .catch(() => { });
+    .catch(() => {});
 };
-const confirm =async (row) => {
-  await productStore.deleteBrand(row.id).then((data) => {
-    console.log('data',data);
-    
-    if(data.code == 200){
-      ElMessage.success('deleted')
-      getData();
-    }else{
-      ElMessage.error('system data can not be deleted')
-    }
-  }).catch(() => {
-    ElMessage.error('server wrong')
-  })
-}
+const confirm = async (row) => {
+  await productStore
+    .deleteBrand(row.id)
+    .then((data) => {
+      console.log('data', data);
+
+      if (data.code == 200) {
+        ElMessage.success('deleted');
+        getData();
+      } else {
+        ElMessage.error('system data can not be deleted');
+      }
+    })
+    .catch(() => {
+      ElMessage.error('server wrong');
+    });
+};
 
 const editBrand = (row) => {
   title.value = 'Edit Brand';
@@ -116,12 +123,11 @@ const deleteBrand = async (row) => {
   // await productStore.deleteBrand(row.id).then(() => {
   //   ElMessage.success('deleted')
   // })
-
 };
 </script>
 
 <style scoped lang="scss">
-.demo-pagination-block+.demo-pagination-block {
+.demo-pagination-block + .demo-pagination-block {
   margin-top: 10px;
 }
 
