@@ -23,9 +23,9 @@
     <el-table :data="list" style="width: 100%; margin: 20px 0" height="600" border>
       <el-table-column fixed type="index" prop="index" label="No." width="100px" align="center" />
       <el-table-column prop="attrName" label="Attribute Name" width="300px"></el-table-column>
-      <el-table-column prop="attrValueList" label="Attribute Value Name" width="700px" style="display: flex; justify-content: space-around;">
-        <template #default={row} >
-          <span v-for="item in row.attrValueList" :key="item.id" >{{ item.valueName }}</span>
+      <el-table-column prop="attrValueList" label="Attribute Value Name" width="700px" style="display: flex; justify-content: space-around">
+        <template #default="{ row }">
+          <span v-for="item in row.attrValueList" :key="item.id">{{ item.valueName }}</span>
         </template>
       </el-table-column>
       <el-table-column prop="" label="Operation" />
