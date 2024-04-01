@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { getCategory1, getCategory2, getCategory3, getAttrList } from '@/api/production/attribute';
 import type { categoryType, categoryReturnType } from '@/api/production/type';
+import { nextTick } from 'vue';
 
 const useCategoryStore = defineStore('Category', {
   state: () => {
@@ -12,6 +13,7 @@ const useCategoryStore = defineStore('Category', {
       c2_id: '',
       c3_id: '',
       list: [] as categoryType[],
+      loading: false,
     };
   },
   actions: {
@@ -34,9 +36,16 @@ const useCategoryStore = defineStore('Category', {
       }
     },
     async getList() {
+      this.loading = true;
       const data = await getAttrList(Number.parseInt(this.c1_id), Number.parseInt(this.c2_id), Number.parseInt(this.c3_id));
       if (data.code == 200) {
         this.list = data.data;
+        nextTick(() => {
+          this.loading = false;
+        })
+      }else{
+        console.log(1);
+        
       }
     },
   },

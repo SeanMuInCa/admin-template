@@ -4,6 +4,8 @@ import axios from 'axios';
 import { ElMessage } from 'element-plus';
 //引入用户配置数据仓库
 import useUserStore from '@/store/modules/user';
+import useCategoryStore from '@/store/modules/category';
+
 //第一步，axios.create，去创建axios实例，目的是可以配置一些如路径，超时时间等
 
 const axiosRequest = axios.create({
@@ -32,6 +34,7 @@ axiosRequest.interceptors.response.use(
     return response.data; //简化数据了，接口返回的对象里有个data是实际数据
   },
   (error) => {
+    const categoryStore = useCategoryStore();
     //这里是失败回调，处理网络错误
     let message = '';
     // ElMessage.error(error.message)
@@ -61,6 +64,7 @@ axiosRequest.interceptors.response.use(
       type: 'error',
       message,
     });
+    categoryStore.loading = false;
     return Promise.reject(error);
   }
 );
