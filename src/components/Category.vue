@@ -2,18 +2,18 @@
   <el-card>
     <el-form class="demo-form-inline" :inline="true">
       <el-form-item label="Category I">
-        <el-select placeholder="please select category" clearable style="width: 240px" v-model="form.categoryA_id" @change="selectA" @clear="clearA">
-          <el-option v-for="item in dataA" :key="item.id" :label="item.name" :value="item.id" />
+        <el-select placeholder="please select category" clearable style="width: 240px" v-model="categoryStore.c1_id" @change="selectA" @clear="clearA">
+          <el-option v-for="item in categoryStore.c1Arr" :key="item.id" :label="item.name" :value="item.id" />
         </el-select>
       </el-form-item>
       <el-form-item label="Category II">
-        <el-select v-model="form.categoryB_id" clearable placeholder="please select category" @change="selectB" style="width: 240px">
-          <el-option v-for="item in dataB" :key="item.id" :label="item.name" :value="item.id" />
+        <el-select v-model="categoryStore.c2_id" clearable placeholder="please select category" @change="selectB" style="width: 240px">
+          <el-option v-for="item in categoryStore.c2Arr" :key="item.id" :label="item.name" :value="item.id" />
         </el-select>
       </el-form-item>
       <el-form-item label="Category III">
-        <el-select v-model="form.categoryC_id" clearable placeholder="please select category" @change="selectC" style="width: 240px">
-          <el-option v-for="item in dataC" :key="item.id" :label="item.name" :value="item.id" />
+        <el-select v-model="categoryStore.c3_id" clearable placeholder="please select category" @change="selectC" style="width: 240px">
+          <el-option v-for="item in categoryStore.c3Arr" :key="item.id" :label="item.name" :value="item.id" />
         </el-select>
       </el-form-item>
     </el-form>
@@ -21,69 +21,32 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, onMounted } from 'vue';
-import { getCategory1, getCategory2, getCategory3, getAttrList } from '@/api/production/attribute';
-import type { categoryType, categoryReturnType } from '@/api/production/type';
-import { ElMessage } from 'element-plus';
+import { onMounted } from 'vue';
+import useCategoryStore from '@/store/modules/category'
 
-const props = defineProps(['setList']);
+const categoryStore = useCategoryStore();
+const props = defineProps(['setFlag'])
 
-const form = reactive({
-  categoryA_id: null as number | null,
-  categoryB_id: null as number | null,
-  categoryC_id: null as number | null,
-});
 
-let dataA = reactive<categoryType[]>([]);
-let dataB = reactive<categoryType[]>([]);
-const dataC = reactive<categoryType[]>([]);
 
-onMounted(async () => {
+onMounted( () => {
   getCategoryInit();
 });
 const getCategoryInit = async () => {
-  const data: categoryReturnType = await getCategory1();
-  if (data.code == 200) {
-    Object.assign(dataA, data.data);
-  }
-  console.log('dataA', dataA);
+    await categoryStore.getC1();
 };
-const clearA = () => {
-  dataA = {};
-  console.log(dataA);
 
-  dataB = {};
-  console.log(dataB);
-
-  Object.assign(dataC, null);
-  getCategoryInit();
-};
 const selectA = async () => {
-  Object.assign(dataB, null);
-  const data = await getCategory2(form.categoryA_id!);
-  if (data.code == 200) {
-    Object.assign(dataB, data.data);
-  }
-  console.log('dataB', dataB);
+  await categoryStore.getC2();
 };
 
 const selectB = async () => {
-  const data = await getCategory3(form.categoryB_id!);
-  if (data.code == 200) {
-    Object.assign(dataC, data.data);
-  }
-  console.log('dataC', dataC);
+    await categoryStore.getC3();
 };
 
-const selectC = async () => {
-  const data = await getAttrList(form.categoryA_id!, form.categoryB_id!, form.categoryC_id!);
-
-  if (data.code == 200) {
-    props.setList(data.data);
-  } else {
-    ElMessage.error('network error');
-  }
-};
+const selectC = () => {
+    props.setFlag(true)
+}
 </script>
 
 <style scoped>

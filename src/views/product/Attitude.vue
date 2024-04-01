@@ -1,8 +1,8 @@
 <template>
-  <Category :setList="setList"></Category>
+  <Category :setFlag="setFlag"></Category>
   <el-card>
     <el-button type="primary" icon="Plus" @click="handleAdd">add an attribute</el-button>
-    <el-table :data="list" style="width: 100%; margin: 20px 0" height="600" border>
+    <el-table :data="categoryStore.list" style="width: 100%; margin: 20px 0" height="600" border>
       <el-table-column fixed type="index" prop="index" label="No." width="100px" align="center" />
       <el-table-column prop="attrName" label="Attribute Name" width="300px"></el-table-column>
       <el-table-column prop="attrValueList" label="Attribute Value Name" width="700px" style="display: flex; justify-content: space-around">
@@ -17,13 +17,41 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { ref,watch,watchEffect } from 'vue';
 import type { categoryType } from '@/api/production/type';
-const list = reactive<categoryType[]>([]);
+import useCategoryStore from '@/store/modules/category';
 
-const setList = (value: categoryType[]) => {
-  Object.assign(list, value);
-};
+const categoryStore = useCategoryStore();
+const flag = ref(false);
+
+const setFlag = (value:boolean) => {
+  flag.value = value;
+}
+watchEffect(() => {
+  if(flag.value){
+    categoryStore.list = [];
+    getList();
+    flag.value = false;
+  }
+  
+})
+
+watch(() => categoryStore.c1_id, () => {
+  categoryStore.c2_id = '';
+  categoryStore.c3_id = '';
+  categoryStore.c2Arr = [];
+  categoryStore.c3Arr = [];
+
+})
+
+watch(() => categoryStore.c2_id, () => {
+  categoryStore.c3_id = '';
+  categoryStore.c3Arr = [];
+})
+
+const getList = async() => {
+  await categoryStore.getList();
+}
 </script>
 
 <style scoped></style>
