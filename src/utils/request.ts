@@ -34,8 +34,12 @@ axiosRequest.interceptors.response.use(
   (error) => {
     //这里是失败回调，处理网络错误
     let message = '';
-    const status = error.response.status;
+    // ElMessage.error(error.message)
+    const status = error.response ? error.response.status : error.request.status;
     switch (status) {
+      case 0:
+        message = 'timeout';
+        break;
       case 401:
         message = 'token过期';
         break;
