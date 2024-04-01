@@ -1,5 +1,5 @@
 <template>
-    <el-card>
+  <el-card>
     <el-form class="demo-form-inline" :inline="true">
       <el-form-item label="Category I">
         <el-select placeholder="please select category" clearable style="width: 240px" v-model="form.categoryA_id" @change="selectA" @clear="clearA">
@@ -26,7 +26,7 @@ import { getCategory1, getCategory2, getCategory3, getAttrList } from '@/api/pro
 import type { categoryType, categoryReturnType } from '@/api/production/type';
 import { ElMessage } from 'element-plus';
 
-const props = defineProps(['setList'])
+const props = defineProps(['setList']);
 
 const form = reactive({
   categoryA_id: null as number | null,
@@ -34,34 +34,32 @@ const form = reactive({
   categoryC_id: null as number | null,
 });
 
-
 let dataA = reactive<categoryType[]>([]);
 let dataB = reactive<categoryType[]>([]);
 const dataC = reactive<categoryType[]>([]);
 
-
 onMounted(async () => {
   getCategoryInit();
 });
-const getCategoryInit = async() => {
+const getCategoryInit = async () => {
   const data: categoryReturnType = await getCategory1();
   if (data.code == 200) {
     Object.assign(dataA, data.data);
   }
   console.log('dataA', dataA);
-}
+};
 const clearA = () => {
-  dataA = {}
+  dataA = {};
   console.log(dataA);
-  
-  dataB = {}
+
+  dataB = {};
   console.log(dataB);
-  
-  Object.assign(dataC, null)
+
+  Object.assign(dataC, null);
   getCategoryInit();
-}
+};
 const selectA = async () => {
-  Object.assign(dataB, null)
+  Object.assign(dataB, null);
   const data = await getCategory2(form.categoryA_id!);
   if (data.code == 200) {
     Object.assign(dataB, data.data);
@@ -81,11 +79,10 @@ const selectC = async () => {
   const data = await getAttrList(form.categoryA_id!, form.categoryB_id!, form.categoryC_id!);
 
   if (data.code == 200) {
-    props.setList(data.data)
-  }else{
-    ElMessage.error('network error')
+    props.setList(data.data);
+  } else {
+    ElMessage.error('network error');
   }
-  
 };
 </script>
 
