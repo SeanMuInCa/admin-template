@@ -42,10 +42,9 @@ const useCategoryStore = defineStore('Category', {
         this.list = data.data;
         nextTick(() => {
           this.loading = false;
-        })
-      }else{
+        });
+      } else {
         console.log(1);
-        
       }
     },
   },

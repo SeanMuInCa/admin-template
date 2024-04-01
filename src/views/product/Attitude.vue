@@ -41,7 +41,6 @@ watchEffect(() => {
     categoryStore.list = [];
     getList();
     flag.value = false;
-
   }
 });
 
