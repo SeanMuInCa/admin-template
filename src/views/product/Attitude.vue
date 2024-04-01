@@ -7,18 +7,28 @@
         </el-select>
       </el-form-item>
       <el-form-item label="Category II">
-        <el-select v-model="form.categoryB_id" placeholder="please select category" @change="selectB">
+        <el-select v-model="form.categoryB_id" placeholder="please select category" @change="selectB" style="width: 240px">
           <el-option v-for="item in dataB" :key="item.id" :label="item.name" :value="item.id" />
         </el-select>
       </el-form-item>
       <el-form-item label="Category III">
-        <el-select v-model="form.categoryC_id" placeholder="please select category" @change="selectC">
+        <el-select v-model="form.categoryC_id" placeholder="please select category" @change="selectC" style="width: 240px">
           <el-option v-for="item in dataC" :key="item.id" :label="item.name" :value="item.id" />
         </el-select>
       </el-form-item>
     </el-form>
   </el-card>
-  <el-card></el-card>
+  <el-card>
+    <el-button type="primary" icon="Plus" @click="handleAdd">add an attribute</el-button>
+    <el-table :data="list" style="width: 100%; margin: 20px 0" height="600" border>
+      <el-table-column fixed type="index" prop="index" label="No." width="100px" align="center" />
+      <el-table-column prop="attrName" label="Attribute Name" width="300px"></el-table-column>
+      <el-table-column prop="attrValueList" label="Attribute Value Name" width="700px">
+        <span v-for="item in attrValueList" :key="item.id">{{ item.valueName }}</span>
+      </el-table-column>
+      <el-table-column prop="" label="Operation" />
+    </el-table>
+  </el-card>
 </template>
 
 <script setup lang="ts">
@@ -34,6 +44,7 @@ const dataA = reactive<categoryType[]>([]);
 const dataB = reactive<categoryType[]>([]);
 const dataC = reactive<categoryType[]>([]);
 const list = reactive<categoryType[]>([]);
+
 onMounted(async () => {
   const data: categoryReturnType = await getCategory1();
   if (data.code == 200) {
