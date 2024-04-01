@@ -17,41 +17,45 @@
 </template>
 
 <script setup lang="ts">
-import { ref,watch,watchEffect } from 'vue';
+import { ref, watch, watchEffect } from 'vue';
 import type { categoryType } from '@/api/production/type';
 import useCategoryStore from '@/store/modules/category';
 
 const categoryStore = useCategoryStore();
 const flag = ref(false);
 
-const setFlag = (value:boolean) => {
+const setFlag = (value: boolean) => {
   flag.value = value;
-}
+};
 watchEffect(() => {
-  if(flag.value){
+  if (flag.value) {
     categoryStore.list = [];
     getList();
     flag.value = false;
   }
-  
-})
+});
 
-watch(() => categoryStore.c1_id, () => {
-  categoryStore.c2_id = '';
-  categoryStore.c3_id = '';
-  categoryStore.c2Arr = [];
-  categoryStore.c3Arr = [];
+watch(
+  () => categoryStore.c1_id,
+  () => {
+    categoryStore.c2_id = '';
+    categoryStore.c3_id = '';
+    categoryStore.c2Arr = [];
+    categoryStore.c3Arr = [];
+  }
+);
 
-})
+watch(
+  () => categoryStore.c2_id,
+  () => {
+    categoryStore.c3_id = '';
+    categoryStore.c3Arr = [];
+  }
+);
 
-watch(() => categoryStore.c2_id, () => {
-  categoryStore.c3_id = '';
-  categoryStore.c3Arr = [];
-})
-
-const getList = async() => {
+const getList = async () => {
   await categoryStore.getList();
-}
+};
 </script>
 
 <style scoped></style>

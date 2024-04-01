@@ -22,18 +22,16 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import useCategoryStore from '@/store/modules/category'
+import useCategoryStore from '@/store/modules/category';
 
 const categoryStore = useCategoryStore();
-const props = defineProps(['setFlag'])
+const props = defineProps(['setFlag']);
 
-
-
-onMounted( () => {
+onMounted(() => {
   getCategoryInit();
 });
 const getCategoryInit = async () => {
-    await categoryStore.getC1();
+  await categoryStore.getC1();
 };
 
 const selectA = async () => {
@@ -41,12 +39,12 @@ const selectA = async () => {
 };
 
 const selectB = async () => {
-    await categoryStore.getC3();
+  await categoryStore.getC3();
 };
 
 const selectC = () => {
-    props.setFlag(true)
-}
+  props.setFlag(true);
+};
 </script>
 
 <style scoped>
