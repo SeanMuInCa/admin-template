@@ -22,3 +22,16 @@ export interface getBrandReturnType extends returnDataTypeCommon {
     pages: number;
   };
 }
+
+export interface categoryType {
+  createTime:string,
+  id:number,
+  name:string,
+  updateTime:string,
+  category1Id?:number,
+  category2Id?:number,
+}
+
+export interface categoryReturnType extends returnDataTypeCommon{
+  data:categoryType[]
+}
