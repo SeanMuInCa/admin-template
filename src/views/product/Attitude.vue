@@ -8,7 +8,9 @@
       <el-table-column prop="attrValueList" label="Attribute Value Name" width="700px" style="display: flex; justify-content: space-around">
         <template #default="{ row }">
           <!-- <span v-for="item in row.attrValueList" :key="item.id" style="display: inline-block; padding: 5px; margin: 0 10px; background-color: aqua " >{{ item.valueName }}</span> -->
-          <el-button v-for="item in row.attrValueList" :key="item.id" :type="Math.random() > 0.5 ? 'success' : 'warning'" plain>{{ item.valueName }}</el-button>
+          <div class="tags">
+            <el-tag v-for="item in row.attrValueList" :key="item.id" :type="Math.random() > 0.5 ? 'success' : 'warning'">{{ item.valueName }}</el-tag>
+          </div>
         </template>
       </el-table-column>
       <el-table-column prop="" label="Operation">
@@ -27,7 +29,6 @@
 
 <script setup lang="ts">
 import { watch } from 'vue';
-import type { categoryType } from '@/api/production/type';
 import useCategoryStore from '@/store/modules/category';
 
 const categoryStore = useCategoryStore();
@@ -35,7 +36,10 @@ const categoryStore = useCategoryStore();
 watch(
   () => categoryStore.c3_id,
   () => {
-    getList();
+    //不能光保证改变，还得有值才能发请求
+    if (categoryStore.c3_id) {
+      getList();
+    }
   }
 );
 watch(
@@ -61,11 +65,19 @@ const getList = async () => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 body {
   margin: 0;
 }
 .example-showcase .el-loading-mask {
   z-index: 9;
+}
+.tags {
+  display: flex;
+  span {
+    display: block;
+    margin: 0 5px;
+    line-height: 20px;
+  }
 }
 </style>
