@@ -1,5 +1,5 @@
 import axiosRequest from '@/utils/request';
-import type { categoryReturnType,attrListReturnType } from '@/api/production/type';
+import type { categoryReturnType, attrListReturnType } from '@/api/production/type';
 enum API {
   GET_CATEGORY1_URL = `/admin/product/getCategory1`,
   GET_CATEGORY2_URL = '/admin/product/getCategory2/',

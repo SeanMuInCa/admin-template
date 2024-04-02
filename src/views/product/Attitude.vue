@@ -13,8 +13,8 @@
       </el-table-column>
       <el-table-column prop="" label="Operation">
         <template #default="{ row }">
-          <el-button type="warning" icon="Edit" ></el-button>
-          <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" >
+          <el-button type="warning" icon="Edit"></el-button>
+          <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?">
             <template #reference>
               <el-button type="danger" icon="Delete"></el-button>
             </template>
@@ -32,10 +32,12 @@ import useCategoryStore from '@/store/modules/category';
 
 const categoryStore = useCategoryStore();
 
-
-watch(() => categoryStore.c3_id, () => {
-  getList();
-})
+watch(
+  () => categoryStore.c3_id,
+  () => {
+    getList();
+  }
+);
 watch(
   () => categoryStore.c1_id,
   () => {

@@ -41,8 +41,6 @@ const selectA = async () => {
 const selectB = async () => {
   await categoryStore.getC3();
 };
-
-
 </script>
 
 <style scoped>

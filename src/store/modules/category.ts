@@ -41,7 +41,7 @@ const useCategoryStore = defineStore('Category', {
       if (data.code == 200) {
         this.list = data.data;
         console.log(data);
-        
+
         nextTick(() => {
           this.loading = false;
         });
