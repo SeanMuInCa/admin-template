@@ -42,9 +42,7 @@ const selectB = async () => {
   await categoryStore.getC3();
 };
 
-const selectC = () => {
-  props.setFlag(true);
-};
+
 </script>
 
 <style scoped>

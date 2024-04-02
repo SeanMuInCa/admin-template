@@ -1,5 +1,5 @@
 <template>
-  <Category :setFlag="setFlag"></Category>
+  <Category></Category>
   <el-card>
     <el-button type="primary" icon="Plus" @click="handleAdd" :disabled="!categoryStore.c3_id">add an attribute</el-button>
     <el-table :data="categoryStore.list" style="width: 100%; margin: 20px 0" height="600" border v-loading="categoryStore.loading">
@@ -13,8 +13,8 @@
       </el-table-column>
       <el-table-column prop="" label="Operation">
         <template #default="{ row }">
-          <el-button type="warning" icon="Edit" @click="editBrand(row)"></el-button>
-          <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirm(row)">
+          <el-button type="warning" icon="Edit" ></el-button>
+          <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" >
             <template #reference>
               <el-button type="danger" icon="Delete"></el-button>
             </template>
@@ -26,24 +26,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, watchEffect } from 'vue';
+import { watch } from 'vue';
 import type { categoryType } from '@/api/production/type';
 import useCategoryStore from '@/store/modules/category';
 
 const categoryStore = useCategoryStore();
-const flag = ref(false);
 
-const setFlag = (value: boolean) => {
-  flag.value = value;
-};
-watchEffect(() => {
-  if (flag.value) {
-    categoryStore.list = [];
-    getList();
-    flag.value = false;
-  }
-});
 
+watch(() => categoryStore.c3_id, () => {
+  getList();
+})
 watch(
   () => categoryStore.c1_id,
   () => {
