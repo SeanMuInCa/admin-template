@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { getCategory1, getCategory2, getCategory3, getAttrList } from '@/api/production/attribute';
-import type { categoryType, attrList } from '@/api/production/type';
+import type { categoryType, attrList,attr } from '@/api/production/type';
 import { nextTick } from 'vue';
 
 const useCategoryStore = defineStore('Category', {
@@ -12,7 +12,7 @@ const useCategoryStore = defineStore('Category', {
       c1_id: '',
       c2_id: '',
       c3_id: '',
-      list: [] as attrList[],
+      list: [] as attr[],
       loading: false,
     };
   },
