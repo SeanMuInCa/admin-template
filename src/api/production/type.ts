@@ -59,5 +59,3 @@ export type attrList = attr[];
 export interface attrListReturnType extends returnDataTypeCommon {
   data: attrList;
 }
-
-
