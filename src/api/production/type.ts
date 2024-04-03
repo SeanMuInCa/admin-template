@@ -37,17 +37,17 @@ export interface categoryReturnType extends returnDataTypeCommon {
 }
 
 export interface attrValue {
-  id: number;
+  id?: number;
   valueName: string;
-  attrId: number;
+  attrId?: number;
 }
 
 export type attrValueList = attrValue[];
 
 export interface attr {
-  id: number;
+  id?: number | string;
   attrName: string;
-  categoryId: number;
+  categoryId: number | string;
   categoryLevel: number;
   attrValueList: attrValueList;
   createTime?: string;
@@ -59,3 +59,5 @@ export type attrList = attr[];
 export interface attrListReturnType extends returnDataTypeCommon {
   data: attrList;
 }
+
+
