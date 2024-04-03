@@ -38,7 +38,8 @@
         <el-table-column label="Attribute Value">
           <template #default="{ row, column, $index }">
             <div class="tags">
-              <el-input v-model="row.valueName"></el-input>
+              <el-input v-model="row.valueName"  v-show="edit== 1" ref="$input"></el-input>
+              <div style="background-color: red; width: 100%" v-show="edit==0">{{ row.valueName }}</div>
             </div>
           </template>
         </el-table-column>
@@ -64,6 +65,7 @@ import { modifyAttr } from '@/api/production/attribute';
 import { ElMessage } from 'element-plus';
 const showTable = ref<boolean>(true);
 const categoryStore = useCategoryStore();
+const edit = ref(1)
 const AttributeObj = reactive<attr>({
   attrName: '',
   categoryId: '',
@@ -71,13 +73,7 @@ const AttributeObj = reactive<attr>({
   attrValueList: [],
 });
 
-const AttributeObjForModify = reactive<attr>({
-  id: '',
-  attrName: '',
-  categoryId: '',
-  categoryLevel: 3,
-  attrValueList: [],
-});
+
 
 watch(
   () => categoryStore.c3_id,
@@ -121,13 +117,15 @@ const confirmToSave = async () => {
     if (data.code == 200) {
       showTable.value = true;
       getList();
-    }
+      ElMessage.success('new attribute ' + AttributeObj.id? 'Edited' :'added' );
+    }else ElMessage.error('failed to '+ AttributeObj.id? 'Edited' :'added'+ ', try again');
   } else {
     ElMessage.error('no blank attribute name');
   }
 };
 
 const handleNewAttrName = () => {
+  edit.value = 1;
   if (AttributeObj.attrValueList.length === 0) {
     AttributeObj.attrValueList.push({
       valueName: '',
