@@ -39,7 +39,7 @@
           <el-table-column label="Attribute Value">
             <template #default="{ row, column, $index }">
               <div class="tags">
-                <el-input v-model="row.valueName" v-show="edit == 1"></el-input>
+                <el-input v-model="row.valueName" v-show="edit == 1" :ref="handleFocus"></el-input>
                 <div style="background-color: red; width: 100%" v-show="edit == 0">{{ row.valueName }}</div>
               </div>
             </template>
@@ -54,7 +54,7 @@
             </template>
           </el-table-column>
         </el-table>
-        <el-button type="primary" :disabled="!AttributeObj.attrName" @click="confirmToSave">Confirm</el-button>
+        <el-button type="primary" :disabled="!AttributeObj.attrValueList.length" @click="confirmToSave">Confirm</el-button>
         <el-button @click="cancel">Cancel</el-button>
       </div>
     </el-card>
@@ -77,6 +77,7 @@ const AttributeObj = reactive<attr>({
   attrValueList: [],
 });
 
+const inputArr = ref([]);
 watch(
   () => categoryStore.c3_id,
   () => {
@@ -111,6 +112,10 @@ watch(
     if (!showTable.value) AttributeObj.categoryId = categoryStore.c3_id;
   }
 );
+const handleFocus = (element) => {
+  element && element.focus();
+  
+}
 
 const confirmToSave = async () => {
   let temp = AttributeObj.attrValueList.filter((item: attrValue) => item.valueName.trim().length === 0);
@@ -132,6 +137,7 @@ const handleNewAttrName = () => {
     AttributeObj.attrValueList.push({
       valueName: '',
     });
+
     return;
   }
   let temp = AttributeObj.attrValueList.filter((item: attrValue) => item.valueName.trim().length === 0);
@@ -146,14 +152,13 @@ const handleNewAttrName = () => {
 
 const deleteAttrName = (row, index: number) => {
   AttributeObj.attrValueList.splice(index, 1);
-  console.log(row);
-  console.log(index);
-  console.log(AttributeObj);
 };
 
 const handleAdd = () => {
   if (categoryStore.c3_id) {
     showTable.value = false;
+    AttributeObj.attrName = ''
+    AttributeObj.attrValueList = []
   }
 };
 const handleEdit = (row: attr) => {
