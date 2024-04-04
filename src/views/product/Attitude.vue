@@ -1,5 +1,6 @@
 <template>
-  <Category :showTable="showTable"></Category>
+  <div>
+    <Category :showTable="showTable"></Category>
   <el-card>
     <div v-if="showTable">
       <el-button type="primary" icon="Plus" @click="handleAdd" :disabled="!categoryStore.c3_id">add an attribute</el-button>
@@ -15,8 +16,8 @@
         </el-table-column>
         <el-table-column prop="" label="Operation">
           <template #default="{ row }">
-            <el-button type="warning" icon="Edit" @click="handleEdit"></el-button>
-            <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?">
+            <el-button type="warning" icon="Edit" @click="handleEdit(row)"></el-button>
+            <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="deleteAttribute(row)">
               <template #reference>
                 <el-button type="danger" icon="Delete"></el-button>
               </template>
@@ -55,13 +56,14 @@
       <el-button @click="cancel">Cancel</el-button>
     </div>
   </el-card>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { watch, reactive, ref } from 'vue';
 import useCategoryStore from '@/store/modules/category';
 import type { attr, attrValue } from '@/api/production/type';
-import { modifyAttr } from '@/api/production/attribute';
+import { modifyAttr,deleteAttr } from '@/api/production/attribute';
 import { ElMessage } from 'element-plus';
 const showTable = ref<boolean>(true);
 const categoryStore = useCategoryStore();
@@ -149,9 +151,21 @@ const handleAdd = () => {
     showTable.value = false;
   }
 };
-const handleEdit = () => {
+const handleEdit = (row) => {
   showTable.value = false;
+  console.log(row);
+  AttributeObj.attrName = row.attrName;
+  AttributeObj.id = row.id;
+  AttributeObj.attrValueList = row.attrValueList;
 };
+const deleteAttribute = async(row) => {
+  console.log(row);
+  const data = await deleteAttr(row.id);
+  if(data.code == 200){
+    ElMessage.success('deleted')
+  }else ElMessage.error('something went wrong, try again')
+  getList()
+}
 const getList = async () => {
   await categoryStore.getList();
 };

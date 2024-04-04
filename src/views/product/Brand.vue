@@ -1,5 +1,6 @@
 <template>
-  <Dialog :title="title" :show="show" :getStatus="getStatus" :flag="addFlag" v-if="show" :getData="getData" :rowData="rowData"></Dialog>
+  <div>
+    <Dialog :title="title" :show="show" :getStatus="getStatus" :flag="addFlag" v-if="show" :getData="getData" :rowData="rowData"></Dialog>
   <el-card style="width: 100%; height: 100%">
     <el-button type="primary" icon="Plus" @click="handleAdd">add a brand</el-button>
     <!-- main data table -->
@@ -40,6 +41,7 @@
       />
     </div>
   </el-card>
+  </div>
 </template>
 
 <script setup lang="ts">
