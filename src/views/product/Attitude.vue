@@ -3,26 +3,21 @@
     <Category :showTable="showTable"></Category>
     <el-card>
       <div v-if="showTable">
-        <el-button type="primary" icon="Plus" @click="handleAdd" :disabled="!categoryStore.c3_id">add an
-          attribute</el-button>
-        <el-table :data="categoryStore.list" style="width: 100%; margin: 20px 0" height="600" border
-          v-loading="categoryStore.loading">
+        <el-button type="primary" icon="Plus" @click="handleAdd" :disabled="!categoryStore.c3_id">add an attribute</el-button>
+        <el-table :data="categoryStore.list" style="width: 100%; margin: 20px 0" height="600" border v-loading="categoryStore.loading">
           <el-table-column fixed type="index" prop="index" label="No." width="100px" align="center" />
           <el-table-column prop="attrName" label="Attribute Name" width="300px"></el-table-column>
-          <el-table-column prop="attrValueList" label="Attribute Value Name" width="700px"
-            style="display: flex; justify-content: space-around">
+          <el-table-column prop="attrValueList" label="Attribute Value Name" width="700px" style="display: flex; justify-content: space-around">
             <template #default="{ row }">
               <div class="tags">
-                <el-tag v-for="item in row.attrValueList" :key="item.id"
-                  :type="Math.random() > 0.5 ? 'success' : 'warning'">{{ item.valueName }}</el-tag>
+                <el-tag v-for="item in row.attrValueList" :key="item.id" :type="Math.random() > 0.5 ? 'success' : 'warning'">{{ item.valueName }}</el-tag>
               </div>
             </template>
           </el-table-column>
           <el-table-column prop="" label="Operation">
             <template #default="{ row }">
               <el-button type="warning" icon="Edit" @click="handleEdit(row)"></el-button>
-              <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled"
-                icon-color="#626AEF" title="Are you sure to delete this?" @confirm="deleteAttribute(row)">
+              <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="deleteAttribute(row)">
                 <template #reference>
                   <el-button type="danger" icon="Delete"></el-button>
                 </template>
@@ -37,9 +32,7 @@
             <el-input placeholder="Input Attribute Name" v-model="AttributeObj.attrName"></el-input>
           </el-form-item>
         </el-form>
-        <el-button type="primary" icon="Plus" :disabled="!AttributeObj.attrName" @click="handleNewAttrName">Add
-          Attribute
-          Value</el-button>
+        <el-button type="primary" icon="Plus" :disabled="!AttributeObj.attrName" @click="handleNewAttrName">Add Attribute Value</el-button>
         <el-button @click="cancel">Cancel</el-button>
         <el-table border style="margin: 10px 0" :data="AttributeObj.attrValueList">
           <el-table-column label="No." width="100px" align="center" type="index"></el-table-column>
@@ -53,8 +46,7 @@
           </el-table-column>
           <el-table-column label="Operation">
             <template #default="{ row, column, $index }">
-              <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled"
-                icon-color="#626AEF" title="Are you sure to delete this?" @confirm="deleteAttrName(row, $index)">
+              <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="deleteAttrName(row, $index)">
                 <template #reference>
                   <el-button type="danger" icon="Delete"></el-button>
                 </template>
@@ -152,14 +144,11 @@ const handleNewAttrName = () => {
   }
 };
 
-const deleteAttrName = (row,index:number) => {
+const deleteAttrName = (row, index: number) => {
   AttributeObj.attrValueList.splice(index, 1);
   console.log(row);
   console.log(index);
   console.log(AttributeObj);
-  
-  
-
 };
 
 const handleAdd = () => {
@@ -174,7 +163,6 @@ const handleEdit = (row: attr) => {
   AttributeObj.id = row.id;
   AttributeObj.attrValueList = row.attrValueList;
   console.log(row.attrValueList);
-
 };
 const deleteAttribute = async (row: attr) => {
   console.log(row);
