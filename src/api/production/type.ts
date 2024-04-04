@@ -61,11 +61,11 @@ export interface attrListReturnType extends returnDataTypeCommon {
 }
 
 export interface spuData {
-  id?:number | string,
-  spuName: string,
-  description:string,
-  category3Id:number|string,
-  tmId:number|string,
-  spuSaleAttrList:null,
-  spuImageList:null
+  id?: number | string;
+  spuName: string;
+  description: string;
+  category3Id: number | string;
+  tmId: number | string;
+  spuSaleAttrList: null;
+  spuImageList: null;
 }
