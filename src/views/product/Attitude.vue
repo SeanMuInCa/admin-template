@@ -1,7 +1,7 @@
 <template>
   <div>
     <Category :showTable="showTable"></Category>
-    <el-card>
+    <el-card style="margin:10px 0">
       <div v-if="showTable">
         <el-button type="primary" icon="Plus" @click="handleAdd" :disabled="!categoryStore.c3_id">add an attribute</el-button>
         <el-table :data="categoryStore.list" style="width: 100%; margin: 20px 0" height="600" border v-loading="categoryStore.loading">
