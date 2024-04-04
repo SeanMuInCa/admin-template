@@ -41,13 +41,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, nextTick } from 'vue';
+import { ref, watch, nextTick,onBeforeUnmount } from 'vue';
 import useCategoryStore from '@/store/modules/category';
 import { getSPUList } from '@/api/production/spu';
 const categoryStore = useCategoryStore();
 const currentPage = ref(1);
 const pageSize = ref(3);
-const total = ref(10);
+const total = ref(0);
 const tableData = ref([]);
 watch(
   () => categoryStore.c3_id,
@@ -93,6 +93,10 @@ const handleSizeChange = async () => {
 const handleCurrentChange = async () => {
   await getList();
 };
+
+onBeforeUnmount(() => {
+  categoryStore.$reset();
+});
 </script>
 
 <style scoped>

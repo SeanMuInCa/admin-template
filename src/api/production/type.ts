@@ -59,3 +59,13 @@ export type attrList = attr[];
 export interface attrListReturnType extends returnDataTypeCommon {
   data: attrList;
 }
+
+export interface spuData {
+  id?:number | string,
+  spuName: string,
+  description:string,
+  category3Id:number|string,
+  tmId:number|string,
+  spuSaleAttrList:null,
+  spuImageList:null
+}
