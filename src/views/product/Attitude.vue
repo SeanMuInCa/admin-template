@@ -62,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch, reactive, ref } from 'vue';
+import { watch, reactive, ref,onBeforeUnmount } from 'vue';
 import useCategoryStore from '@/store/modules/category';
 import type { attr, attrValue } from '@/api/production/type';
 import { modifyAttr, deleteAttr } from '@/api/production/attribute';
@@ -185,6 +185,10 @@ const cancel = () => {
   // console.log(AttributeObj);
   // getList();
 };
+
+onBeforeUnmount(() => {
+  categoryStore.$reset();
+})
 </script>
 
 <style scoped lang="scss">
