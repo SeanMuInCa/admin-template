@@ -69,3 +69,16 @@ export interface spuData {
   spuSaleAttrList: null;
   spuImageList: null;
 }
+
+export type records = spuData[];
+
+export interface spuReturnType extends returnDataTypeCommon{
+  data:{
+    records:records,
+    total: number,
+    size: number,
+    current: number,
+    searchCount: true,
+    pages:number,
+  }
+}
