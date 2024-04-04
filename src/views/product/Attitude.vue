@@ -114,8 +114,7 @@ watch(
 );
 const handleFocus = (element) => {
   element && element.focus();
-  
-}
+};
 
 const confirmToSave = async () => {
   let temp = AttributeObj.attrValueList.filter((item: attrValue) => item.valueName.trim().length === 0);
@@ -157,8 +156,8 @@ const deleteAttrName = (row, index: number) => {
 const handleAdd = () => {
   if (categoryStore.c3_id) {
     showTable.value = false;
-    AttributeObj.attrName = ''
-    AttributeObj.attrValueList = []
+    AttributeObj.attrName = '';
+    AttributeObj.attrValueList = [];
   }
 };
 const handleEdit = (row: attr) => {
