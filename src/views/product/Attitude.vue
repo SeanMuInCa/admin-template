@@ -77,7 +77,6 @@ const AttributeObj = reactive<attr>({
   attrValueList: [],
 });
 
-const inputArr = ref([]);
 watch(
   () => categoryStore.c3_id,
   () => {
@@ -162,11 +161,10 @@ const handleAdd = () => {
 };
 const handleEdit = (row: attr) => {
   showTable.value = false;
-  console.log(row);
-  AttributeObj.attrName = row.attrName;
-  AttributeObj.id = row.id;
-  AttributeObj.attrValueList = row.attrValueList;
-  console.log(row.attrValueList);
+  // AttributeObj.attrName = row.attrName;
+  // AttributeObj.id = row.id;
+  // AttributeObj.attrValueList = row.attrValueList;
+  Object.assign(AttributeObj, JSON.parse(JSON.stringify(row)))//deep copy
 };
 const deleteAttribute = async (row: attr) => {
   console.log(row);
@@ -184,6 +182,8 @@ const cancel = () => {
   showTable.value = true;
   AttributeObj.attrName = '';
   AttributeObj.attrValueList = [];
+  // console.log(AttributeObj);
+  // getList(); 
 };
 </script>
 
