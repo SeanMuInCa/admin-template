@@ -164,7 +164,7 @@ const handleEdit = (row: attr) => {
   // AttributeObj.attrName = row.attrName;
   // AttributeObj.id = row.id;
   // AttributeObj.attrValueList = row.attrValueList;
-  Object.assign(AttributeObj, JSON.parse(JSON.stringify(row)))//deep copy
+  Object.assign(AttributeObj, JSON.parse(JSON.stringify(row))); //deep copy
 };
 const deleteAttribute = async (row: attr) => {
   console.log(row);
@@ -183,7 +183,7 @@ const cancel = () => {
   AttributeObj.attrName = '';
   AttributeObj.attrValueList = [];
   // console.log(AttributeObj);
-  // getList(); 
+  // getList();
 };
 </script>
 
