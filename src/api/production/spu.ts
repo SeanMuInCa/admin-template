@@ -1,5 +1,5 @@
 import axiosRequest from '@/utils/request';
-import type {spuReturnType} from '@/api/production/type'
+import type { spuReturnType } from '@/api/production/type';
 enum API {
   GET_SPU_LIST = '/admin/product/',
 }
