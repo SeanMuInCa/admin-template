@@ -11,6 +11,10 @@ export interface brandType {
   tmName: string;
   logoUrl: string;
 }
+
+export interface brandListType extends returnDataTypeCommon{
+  data: brandType[];
+}
 //brand list return type
 export interface getBrandReturnType extends returnDataTypeCommon {
   data: {
@@ -81,4 +85,36 @@ export interface spuReturnType extends returnDataTypeCommon {
     searchCount: true;
     pages: number;
   };
+}
+
+export interface imageListType {
+  id:number | string,
+  spuId:number|string,
+  imgName:string,
+  imgUrl:string
+}
+
+export interface getImageListReturnType extends returnDataTypeCommon{
+  data: imageListType[]
+}
+
+export interface spuSaleAttrValueType{
+  id?:number | string,
+  spuId:number|string,
+  baseSaleAttrId:number | string,
+  saleAttrName:string,
+  saleAttrValueName:string,
+  isChecked:null,
+}
+
+export interface saleAttrDataType{
+  id?:number | string,
+  spuId:number|string,
+  baseSaleAttrId:number | string,
+  saleAttrName:string,
+  spuSaleAttrValueList:spuSaleAttrValueType[]
+}
+
+export interface saleAttrListReturnType extends returnDataTypeCommon{
+  data: saleAttrDataType[]
 }
