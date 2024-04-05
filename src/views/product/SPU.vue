@@ -6,7 +6,7 @@
       <!-- main data table -->
       <el-table :data="tableData" style="width: 100%; margin: 20px 0" height="600" border v-loading="categoryStore.loading">
         <el-table-column fixed type="index" prop="index" label="No." width="100" align="center" />
-        <el-table-column prop="spuName" label="SPU name" width="200"/>
+        <el-table-column prop="spuName" label="SPU name" width="200" />
         <el-table-column prop="description" label="description" style="height: '220px'"></el-table-column>
         <el-table-column fixed="right" label="Operations">
           <template #default="{ row }">
@@ -44,7 +44,7 @@
 import { ref, watch, nextTick, onBeforeUnmount } from 'vue';
 import useCategoryStore from '@/store/modules/category';
 import { getSPUList } from '@/api/production/spu';
-import type {records,spuReturnType} from '@/api/production/type'
+import type { records, spuReturnType } from '@/api/production/type';
 const categoryStore = useCategoryStore();
 const currentPage = ref<number>(1);
 const pageSize = ref<number>(3);
@@ -76,13 +76,11 @@ watch(
   }
 );
 
-const handleAdd = () => {
-
-}
+const handleAdd = () => {};
 
 const getList = async () => {
   categoryStore.loading = true;
-  const data:spuReturnType = await getSPUList(currentPage.value, pageSize.value, categoryStore.c3_id);
+  const data: spuReturnType = await getSPUList(currentPage.value, pageSize.value, categoryStore.c3_id);
   console.log(data);
   total.value = data.data.total;
   tableData.value = data.data.records;
