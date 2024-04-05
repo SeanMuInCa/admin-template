@@ -6,4 +6,4 @@ enum API {
 }
 
 export const getSPUList = (page: number, limit: number, category3Id: string | number) => axiosRequest.get<any, spuReturnType>(`${API.GET_SPU_LIST}/${page}/${limit}?category3Id=${category3Id}`);
-export const getTrademarkList = () => axiosRequest.get<any,any>(API.GET_TRADEMARK_LIST);
+export const getTrademarkList = () => axiosRequest.get<any, any>(API.GET_TRADEMARK_LIST);
