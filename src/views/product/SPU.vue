@@ -2,20 +2,20 @@
   <div>
     <Category :showTable="true"></Category>
     <el-card style="width: 100%; height: 100%; margin: 10px 0">
-      <el-button type="primary" icon="Plus" @click="handleAdd">add a SPU</el-button>
+      <el-button type="primary" icon="Plus" @click="handleAdd" :disabled="!categoryStore.c3_id">add a SPU</el-button>
       <!-- main data table -->
       <el-table :data="tableData" style="width: 100%; margin: 20px 0" height="600" border v-loading="categoryStore.loading">
         <el-table-column fixed type="index" prop="index" label="No." width="100" align="center" />
-        <el-table-column prop="spuName" label="SPU name" />
+        <el-table-column prop="spuName" label="SPU name" width="200"/>
         <el-table-column prop="description" label="description" style="height: '220px'"></el-table-column>
         <el-table-column fixed="right" label="Operations">
           <template #default="{ row }">
-            <el-button type="warning" icon="Edit"></el-button>
-            <el-button type="warning" icon="Edit"></el-button>
-            <el-button type="warning" icon="Edit"></el-button>
+            <el-button type="primary" icon="Plus" size="small" title="Plus SKU"></el-button>
+            <el-button type="warning" icon="Edit" size="small" title="Edit SPU"></el-button>
+            <el-button type="info" icon="Warning" size="small" title="SKU Info"></el-button>
             <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirm(row)">
               <template #reference>
-                <el-button type="danger" icon="Delete"></el-button>
+                <el-button type="danger" icon="Delete" size="small" title="Delete SPU"></el-button>
               </template>
             </el-popconfirm>
           </template>
@@ -44,11 +44,12 @@
 import { ref, watch, nextTick, onBeforeUnmount } from 'vue';
 import useCategoryStore from '@/store/modules/category';
 import { getSPUList } from '@/api/production/spu';
+import type {records,spuReturnType} from '@/api/production/type'
 const categoryStore = useCategoryStore();
-const currentPage = ref(1);
-const pageSize = ref(3);
-const total = ref(0);
-const tableData = ref([]);
+const currentPage = ref<number>(1);
+const pageSize = ref<number>(3);
+const total = ref<number>(0);
+const tableData = ref<records>([]);
 watch(
   () => categoryStore.c3_id,
   async () => {
@@ -74,9 +75,14 @@ watch(
     categoryStore.c3Arr = [];
   }
 );
+
+const handleAdd = () => {
+
+}
+
 const getList = async () => {
   categoryStore.loading = true;
-  const data = await getSPUList(currentPage.value, pageSize.value, categoryStore.c3_id);
+  const data:spuReturnType = await getSPUList(currentPage.value, pageSize.value, categoryStore.c3_id);
   console.log(data);
   total.value = data.data.total;
   tableData.value = data.data.records;
