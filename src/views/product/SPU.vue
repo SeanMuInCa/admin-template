@@ -1,7 +1,7 @@
 <template>
   <div>
     <Category :showTable="true"></Category>
-    <el-card style="width: 100%; height: 100%; margin: 10px 0">
+    <el-card style="width: 100%; height: 100%; margin: 10px 0" v-if="scene === 0">
       <el-button type="primary" icon="Plus" @click="handleAdd" :disabled="!categoryStore.c3_id">add a SPU</el-button>
       <!-- main data table -->
       <el-table :data="tableData" style="width: 100%; margin: 20px 0" height="600" border v-loading="categoryStore.loading">
@@ -10,7 +10,7 @@
         <el-table-column prop="description" label="description" style="height: '220px'"></el-table-column>
         <el-table-column fixed="right" label="Operations">
           <template #default="{ row }">
-            <el-button type="primary" icon="Plus" size="small" title="Plus SKU"></el-button>
+            <el-button type="primary" icon="Plus" size="small" title="Plus SKU" @click="scene = 2"></el-button>
             <el-button type="warning" icon="Edit" size="small" title="Edit SPU"></el-button>
             <el-button type="info" icon="Warning" size="small" title="SKU Info"></el-button>
             <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirm(row)">
@@ -37,6 +37,8 @@
         />
       </div>
     </el-card>
+    <SPUForm v-if="scene === 1" :setScene="setScene"></SPUForm>
+    <SKUForm v-if="scene === 2" @setScene="setScene"></SKUForm>
   </div>
 </template>
 
@@ -45,11 +47,18 @@ import { ref, watch, nextTick, onBeforeUnmount } from 'vue';
 import useCategoryStore from '@/store/modules/category';
 import { getSPUList } from '@/api/production/spu';
 import type { records, spuReturnType } from '@/api/production/type';
+import SPUForm from './SPUForm.vue';
+import SKUForm from './SKUForm.vue';
 const categoryStore = useCategoryStore();
 const currentPage = ref<number>(1);
 const pageSize = ref<number>(3);
 const total = ref<number>(0);
 const tableData = ref<records>([]);
+const scene = ref<number>(0); // 0 table 1 add&edit spu 2 add sku
+
+const setScene = (value: number) => {
+  scene.value = value;
+};
 watch(
   () => categoryStore.c3_id,
   async () => {
@@ -76,7 +85,9 @@ watch(
   }
 );
 
-const handleAdd = () => {};
+const handleAdd = () => {
+  scene.value = 1;
+};
 
 const getList = async () => {
   categoryStore.loading = true;
