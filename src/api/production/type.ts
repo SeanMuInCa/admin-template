@@ -120,9 +120,9 @@ export interface saleAttrListReturnType extends returnDataTypeCommon {
 }
 
 export interface baseSaleAttrType {
-  id?:number|string,
-  name:string
+  id?: number | string;
+  name: string;
 }
-export interface baseSaleAttrReturnType extends returnDataTypeCommon{
-  data:baseSaleAttrType[]
+export interface baseSaleAttrReturnType extends returnDataTypeCommon {
+  data: baseSaleAttrType[];
 }

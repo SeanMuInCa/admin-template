@@ -1,11 +1,11 @@
 import axiosRequest from '@/utils/request';
-import type { spuReturnType, brandListType, getImageListReturnType, saleAttrListReturnType,baseSaleAttrReturnType } from '@/api/production/type';
+import type { spuReturnType, brandListType, getImageListReturnType, saleAttrListReturnType, baseSaleAttrReturnType } from '@/api/production/type';
 enum API {
   GET_SPU_LIST = '/admin/product/',
   GET_TRADEMARK_LIST = '/admin/product/baseTrademark/getTrademarkList',
   GET_IMAGE_LIST = '/admin/product/spuImageList/',
   GET_SPU_SALE_ATTR_LIST = '/admin/product/spuSaleAttrList/',
-  GET_SPU_ATTR_LIST = '/admin/product/baseSaleAttrList'
+  GET_SPU_ATTR_LIST = '/admin/product/baseSaleAttrList',
 }
 
 export const getSPUList = (page: number, limit: number, category3Id: string | number) => axiosRequest.get<any, spuReturnType>(`${API.GET_SPU_LIST}/${page}/${limit}?category3Id=${category3Id}`);

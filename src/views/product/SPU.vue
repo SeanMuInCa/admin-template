@@ -59,8 +59,7 @@ const scene = ref<number>(0); // 0 table 1 add&edit spu 2 add sku
 const editSPU = (row) => {
   scene.value = 1;
   console.log(row);
-  
-}
+};
 const setScene = (value: number) => {
   scene.value = value;
 };

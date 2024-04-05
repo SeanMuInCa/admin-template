@@ -10,7 +10,7 @@
       </el-select>
     </el-form-item>
 
-    <el-form-item label="Spu description" label-width="135" >
+    <el-form-item label="Spu description" label-width="135">
       <el-input type="textarea" placeholder="please input your description" v-model="newSPUDataParams.description"></el-input>
     </el-form-item>
 
@@ -62,7 +62,7 @@ let brandList = reactive<brandType[]>([]);
 const getTrademarkData = async () => {
   const data = await getTrademarkList();
   console.log(data);
-  Object.assign(brandList,data.data)
+  Object.assign(brandList, data.data);
 };
 const fileList = ref<UploadUserFile[]>([]);
 
