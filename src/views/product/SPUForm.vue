@@ -5,13 +5,13 @@
     </el-form-item>
 
     <el-form-item label="Spu brand" label-width="135">
-      <el-select placeholder="select your brand" style="width: 240px">
+      <el-select placeholder="select your brand" style="width: 240px" v-model="newSPUDataParams.tmId">
         <el-option v-for="item in brandList" :key="item.id" :label="item.tmName" :value="item.id"></el-option>
       </el-select>
     </el-form-item>
 
-    <el-form-item label="Spu description" label-width="135">
-      <el-input type="textarea" placeholder="please input your description"></el-input>
+    <el-form-item label="Spu description" label-width="135" >
+      <el-input type="textarea" placeholder="please input your description" v-model="newSPUDataParams.description"></el-input>
     </el-form-item>
 
     <el-form-item label-width="135" label="Brand Logo" prop="logoUrl">
@@ -62,7 +62,7 @@ let brandList = reactive<brandType[]>([]);
 const getTrademarkData = async () => {
   const data = await getTrademarkList();
   console.log(data);
-  brandList = data.data;
+  Object.assign(brandList,data.data)
 };
 const fileList = ref<UploadUserFile[]>([]);
 

@@ -11,7 +11,7 @@
         <el-table-column fixed="right" label="Operations">
           <template #default="{ row }">
             <el-button type="primary" icon="Plus" size="small" title="Plus SKU" @click="scene = 2"></el-button>
-            <el-button type="warning" icon="Edit" size="small" title="Edit SPU"></el-button>
+            <el-button type="warning" icon="Edit" size="small" title="Edit SPU" @click="editSPU(row)"></el-button>
             <el-button type="info" icon="Warning" size="small" title="SKU Info"></el-button>
             <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirm(row)">
               <template #reference>
@@ -37,8 +37,8 @@
         />
       </div>
     </el-card>
-    <SPUForm v-if="scene === 1" :setScene="setScene"></SPUForm>
-    <SKUForm v-if="scene === 2" @setScene="setScene"></SKUForm>
+    <SPUForm v-show="scene === 1" :setScene="setScene"></SPUForm>
+    <SKUForm v-show="scene === 2" @setScene="setScene"></SKUForm>
   </div>
 </template>
 
@@ -56,6 +56,11 @@ const total = ref<number>(0);
 const tableData = ref<records>([]);
 const scene = ref<number>(0); // 0 table 1 add&edit spu 2 add sku
 
+const editSPU = (row) => {
+  scene.value = 1;
+  console.log(row);
+  
+}
 const setScene = (value: number) => {
   scene.value = value;
 };
