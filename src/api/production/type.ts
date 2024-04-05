@@ -12,7 +12,7 @@ export interface brandType {
   logoUrl: string;
 }
 
-export interface brandListType extends returnDataTypeCommon{
+export interface brandListType extends returnDataTypeCommon {
   data: brandType[];
 }
 //brand list return type
@@ -88,33 +88,33 @@ export interface spuReturnType extends returnDataTypeCommon {
 }
 
 export interface imageListType {
-  id:number | string,
-  spuId:number|string,
-  imgName:string,
-  imgUrl:string
+  id: number | string;
+  spuId: number | string;
+  imgName: string;
+  imgUrl: string;
 }
 
-export interface getImageListReturnType extends returnDataTypeCommon{
-  data: imageListType[]
+export interface getImageListReturnType extends returnDataTypeCommon {
+  data: imageListType[];
 }
 
-export interface spuSaleAttrValueType{
-  id?:number | string,
-  spuId:number|string,
-  baseSaleAttrId:number | string,
-  saleAttrName:string,
-  saleAttrValueName:string,
-  isChecked:null,
+export interface spuSaleAttrValueType {
+  id?: number | string;
+  spuId: number | string;
+  baseSaleAttrId: number | string;
+  saleAttrName: string;
+  saleAttrValueName: string;
+  isChecked: null;
 }
 
-export interface saleAttrDataType{
-  id?:number | string,
-  spuId:number|string,
-  baseSaleAttrId:number | string,
-  saleAttrName:string,
-  spuSaleAttrValueList:spuSaleAttrValueType[]
+export interface saleAttrDataType {
+  id?: number | string;
+  spuId: number | string;
+  baseSaleAttrId: number | string;
+  saleAttrName: string;
+  spuSaleAttrValueList: spuSaleAttrValueType[];
 }
 
-export interface saleAttrListReturnType extends returnDataTypeCommon{
-  data: saleAttrDataType[]
+export interface saleAttrListReturnType extends returnDataTypeCommon {
+  data: saleAttrDataType[];
 }

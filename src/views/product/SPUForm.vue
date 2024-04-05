@@ -49,7 +49,7 @@ import type { UploadProps, UploadUserFile } from 'element-plus';
 import { reactive, ref, onMounted, nextTick, onBeforeMount } from 'vue';
 import { ElMessage } from 'element-plus';
 import { getTrademarkList } from '@/api/production/spu';
-import type {brandType} from '@/api/production/type'
+import type { brandType } from '@/api/production/type';
 const props = defineProps(['setScene']);
 
 const cancel = () => {
