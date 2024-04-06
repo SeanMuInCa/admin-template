@@ -25,7 +25,7 @@
 
     <el-form-item label="Spu attribute" label-width="135">
       <el-select style="width: 240px; margin-right: 10px" v-model="SpuStore.spuAttrLeftList.id" :placeholder="SpuStore.spuAttrLeftList.length + ' left'">
-        <el-option v-for="item in SpuStore.spuAttrLeftList" :key=item.id :label="item.name" :value="item.id"></el-option>
+        <el-option v-for="item in SpuStore.spuAttrLeftList" :key="item.id" :label="item.name" :value="item.id"></el-option>
       </el-select>
       <el-button type="primary" icon="Plus">add attribute</el-button>
       <el-table border style="margin: 10px 0" :data="SpuStore.spuSaleAttrList">
@@ -108,7 +108,7 @@ watch(
     let result = attrList.filter((item) => {
       return !nameList.includes(item.name);
     });
-    SpuStore.spuAttrLeftList = result
+    SpuStore.spuAttrLeftList = result;
     console.log(SpuStore.spuAttrLeftList);
   }
 );
