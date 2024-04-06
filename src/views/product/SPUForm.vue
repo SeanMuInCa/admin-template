@@ -90,14 +90,13 @@ const getSaleAttr = async () => {
   const data = await getSPUSaleAttrList(SpuStore.id);
   console.log(data, '12312');
   SpuStore.spuSaleAttrList = data.data;
-  nameList = data.data.map((item) => item.saleAttrName)
+  nameList = data.data.map((item) => item.saleAttrName);
 };
 
 const getAttri = async () => {
   const data = await getBaseSaleAttrList();
   console.log('getAttri', data);
   Object.assign(attrList, data.data);
-  
 };
 
 const attrList = reactive([]);
@@ -110,7 +109,7 @@ watch(
     console.log(nameList);
 
     let result = attrList.filter((item) => {
-      return nameList.includes(item.name)
+      return nameList.includes(item.name);
     });
     console.log(result);
   }
