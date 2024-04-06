@@ -50,7 +50,7 @@
 
 <script setup lang="ts">
 import type { UploadProps, UploadUserFile } from 'element-plus';
-import { reactive, ref, onMounted, nextTick, onBeforeMount } from 'vue';
+import { reactive, ref, onMounted, nextTick, onBeforeMount,watch } from 'vue';
 import { ElMessage } from 'element-plus';
 import { getTrademarkList, getSPUImageList, getSPUSaleAttrList, getBaseSaleAttrList } from '@/api/production/spu';
 import type { brandType, getImageListReturnType } from '@/api/production/type';
@@ -67,6 +67,7 @@ onBeforeMount(() => {
   getSaleAttr();
   getAttri();
 });
+
 let brandList = reactive<brandType[]>([]);
 const getTrademarkData = async () => {
   const data = await getTrademarkList();
@@ -92,7 +93,21 @@ const getSaleAttr = async () => {
 const getAttri = async () => {
   const data = await getBaseSaleAttrList();
   console.log('getAttri', data);
+  Object.assign(attrList, data.data)
 };
+
+const attrList = reactive([]);
+
+//Todo: 属性值这里还没有处理好
+watch(() => brandList.length,() => {
+    console.log(attrList);
+    console.log(SpuStore.spuSaleAttrList);
+    
+    let result = attrList.filter((item) => {
+        return item.name == '颜色' ||item.name == '尺码' || item.name == '版本';
+    })
+    console.log(result);
+})
 const fileList = ref<UploadUserFile[]>([]);
 
 const dialogImageUrl = ref('');
