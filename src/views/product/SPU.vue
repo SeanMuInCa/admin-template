@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Category :showTable="scene==0"></Category>
+    <Category :showTable="scene == 0"></Category>
     <el-card style="width: 100%; height: 100%; margin: 10px 0" v-show="scene === 0">
       <el-button type="primary" icon="Plus" @click="handleAdd" :disabled="!categoryStore.c3_id">add a SPU</el-button>
       <!-- main data table -->
@@ -46,7 +46,7 @@
 import { ref, watch, nextTick, onBeforeUnmount } from 'vue';
 import useCategoryStore from '@/store/modules/category';
 import { getSPUList } from '@/api/production/spu';
-import type { records, spuReturnType,spuData } from '@/api/production/type';
+import type { records, spuReturnType, spuData } from '@/api/production/type';
 import SPUForm from './SPUForm.vue';
 import SKUForm from './SKUForm.vue';
 import useSPUStore from '@/store/modules/spu';
@@ -58,7 +58,7 @@ const total = ref<number>(0);
 const tableData = ref<records>([]);
 const scene = ref<number>(0); // 0 table 1 add&edit spu 2 add sku
 const SPUFormRef = ref();
-const editSPU = (row:spuData) => {
+const editSPU = (row: spuData) => {
   scene.value = 1;
   SPUFormRef.value.initSPUData(row);
   SPUFormRef.value.setBlank();

@@ -68,11 +68,11 @@ export interface spuData {
   id?: number | string;
   category3Id: number | string;
   description: string;
-  spuImageList: null|imageListType[];
+  spuImageList: null | imageListType[];
   spuName: string;
-  spuSaleAttrList: null|saleAttrDataType[];
+  spuSaleAttrList: null | saleAttrDataType[];
   tmId: number | string;
-  spuPosterList?:null|imageListType[],
+  spuPosterList?: null | imageListType[];
 }
 
 export type records = spuData[];
@@ -114,7 +114,7 @@ export interface saleAttrDataType {
   baseSaleAttrId: number | string;
   saleAttrName: string;
   spuSaleAttrValueList: spuSaleAttrValueType[];
-  flag?:boolean
+  flag?: boolean;
 }
 
 export interface saleAttrListReturnType extends returnDataTypeCommon {

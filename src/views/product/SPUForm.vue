@@ -41,7 +41,7 @@
         <el-table-column label="Attribute Name" width="140px" prop="saleAttrName"></el-table-column>
         <el-table-column label="Attribute Values">
           <template #default="{ row }">
-            <el-tag v-for="item in row.spuSaleAttrValueList" :key="item.id" closable style="margin: 0 5px" @close="handleClose(row,item)">
+            <el-tag v-for="item in row.spuSaleAttrValueList" :key="item.id" closable style="margin: 0 5px" @close="handleClose(row, item)">
               {{ item.saleAttrValueName }}
             </el-tag>
             <el-button v-show="!row.flag" type="success" size="small" icon="plus" @click="row.flag = true"></el-button>
@@ -62,99 +62,98 @@
 
 <script setup lang="ts">
 import type { UploadProps, UploadUserFile } from 'element-plus';
-import { reactive, ref,nextTick,computed,onMounted } from 'vue';
+import { reactive, ref, nextTick, computed, onMounted } from 'vue';
 import { ElMessage } from 'element-plus';
-import { getTrademarkList, getSPUImageList, getSPUSaleAttrList, getBaseSaleAttrList, } from '@/api/production/spu';
-import type { getImageListReturnType, spuData,brandListType,saleAttrListReturnType,baseSaleAttrReturnType } from '@/api/production/type';
+import { getTrademarkList, getSPUImageList, getSPUSaleAttrList, getBaseSaleAttrList } from '@/api/production/spu';
+import type { getImageListReturnType, spuData, brandListType, saleAttrListReturnType, baseSaleAttrReturnType } from '@/api/production/type';
 import useSPUStore from '@/store/modules/spu';
 const SpuStore = useSPUStore();
 const props = defineProps(['setScene']);
-const newAttrValue = ref('')
-let SpuParams = ref<spuData>({})
+const newAttrValue = ref('');
+let SpuParams = ref<spuData>({});
 const tempAttr = ref('');
 
-const handleClose = (row,item) => {
-    row.spuSaleAttrValueList.splice(row.spuSaleAttrValueList.indexOf(item),1);
-}
+const handleClose = (row, item) => {
+  row.spuSaleAttrValueList.splice(row.spuSaleAttrValueList.indexOf(item), 1);
+};
 const pushAttrValue = () => {
-    let id = tempAttr.value.split(':')[0];
-    let name = tempAttr.value.split(':')[1];
-    SpuStore.saleAttrList.push({
-        baseSaleAttrId:id,
-        flag:false,
-        saleAttrName:name,
-        spuSaleAttrValueList:[]
-    })
-    tempAttr.value = ''
-}
+  let id = tempAttr.value.split(':')[0];
+  let name = tempAttr.value.split(':')[1];
+  SpuStore.saleAttrList.push({
+    baseSaleAttrId: id,
+    flag: false,
+    saleAttrName: name,
+    spuSaleAttrValueList: [],
+  });
+  tempAttr.value = '';
+};
 const setBlank = () => {
-    tempAttr.value = ''
-}
+  tempAttr.value = '';
+};
 const attrInput = (ele) => {
-    nextTick(() => {
-        ele.focus();
-    })
-}
-
+  nextTick(() => {
+    ele.focus();
+  });
+};
 
 const addValue = (row) => {
-    if(row.spuSaleAttrValueList.find((item) => {
-        return item.saleAttrValueName === newAttrValue.value
-    })) {
-        ElMessage.error('attribute value can not be duplicated')
-        return;
-    }
-    if(newAttrValue.value.trim()){
-        row.spuSaleAttrValueList.push({
-            baseSaleAttrId:row.baseSaleAttrId,
-            saleAttrName:row.saleAttrName,
-            saleAttrValueName:newAttrValue.value,
-            spuId:row.spuId
-        })
-    }
-    row.flag = false;
-    newAttrValue.value = ''
-}
+  if (
+    row.spuSaleAttrValueList.find((item) => {
+      return item.saleAttrValueName === newAttrValue.value;
+    })
+  ) {
+    ElMessage.error('attribute value can not be duplicated');
+    return;
+  }
+  if (newAttrValue.value.trim()) {
+    row.spuSaleAttrValueList.push({
+      baseSaleAttrId: row.baseSaleAttrId,
+      saleAttrName: row.saleAttrName,
+      saleAttrValueName: newAttrValue.value,
+      spuId: row.spuId,
+    });
+  }
+  row.flag = false;
+  newAttrValue.value = '';
+};
 
 const deleteAttr = (index) => {
-    SpuStore.saleAttrList.splice(index,1)
-}
+  SpuStore.saleAttrList.splice(index, 1);
+};
 
 /**
  * 计算剩余属性
  */
 const spuAttrLeftList = computed(() => {
-    return SpuStore.baseAttrList.filter(item =>{
-        return SpuStore.saleAttrList.every(ele => {
-            return ele.saleAttrName !== item.name
-        })
-    })
-})
-
-const initSPUData = async(row: spuData) => {
-    SpuParams.value = row;
-  console.log(row);
-  const data:brandListType = await getTrademarkList();
-  const data1:getImageListReturnType = await getSPUImageList((row.id as number));
-  const data2:saleAttrListReturnType = await getSPUSaleAttrList((row.id as number));
-  const data3:baseSaleAttrReturnType = await getBaseSaleAttrList();
-  SpuStore.allBrands = data.data;
-  SpuStore.imgList = data1.data.map(item=>{
-    return {
-        name: item.imgName,
-        url:item.imgUrl
-    }
+  return SpuStore.baseAttrList.filter((item) => {
+    return SpuStore.saleAttrList.every((ele) => {
+      return ele.saleAttrName !== item.name;
+    });
   });
-  SpuStore.saleAttrList = data2.data.map(item=> {
-    item.flag = false
-    return item
+});
+
+const initSPUData = async (row: spuData) => {
+  SpuParams.value = row;
+  console.log(row);
+  const data: brandListType = await getTrademarkList();
+  const data1: getImageListReturnType = await getSPUImageList(row.id as number);
+  const data2: saleAttrListReturnType = await getSPUSaleAttrList(row.id as number);
+  const data3: baseSaleAttrReturnType = await getBaseSaleAttrList();
+  SpuStore.allBrands = data.data;
+  SpuStore.imgList = data1.data.map((item) => {
+    return {
+      name: item.imgName,
+      url: item.imgUrl,
+    };
+  });
+  SpuStore.saleAttrList = data2.data.map((item) => {
+    item.flag = false;
+    return item;
   });
   SpuStore.baseAttrList = data3.data;
   tempAttr.value = null;
 };
-defineExpose({ initSPUData,setBlank }); //向父组件暴露该方法
-
-
+defineExpose({ initSPUData, setBlank }); //向父组件暴露该方法
 
 const cancel = () => {
   props.setScene(0);
@@ -163,11 +162,11 @@ const cancel = () => {
 const dialogImageUrl = ref('');
 const dialogVisible = ref(false);
 
-const handleRemove: UploadProps['onRemove'] = (uploadFile:UploadUserFile, uploadFiles:UploadUserFile) => {
+const handleRemove: UploadProps['onRemove'] = (uploadFile: UploadUserFile, uploadFiles: UploadUserFile) => {
   console.log(uploadFile, uploadFiles);
 };
 
-const handlePictureCardPreview: UploadProps['onPreview'] = (uploadFile:UploadUserFile) => {
+const handlePictureCardPreview: UploadProps['onPreview'] = (uploadFile: UploadUserFile) => {
   dialogImageUrl.value = uploadFile.url!;
   dialogVisible.value = true;
 };
