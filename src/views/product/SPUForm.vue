@@ -14,7 +14,7 @@
       <el-input type="textarea" placeholder="please input your description" v-model="SpuStore.description"></el-input>
     </el-form-item>
 
-    <el-form-item label-width="135" label="Brand Logo" >
+    <el-form-item label-width="135" label="Brand Logo">
       <el-upload v-model:file-list="fileList" action="/api/admin/product/fileUpload" list-type="picture-card" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
         <el-icon><Plus /></el-icon>
       </el-upload>
@@ -31,12 +31,12 @@
       <el-table border style="margin: 10px 0" :data="SpuStore.spuSaleAttrList">
         <el-table-column label="No." type="index" align="center" width="80px"></el-table-column>
         <el-table-column label="Attribute Name" width="140px" prop="saleAttrName"></el-table-column>
-        <el-table-column label="Attribute Values" >
-            <template #default={row}>
-                <el-tag v-for="item in row.spuSaleAttrValueList" :key="item.id" closable style="margin: 0 5px">
-                {{ item.saleAttrValueName }}
-                </el-tag>
-            </template>
+        <el-table-column label="Attribute Values">
+          <template #default="{ row }">
+            <el-tag v-for="item in row.spuSaleAttrValueList" :key="item.id" closable style="margin: 0 5px">
+              {{ item.saleAttrValueName }}
+            </el-tag>
+          </template>
         </el-table-column>
         <el-table-column label="Operation" width="100px">
           <el-button type="danger" icon="Delete"></el-button>
@@ -52,8 +52,8 @@
 import type { UploadProps, UploadUserFile } from 'element-plus';
 import { reactive, ref, onMounted, nextTick, onBeforeMount } from 'vue';
 import { ElMessage } from 'element-plus';
-import { getTrademarkList,getSPUImageList,getSPUSaleAttrList,getBaseSaleAttrList } from '@/api/production/spu';
-import type { brandType ,getImageListReturnType} from '@/api/production/type';
+import { getTrademarkList, getSPUImageList, getSPUSaleAttrList, getBaseSaleAttrList } from '@/api/production/spu';
+import type { brandType, getImageListReturnType } from '@/api/production/type';
 import useSPUStore from '@/store/modules/spu';
 const SpuStore = useSPUStore();
 const props = defineProps(['setScene']);
@@ -73,31 +73,27 @@ const getTrademarkData = async () => {
   console.log(data);
   Object.assign(brandList, data.data);
 };
-const getImageList = async() => {
-    const data: getImageListReturnType= await getSPUImageList(SpuStore.id);
-    if(data.code == 200){
-        SpuStore.spuImageList = data.data
-        for(let i = 0; i < SpuStore.spuImageList.length; i++)
-        {
-            fileList.value.push({
-                url : SpuStore.spuImageList[i].imgUrl
-            })
-        }
+const getImageList = async () => {
+  const data: getImageListReturnType = await getSPUImageList(SpuStore.id);
+  if (data.code == 200) {
+    SpuStore.spuImageList = data.data;
+    for (let i = 0; i < SpuStore.spuImageList.length; i++) {
+      fileList.value.push({
+        url: SpuStore.spuImageList[i].imgUrl,
+      });
     }
+  }
 };
-const getSaleAttr = async() => {
-    const data = await getSPUSaleAttrList(SpuStore.id)
-    console.log(data,'12312');
-    SpuStore.spuSaleAttrList = data.data;
-}
-const getAttri = async() => {
-    const data = await getBaseSaleAttrList();
-    console.log('getAttri', data);
-    
-}
-const fileList = ref<UploadUserFile[]>([
-    
-]);
+const getSaleAttr = async () => {
+  const data = await getSPUSaleAttrList(SpuStore.id);
+  console.log(data, '12312');
+  SpuStore.spuSaleAttrList = data.data;
+};
+const getAttri = async () => {
+  const data = await getBaseSaleAttrList();
+  console.log('getAttri', data);
+};
+const fileList = ref<UploadUserFile[]>([]);
 
 const dialogImageUrl = ref('');
 const dialogVisible = ref(false);
@@ -107,8 +103,8 @@ const handleRemove: UploadProps['onRemove'] = (uploadFile, uploadFiles) => {
 };
 
 const handlePictureCardPreview: UploadProps['onPreview'] = (uploadFile) => {
-    console.log('@@@',uploadFile);
-    
+  console.log('@@@', uploadFile);
+
   dialogImageUrl.value = uploadFile.imgUrl!;
   dialogVisible.value = true;
 };
