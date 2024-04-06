@@ -37,8 +37,8 @@
         />
       </div>
     </el-card>
-    <SPUForm v-show="scene === 1" :setScene="setScene"></SPUForm>
-    <SKUForm v-show="scene === 2" @setScene="setScene"></SKUForm>
+    <SPUForm v-if="scene === 1" :setScene="setScene"></SPUForm>
+    <SKUForm v-if="scene === 2" @setScene="setScene"></SKUForm>
   </div>
 </template>
 
@@ -49,6 +49,8 @@ import { getSPUList } from '@/api/production/spu';
 import type { records, spuReturnType } from '@/api/production/type';
 import SPUForm from './SPUForm.vue';
 import SKUForm from './SKUForm.vue';
+import useSPUStore from '@/store/modules/spu';
+const SpuStore = useSPUStore();
 const categoryStore = useCategoryStore();
 const currentPage = ref<number>(1);
 const pageSize = ref<number>(3);
@@ -59,6 +61,11 @@ const scene = ref<number>(0); // 0 table 1 add&edit spu 2 add sku
 const editSPU = (row) => {
   scene.value = 1;
   console.log(row);
+  SpuStore.id = row.id;
+  SpuStore.category3Id = row.category3Id;
+  SpuStore.spuName = row.spuName;
+  SpuStore.tmId = row.tmId;
+  SpuStore.description = row.description;
 };
 const setScene = (value: number) => {
   scene.value = value;
