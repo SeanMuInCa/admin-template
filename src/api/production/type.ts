@@ -66,12 +66,13 @@ export interface attrListReturnType extends returnDataTypeCommon {
 
 export interface spuData {
   id?: number | string;
-  spuName: string;
-  description: string;
   category3Id: number | string;
+  description: string;
+  spuImageList: null|imageListType[];
+  spuName: string;
+  spuSaleAttrList: null|saleAttrDataType[];
   tmId: number | string;
-  spuSaleAttrList: null;
-  spuImageList: null;
+  spuPosterList?:null|imageListType[],
 }
 
 export type records = spuData[];
@@ -88,8 +89,8 @@ export interface spuReturnType extends returnDataTypeCommon {
 }
 
 export interface imageListType {
-  id: number | string;
-  spuId: number | string;
+  id?: number | string;
+  spuId?: number | string;
   imgName: string;
   imgUrl: string;
 }
@@ -100,19 +101,20 @@ export interface getImageListReturnType extends returnDataTypeCommon {
 
 export interface spuSaleAttrValueType {
   id?: number | string;
-  spuId: number | string;
+  spuId?: number | string;
   baseSaleAttrId: number | string;
-  saleAttrName: string;
+  saleAttrName?: string;
   saleAttrValueName: string;
-  isChecked: null;
+  isChecked?: null;
 }
 
 export interface saleAttrDataType {
   id?: number | string;
-  spuId: number | string;
+  spuId?: number | string;
   baseSaleAttrId: number | string;
   saleAttrName: string;
   spuSaleAttrValueList: spuSaleAttrValueType[];
+  flag?:boolean
 }
 
 export interface saleAttrListReturnType extends returnDataTypeCommon {

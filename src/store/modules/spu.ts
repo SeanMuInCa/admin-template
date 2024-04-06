@@ -12,6 +12,10 @@ const useSPUStore = defineStore('SpuStore', {
       spuPosterList: [],
       spuSaleAttrList: [],
       spuAttrLeftList: [],
+      allBrands:[],
+      imgList:[],
+      saleAttrList:[],
+      baseAttrList:[]
     };
   },
   actions: {},

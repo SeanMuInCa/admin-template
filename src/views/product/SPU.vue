@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Category :showTable="true"></Category>
-    <el-card style="width: 100%; height: 100%; margin: 10px 0" v-if="scene === 0">
+    <Category :showTable="scene==0"></Category>
+    <el-card style="width: 100%; height: 100%; margin: 10px 0" v-show="scene === 0">
       <el-button type="primary" icon="Plus" @click="handleAdd" :disabled="!categoryStore.c3_id">add a SPU</el-button>
       <!-- main data table -->
       <el-table :data="tableData" style="width: 100%; margin: 20px 0" height="600" border v-loading="categoryStore.loading">
@@ -37,8 +37,8 @@
         />
       </div>
     </el-card>
-    <SPUForm v-if="scene === 1" :setScene="setScene"></SPUForm>
-    <SKUForm v-if="scene === 2" @setScene="setScene"></SKUForm>
+    <SPUForm ref="SPUFormRef" v-show="scene === 1" :setScene="setScene"></SPUForm>
+    <SKUForm v-show="scene === 2" @setScene="setScene"></SKUForm>
   </div>
 </template>
 
@@ -46,7 +46,7 @@
 import { ref, watch, nextTick, onBeforeUnmount } from 'vue';
 import useCategoryStore from '@/store/modules/category';
 import { getSPUList } from '@/api/production/spu';
-import type { records, spuReturnType } from '@/api/production/type';
+import type { records, spuReturnType,spuData } from '@/api/production/type';
 import SPUForm from './SPUForm.vue';
 import SKUForm from './SKUForm.vue';
 import useSPUStore from '@/store/modules/spu';
@@ -57,15 +57,11 @@ const pageSize = ref<number>(3);
 const total = ref<number>(0);
 const tableData = ref<records>([]);
 const scene = ref<number>(0); // 0 table 1 add&edit spu 2 add sku
-
-const editSPU = (row) => {
+const SPUFormRef = ref();
+const editSPU = (row:spuData) => {
   scene.value = 1;
-  console.log(row);
-  SpuStore.id = row.id;
-  SpuStore.category3Id = row.category3Id;
-  SpuStore.spuName = row.spuName;
-  SpuStore.tmId = row.tmId;
-  SpuStore.description = row.description;
+  SPUFormRef.value.initSPUData(row);
+  SPUFormRef.value.setBlank();
 };
 const setScene = (value: number) => {
   scene.value = value;
