@@ -24,8 +24,8 @@
     </el-form-item>
 
     <el-form-item label="Spu attribute" label-width="135">
-      <el-select placeholder="select your attribute" style="width: 240px; margin-right: 10px">
-        <el-option label="111" value="111"></el-option>
+      <el-select style="width: 240px; margin-right: 10px" v-model="SpuStore.spuAttrLeftList.id" :placeholder="SpuStore.spuAttrLeftList.length + ' left'">
+        <el-option v-for="item in SpuStore.spuAttrLeftList" :key=item.id :label="item.name" :value="item.id"></el-option>
       </el-select>
       <el-button type="primary" icon="Plus">add attribute</el-button>
       <el-table border style="margin: 10px 0" :data="SpuStore.spuSaleAttrList">
@@ -99,19 +99,17 @@ const getAttri = async () => {
   Object.assign(attrList, data.data);
 };
 
-const attrList = reactive([]);
+const attrList = [];
 
 //Todo: 属性值这里还没有处理好
 watch(
   () => brandList.length,
   () => {
-    console.log(attrList);
-    console.log(nameList);
-
     let result = attrList.filter((item) => {
-      return nameList.includes(item.name);
+      return !nameList.includes(item.name);
     });
-    console.log(result);
+    SpuStore.spuAttrLeftList = result
+    console.log(SpuStore.spuAttrLeftList);
   }
 );
 const fileList = ref<UploadUserFile[]>([]);
@@ -142,7 +140,7 @@ const newSPUDataParams = reactive<any>({
 const handleAvatarSuccess: UploadProps['onSuccess'] = async (response: any) => {
   const data = await response;
   if (data.code == 200) {
-    newSPUDataParams.spuImageList.push(data.data);
+    SpuStore.spuImageList.push(data.data);
   } else {
     ElMessage.error('upload failed, please try again!');
   }
