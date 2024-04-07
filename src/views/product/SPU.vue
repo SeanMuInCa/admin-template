@@ -63,7 +63,7 @@ const editSPU = (row: spuData) => {
   SPUFormRef.value.initSPUData(row);
   SPUFormRef.value.setBlank();
 };
-const setScene = (value: number) => {
+const setScene = (value) => {
   scene.value = value;
 };
 watch(
@@ -105,7 +105,8 @@ const handleAdd = (id) => {
   SPUFormRef.value.initSPUDataForAdd(id);
 };
 
-const getList = async () => {
+const getList = async (pager = 1) => {
+  currentPage.value = pager;
   categoryStore.loading = true;
   const data: spuReturnType = await getSPUList(currentPage.value, pageSize.value, categoryStore.c3_id);
   console.log(data);
