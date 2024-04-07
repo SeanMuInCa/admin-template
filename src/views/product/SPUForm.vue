@@ -91,9 +91,10 @@ const setBlank = () => {
   tempAttr.value = '';
   SpuStore.$reset();
 };
-const attrInput = (ele) => {
-  nextTick(() => {
-    ele.focus();
+const attrInput = (element) => {
+
+  element && nextTick(() => {
+    element.focus();
   });
 };
 

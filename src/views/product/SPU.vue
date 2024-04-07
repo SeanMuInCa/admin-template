@@ -94,6 +94,7 @@ watch(
 
 const handleAdd = () => {
   scene.value = 1;
+  SPUFormRef.value.setBlank();
 };
 
 const getList = async () => {
