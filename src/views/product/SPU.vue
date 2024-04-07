@@ -66,9 +66,12 @@ const editSPU = (row: spuData) => {
 const setScene = (value: number) => {
   scene.value = value;
 };
-watch(() => scene.value, () => {
-  getList();
-})
+watch(
+  () => scene.value,
+  () => {
+    getList();
+  }
+);
 watch(
   () => categoryStore.c3_id,
   async () => {
@@ -100,7 +103,6 @@ const handleAdd = (id) => {
   SPUFormRef.value.setBlank();
   SPUFormRef.value.initSpuParams();
   SPUFormRef.value.initSPUDataForAdd(id);
-  
 };
 
 const getList = async () => {
