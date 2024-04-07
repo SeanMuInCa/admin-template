@@ -92,10 +92,10 @@ const setBlank = () => {
   SpuStore.$reset();
 };
 const attrInput = (element) => {
-
-  element && nextTick(() => {
-    element.focus();
-  });
+  element &&
+    nextTick(() => {
+      element.focus();
+    });
 };
 
 const addValue = (row) => {
