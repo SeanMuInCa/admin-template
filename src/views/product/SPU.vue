@@ -2,7 +2,7 @@
   <div>
     <Category :showTable="scene == 0"></Category>
     <el-card style="width: 100%; height: 100%; margin: 10px 0" v-show="scene === 0">
-      <el-button type="primary" icon="Plus" @click="handleAdd" :disabled="!categoryStore.c3_id">add a SPU</el-button>
+      <el-button type="primary" icon="Plus" @click="handleAdd(categoryStore.c3_id)" :disabled="!categoryStore.c3_id">add a SPU</el-button>
       <!-- main data table -->
       <el-table :data="tableData" style="width: 100%; margin: 20px 0" height="600" border v-loading="categoryStore.loading">
         <el-table-column fixed type="index" prop="index" label="No." width="100" align="center" />
@@ -66,6 +66,9 @@ const editSPU = (row: spuData) => {
 const setScene = (value: number) => {
   scene.value = value;
 };
+watch(() => scene.value, () => {
+  getList();
+})
 watch(
   () => categoryStore.c3_id,
   async () => {
@@ -92,9 +95,12 @@ watch(
   }
 );
 
-const handleAdd = () => {
+const handleAdd = (id) => {
   scene.value = 1;
   SPUFormRef.value.setBlank();
+  SPUFormRef.value.initSpuParams();
+  SPUFormRef.value.initSPUDataForAdd(id);
+  
 };
 
 const getList = async () => {
