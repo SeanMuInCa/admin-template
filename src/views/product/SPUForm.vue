@@ -64,7 +64,7 @@
 import type { UploadProps, UploadUserFile } from 'element-plus';
 import { reactive, ref, nextTick, computed, onMounted } from 'vue';
 import { ElMessage } from 'element-plus';
-import { getTrademarkList, getSPUImageList, getSPUSaleAttrList, getBaseSaleAttrList,modifySPU } from '@/api/production/spu';
+import { getTrademarkList, getSPUImageList, getSPUSaleAttrList, getBaseSaleAttrList, modifySPU } from '@/api/production/spu';
 import type { getImageListReturnType, spuData, brandListType, saleAttrListReturnType, baseSaleAttrReturnType } from '@/api/production/type';
 import useSPUStore from '@/store/modules/spu';
 const SpuStore = useSPUStore();
@@ -122,34 +122,34 @@ const deleteAttr = (index) => {
   SpuStore.saleAttrList.splice(index, 1);
 };
 
-const modifySPUSave = async() => {
-    //clean up the data
-    //imageList
-    // SpuParams.value.spuImageList = 
-    console.log(SpuStore.imgList);
-    let temp = [];
-    // SpuStore.imgList.forEach((item) => {
-    //     temp.push({
-    //         imgName:item.name,
-    //         imgUrl:item.url.startsWith('http') ? item.url : item.url.slice(item.url.indexOf('http'))
-    //     })
-    // })
-    temp = SpuStore.imgList.map(item =>{
-        return {
-            imgName:item.name,
-            imgUrl:(item.response ? item.response.data : item.url)
-        }
-    })
-    SpuParams.value.spuImageList = temp;
-    SpuStore.spuImageList = temp;
-    SpuParams.value.spuSaleAttrList = SpuStore.saleAttrList;
-    SpuStore.spuSaleAttrList = SpuStore.saleAttrList;
-    const data = await modifySPU(SpuParams.value);
-    if(data.code == 200) {
-        ElMessage.success('modified success');
-        props.setScene(0);
-    }
-}
+const modifySPUSave = async () => {
+  //clean up the data
+  //imageList
+  // SpuParams.value.spuImageList =
+  console.log(SpuStore.imgList);
+  let temp = [];
+  // SpuStore.imgList.forEach((item) => {
+  //     temp.push({
+  //         imgName:item.name,
+  //         imgUrl:item.url.startsWith('http') ? item.url : item.url.slice(item.url.indexOf('http'))
+  //     })
+  // })
+  temp = SpuStore.imgList.map((item) => {
+    return {
+      imgName: item.name,
+      imgUrl: item.response ? item.response.data : item.url,
+    };
+  });
+  SpuParams.value.spuImageList = temp;
+  SpuStore.spuImageList = temp;
+  SpuParams.value.spuSaleAttrList = SpuStore.saleAttrList;
+  SpuStore.spuSaleAttrList = SpuStore.saleAttrList;
+  const data = await modifySPU(SpuParams.value);
+  if (data.code == 200) {
+    ElMessage.success('modified success');
+    props.setScene(0);
+  }
+};
 /**
  * 计算剩余属性
  */
@@ -183,7 +183,6 @@ const initSPUData = async (row: spuData) => {
   tempAttr.value = null;
 };
 
-
 defineExpose({ initSPUData, setBlank }); //向父组件暴露该方法
 
 const cancel = () => {
@@ -216,7 +215,6 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = async (response: any) => {
   if (data.code == 200) {
     // SpuStore.imgList[SpuStore.imgList.length - 1].url = data.data;
     console.log(data.data);
-    
   } else {
     ElMessage.error('upload failed, please try again!');
   }
