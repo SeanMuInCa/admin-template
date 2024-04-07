@@ -184,18 +184,18 @@ const initSPUData = async (row: spuData) => {
   tempAttr.value = null;
 };
 
-const initSPUDataForAdd = async(id) => {
-    const data: brandListType = await getTrademarkList();
-    SpuStore.allBrands = data.data;
-    const data3: baseSaleAttrReturnType = await getBaseSaleAttrList();
-    SpuStore.baseAttrList = data3.data;
-    SpuParams.value.category3Id = id;
-}
+const initSPUDataForAdd = async (id) => {
+  const data: brandListType = await getTrademarkList();
+  SpuStore.allBrands = data.data;
+  const data3: baseSaleAttrReturnType = await getBaseSaleAttrList();
+  SpuStore.baseAttrList = data3.data;
+  SpuParams.value.category3Id = id;
+};
 
 const initSpuParams = () => {
-    SpuParams.value = {};
-}
-defineExpose({ initSPUData, setBlank,initSPUDataForAdd,initSpuParams }); //向父组件暴露该方法
+  SpuParams.value = {};
+};
+defineExpose({ initSPUData, setBlank, initSPUDataForAdd, initSpuParams }); //向父组件暴露该方法
 
 const cancel = () => {
   props.setScene(0);
