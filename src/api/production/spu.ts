@@ -15,4 +15,4 @@ export const getTrademarkList = () => axiosRequest.get<any, brandListType>(API.G
 export const getSPUImageList = (id: number | string) => axiosRequest.get<any, getImageListReturnType>(API.GET_IMAGE_LIST + `${id}`);
 export const getSPUSaleAttrList = (id: number | string) => axiosRequest.get<any, saleAttrListReturnType>(API.GET_SPU_SALE_ATTR_LIST + `${id}`);
 export const getBaseSaleAttrList = () => axiosRequest.get<any, baseSaleAttrReturnType>(API.GET_SPU_ATTR_LIST);
-export const modifySPU = (data: spuData) => (data.id ? axiosRequest.post<any, any>(API.UPDATE_SPU, data) : axiosRequest.post<any, any>(API.ADD_SPU, data));
+export const modifySPU = (data: spuData) => data.id ? axiosRequest.post<any, any>(API.UPDATE_SPU, data) : axiosRequest.post<any, any>(API.ADD_SPU, data);
