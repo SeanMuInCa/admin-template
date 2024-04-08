@@ -45,7 +45,7 @@
 <script setup lang="ts">
 import { ref, watch, nextTick, onBeforeUnmount } from 'vue';
 import useCategoryStore from '@/store/modules/category';
-import { getSPUList,deleteSpu } from '@/api/production/spu';
+import { getSPUList, deleteSpu } from '@/api/production/spu';
 import type { records, spuReturnType, spuData } from '@/api/production/type';
 import SPUForm from './SPUForm.vue';
 import SKUForm from './SKUForm.vue';
@@ -68,13 +68,13 @@ const setScene = (value) => {
   scene.value = value;
 };
 
-const confirmDel = async(row) => {
+const confirmDel = async (row) => {
   const data = await deleteSpu(row.id);
-  if(data.code == 200){
+  if (data.code == 200) {
     ElMessage.success('deleted success!');
     getList();
   }
-}
+};
 watch(
   () => scene.value,
   () => {
