@@ -13,7 +13,7 @@
             <el-button type="primary" icon="Plus" size="small" title="Plus SKU" @click="scene = 2"></el-button>
             <el-button type="warning" icon="Edit" size="small" title="Edit SPU" @click="editSPU(row)"></el-button>
             <el-button type="info" icon="Warning" size="small" title="SKU Info"></el-button>
-            <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirm(row)">
+            <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirmDel(row)">
               <template #reference>
                 <el-button type="danger" icon="Delete" size="small" title="Delete SPU"></el-button>
               </template>
@@ -45,11 +45,12 @@
 <script setup lang="ts">
 import { ref, watch, nextTick, onBeforeUnmount } from 'vue';
 import useCategoryStore from '@/store/modules/category';
-import { getSPUList } from '@/api/production/spu';
+import { getSPUList,deleteSpu } from '@/api/production/spu';
 import type { records, spuReturnType, spuData } from '@/api/production/type';
 import SPUForm from './SPUForm.vue';
 import SKUForm from './SKUForm.vue';
 import useSPUStore from '@/store/modules/spu';
+import { ElMessage } from 'element-plus';
 const SpuStore = useSPUStore();
 const categoryStore = useCategoryStore();
 const currentPage = ref<number>(1);
@@ -66,6 +67,14 @@ const editSPU = (row: spuData) => {
 const setScene = (value) => {
   scene.value = value;
 };
+
+const confirmDel = async(row) => {
+  const data = await deleteSpu(row.id);
+  if(data.code == 200){
+    ElMessage.success('deleted success!');
+    getList();
+  }
+}
 watch(
   () => scene.value,
   () => {
