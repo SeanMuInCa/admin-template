@@ -105,8 +105,7 @@ const handleAdd = (id) => {
   SPUFormRef.value.initSPUDataForAdd(id);
 };
 
-const getList = async (pager = 1) => {
-  currentPage.value = pager;
+const getList = async () => {
   categoryStore.loading = true;
   const data: spuReturnType = await getSPUList(currentPage.value, pageSize.value, categoryStore.c3_id);
   console.log(data);
