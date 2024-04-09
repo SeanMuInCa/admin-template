@@ -37,13 +37,13 @@
           <el-table-column type="selection" width="80" align="center"></el-table-column>
           <el-table-column label="logo" prop="imgUrl">
             <template #default="{ row }">
-              <img :src="row.imgUrl" style="width:100px"/>
+              <img :src="row.imgUrl" style="width: 100px" />
             </template>
           </el-table-column>
           <el-table-column label="name" prop="imgName"></el-table-column>
           <el-table-column label="Operation">
-            <template #={row}>
-                <el-button type="primary">set as default</el-button>
+            <template #="{ row }">
+              <el-button type="primary">set as default</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -59,7 +59,7 @@
 <script setup lang="ts">
 import { defineEmits, ref } from 'vue';
 import { getAttrList } from '@/api/production/attribute';
-import { getSPUSaleAttrList, getSPUImageList,modifySKU } from '@/api/production/spu';
+import { getSPUSaleAttrList, getSPUImageList, modifySKU } from '@/api/production/spu';
 import useCategoryStore from '@/store/modules/category';
 const categoryStore = useCategoryStore();
 const $emit = defineEmits(['setScene']);
@@ -70,8 +70,8 @@ const platformAttrList = ref([]);
 const saleAttrList = ref([]);
 const spuImageList = ref([]);
 const initSKUData = async (row) => {
-    console.log(row);
-    
+  console.log(row);
+
   const data = await getAttrList(categoryStore.c1_id, categoryStore.c2_id, categoryStore.c3_id);
   if (data.code == 200) {
     platformAttrList.value = data.data;
@@ -95,14 +95,14 @@ const skuParams = ref({
   isSale: '',
   price: '',
   skuAttrValueList: [],
-  skuDefaultImg: "",
-  skuDesc: "",
+  skuDefaultImg: '',
+  skuDesc: '',
   skuImageList: [],
-  skuName: "",
+  skuName: '',
   skuSaleAttrValueList: [],
   spuId: '',
-  tmId:'',
-  weight: ""
+  tmId: '',
+  weight: '',
 });
 
 defineExpose({ initSKUData });
