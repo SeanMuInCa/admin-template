@@ -20,4 +20,4 @@ export const getSPUSaleAttrList = (id: number | string) => axiosRequest.get<any,
 export const getBaseSaleAttrList = () => axiosRequest.get<any, baseSaleAttrReturnType>(API.GET_SPU_ATTR_LIST);
 export const modifySPU = (data: spuData) => (data.id ? axiosRequest.post<any, any>(API.UPDATE_SPU, data) : axiosRequest.post<any, any>(API.ADD_SPU, data));
 export const deleteSpu = (id: number | string) => axiosRequest.delete(API.DELETE_SPU + id);
-export const modifySKU = (data: any) => (data.id ? axiosRequest.post<any, any>(API.UPDATE_SKU, data) : axiosRequest.post<any, any>(API.ADD_SKU, data));
+export const addSKU = (data: any) => axiosRequest.post<any, any>(API.ADD_SKU, data);

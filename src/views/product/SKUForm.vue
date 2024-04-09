@@ -15,9 +15,9 @@
       </el-form-item>
       <el-form-item label="Platform Attribute">
         <el-form inline>
-          <el-form-item :label="item.attrName" v-for="item in platformAttrList" :key="item.id">
-            <el-select placeholder="please select" v-model="skuParams.attrId">
-              <el-option v-for="op in item.attrValueList" :key="op.id" :label="op.valueName" :value="op.attrId"></el-option>
+          <el-form-item :label="item.attrName" v-for="(item,index) in platformAttrList" :key="item.id">
+            <el-select placeholder="please select"  v-model="temp[index]">
+              <el-option v-for="op in item.attrValueList" :key="op.id" :label="op.valueName" :value="`${op.id}:${op.attrId}`"></el-option>
             </el-select>
           </el-form-item>
         </el-form>
@@ -69,6 +69,12 @@ const cancel = () => {
 const platformAttrList = ref([]);
 const saleAttrList = ref([]);
 const spuImageList = ref([]);
+
+const test = (e) => {
+    console.log(e);
+    console.log(temp);
+    
+}
 const initSKUData = async (row) => {
   console.log(row);
 
@@ -89,20 +95,32 @@ const initSKUData = async (row) => {
   skuParams.value.spuId = row.id;
 };
 
+let temp = ref(['',''])
 const skuParams = ref({
   category3Id: '',
-  id: '',
-  isSale: '',
-  price: '',
-  skuAttrValueList: [],
-  skuDefaultImg: '',
-  skuDesc: '',
-  skuImageList: [],
-  skuName: '',
-  skuSaleAttrValueList: [],
   spuId: '',
   tmId: '',
+
+  skuName: '',
   weight: '',
+  price: '',
+  skuDesc: '',
+
+  skuAttrValueList: [
+    // {
+    //   attrId: '',
+    //   valueId: '',
+    // },
+  ],
+
+  skuSaleAttrValueList: [
+    // {
+    //     saleAttrId:'',
+    //     saleAttrValueId:''
+    // }
+  ],
+
+  skuDefaultImg: '',
 });
 
 defineExpose({ initSKUData });
