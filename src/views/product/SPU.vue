@@ -66,10 +66,10 @@ const editSPU = (row: spuData) => {
   SPUFormRef.value.setBlank();
 };
 const addSku = (row: spuData) => {
-  scene.value = 2
+  scene.value = 2;
   console.log(row);
   SKUFormRef.value.initSKUData(row);
-}
+};
 const setScene = (value) => {
   scene.value = value;
 };

@@ -36,8 +36,8 @@
         <el-table border :data="spuImageList">
           <el-table-column type="selection" width="80" align="center"></el-table-column>
           <el-table-column label="logo" prop="imgUrl">
-            <template #default={row}>
-                <img :src="row.imgUrl" alt="" style="height:100px;">
+            <template #default="{ row }">
+              <img :src="row.imgUrl" alt="" style="height: 100px" />
             </template>
           </el-table-column>
           <el-table-column label="name" prop="imgName"></el-table-column>
@@ -53,9 +53,9 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits,ref } from 'vue';
-import {getAttrList} from '@/api/production/attribute';
-import{getSPUSaleAttrList,getSPUImageList} from '@/api/production/spu';
+import { defineEmits, ref } from 'vue';
+import { getAttrList } from '@/api/production/attribute';
+import { getSPUSaleAttrList, getSPUImageList } from '@/api/production/spu';
 import useCategoryStore from '@/store/modules/category';
 const categoryStore = useCategoryStore();
 const $emit = defineEmits(['setScene']);
@@ -65,29 +65,29 @@ const cancel = () => {
 const platformAttrList = ref([]);
 const saleAttrList = ref([]);
 const spuImageList = ref([]);
-const initSKUData = async(row) => {
-    const data = await getAttrList(categoryStore.c1_id,categoryStore.c2_id,categoryStore.c3_id);
-    if(data.code == 200){
-        platformAttrList.value = data.data;
-    }
-    const data1 = await getSPUSaleAttrList(row.id);
-    if(data1.code == 200){
-        console.log(data1);
-        saleAttrList.value = data1.data;
-    }
-    const data2 = await getSPUImageList(row.id);
-    if(data2.code == 200){
-        console.log(data2);
-        spuImageList.value = data2.data;
-    }
-}
+const initSKUData = async (row) => {
+  const data = await getAttrList(categoryStore.c1_id, categoryStore.c2_id, categoryStore.c3_id);
+  if (data.code == 200) {
+    platformAttrList.value = data.data;
+  }
+  const data1 = await getSPUSaleAttrList(row.id);
+  if (data1.code == 200) {
+    console.log(data1);
+    saleAttrList.value = data1.data;
+  }
+  const data2 = await getSPUImageList(row.id);
+  if (data2.code == 200) {
+    console.log(data2);
+    spuImageList.value = data2.data;
+  }
+};
 
 const skuParams = ref({
-    attrId:'',
-    saleAttrValueNameId:''
-})
+  attrId: '',
+  saleAttrValueNameId: '',
+});
 
-defineExpose({initSKUData});
+defineExpose({ initSKUData });
 </script>
 
 <style scoped></style>
