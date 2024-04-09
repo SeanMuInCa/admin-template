@@ -15,8 +15,8 @@
       </el-form-item>
       <el-form-item label="Platform Attribute">
         <el-form inline>
-          <el-form-item :label="item.attrName" v-for="(item,index) in platformAttrList" :key="item.id">
-            <el-select placeholder="please select"  v-model="temp[index]">
+          <el-form-item :label="item.attrName" v-for="(item, index) in platformAttrList" :key="item.id">
+            <el-select placeholder="please select" v-model="temp[index]">
               <el-option v-for="op in item.attrValueList" :key="op.id" :label="op.valueName" :value="`${op.id}:${op.attrId}`"></el-option>
             </el-select>
           </el-form-item>
@@ -71,10 +71,9 @@ const saleAttrList = ref([]);
 const spuImageList = ref([]);
 
 const test = (e) => {
-    console.log(e);
-    console.log(temp);
-    
-}
+  console.log(e);
+  console.log(temp);
+};
 const initSKUData = async (row) => {
   console.log(row);
 
@@ -95,7 +94,7 @@ const initSKUData = async (row) => {
   skuParams.value.spuId = row.id;
 };
 
-let temp = ref(['',''])
+let temp = ref(['', '']);
 const skuParams = ref({
   category3Id: '',
   spuId: '',
