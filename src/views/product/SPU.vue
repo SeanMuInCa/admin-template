@@ -10,7 +10,7 @@
         <el-table-column prop="description" label="description" style="height: '220px'"></el-table-column>
         <el-table-column fixed="right" label="Operations">
           <template #default="{ row }">
-            <el-button type="primary" icon="Plus" size="small" title="Plus SKU" @click="scene = 2"></el-button>
+            <el-button type="primary" icon="Plus" size="small" title="Plus SKU" @click="addSku(row)"></el-button>
             <el-button type="warning" icon="Edit" size="small" title="Edit SPU" @click="editSPU(row)"></el-button>
             <el-button type="info" icon="Warning" size="small" title="SKU Info"></el-button>
             <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirmDel(row)">
@@ -38,7 +38,7 @@
       </div>
     </el-card>
     <SPUForm ref="SPUFormRef" v-show="scene === 1" :setScene="setScene"></SPUForm>
-    <SKUForm v-show="scene === 2" @setScene="setScene"></SKUForm>
+    <SKUForm ref="SKUFormRef" v-show="scene === 2" @setScene="setScene"></SKUForm>
   </div>
 </template>
 
@@ -59,11 +59,17 @@ const total = ref<number>(0);
 const tableData = ref<records>([]);
 const scene = ref<number>(0); // 0 table 1 add&edit spu 2 add sku
 const SPUFormRef = ref();
+const SKUFormRef = ref();
 const editSPU = (row: spuData) => {
   scene.value = 1;
   SPUFormRef.value.initSPUData(row);
   SPUFormRef.value.setBlank();
 };
+const addSku = (row: spuData) => {
+  scene.value = 2
+  console.log(row);
+  SKUFormRef.value.initSKUData(row);
+}
 const setScene = (value) => {
   scene.value = value;
 };
