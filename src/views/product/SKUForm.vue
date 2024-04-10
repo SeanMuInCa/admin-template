@@ -27,7 +27,7 @@
         <el-form inline>
           <el-form-item :label="item.saleAttrName" v-for="item in saleAttrList" :key="item.id">
             <el-select placeholder="please select" v-model="item.saleIdAndValueId">
-              <el-option v-for="op in item.spuSaleAttrValueList" :key="op.id" :label="op.saleAttrValueName" :value="`${item.id}:${op.id}}}}`"></el-option>
+              <el-option v-for="op in item.spuSaleAttrValueList" :key="op.id" :label="op.saleAttrValueName" :value="`${item.id}:${op.id}`"></el-option>
             </el-select>
           </el-form-item>
         </el-form>
@@ -49,7 +49,7 @@
         </el-table>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary">Save</el-button>
+        <el-button type="primary" @click="save">Save</el-button>
         <el-button @click="cancel">Cancel</el-button>
       </el-form-item>
     </el-form>
@@ -59,7 +59,7 @@
 <script setup lang="ts">
 import { defineEmits, ref } from 'vue';
 import { getAttrList } from '@/api/production/attribute';
-import { getSPUSaleAttrList, getSPUImageList, modifySKU } from '@/api/production/spu';
+import { getSPUSaleAttrList, getSPUImageList, addSKU } from '@/api/production/spu';
 import useCategoryStore from '@/store/modules/category';
 const categoryStore = useCategoryStore();
 const $emit = defineEmits(['setScene']);
@@ -71,6 +71,38 @@ const saleAttrList = ref([]);
 const spuImageList = ref([]);
 const imageTable = ref();
 const buttonStyle = ref('primary');
+
+
+const save = async() => {
+  skuParams.value.skuAttrValueList = platformAttrList.value.reduce((prev:any,next:any)=>{
+    if(next.attrIdAndValueId){
+      let [attrId, valueId] = next.attrIdAndValueId.split(':');
+      prev.push({
+        attrId,
+        valueId
+      })
+    }
+    return prev;
+  },[])
+
+  skuParams.value.skuSaleAttrValueList = saleAttrList.value.reduce((prev:any,next:any) =>{
+    if(next.saleIdAndValueId){
+      let [saleAttrId, saleAttrValueId] = next.saleIdAndValueId.split(':');
+      prev.push({
+        saleAttrId,
+        saleAttrValueId
+      })
+    }
+    return prev;
+  },[])
+
+  const data = await addSKU(skuParams.value);
+  if(data.code == 200){
+    $emit('setScene', 0);
+  }
+  
+}
+
 const setAsDefault = (row) => {
   console.log(row);
   console.log(imageTable.value);
