@@ -34,7 +34,7 @@
       </el-form-item>
       <el-form-item label="logo name">
         <el-table border :data="spuImageList">
-          <el-table-column type="selection" width="80" align="center"></el-table-column>
+          <el-table-column type="selection" width="80" align="center" ></el-table-column>
           <el-table-column label="logo" prop="imgUrl">
             <template #default="{ row }">
               <img :src="row.imgUrl" style="width: 100px" />
@@ -72,12 +72,13 @@ const spuImageList = ref([]);
 
 const setAsDefault = (row) => {
   console.log(row);
+  
+  skuParams.value.skuDefaultImg = row.imgUrl;
 };
-
 const initSKUData = async (row) => {
   console.log(row);
 
-  const data = await getAttrList(categoryStore.c1_id, categoryStore.c2_id, categoryStore.c3_id);
+  const data:any = await getAttrList(categoryStore.c1_id, categoryStore.c2_id, categoryStore.c3_id);
   if (data.code == 200) {
     platformAttrList.value = data.data;
   }
