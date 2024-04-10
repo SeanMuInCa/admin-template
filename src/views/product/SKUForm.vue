@@ -61,6 +61,7 @@ import { defineEmits, ref } from 'vue';
 import { getAttrList } from '@/api/production/attribute';
 import { getSPUSaleAttrList, getSPUImageList, addSKU } from '@/api/production/spu';
 import useCategoryStore from '@/store/modules/category';
+import { ElMessage } from 'element-plus';
 const categoryStore = useCategoryStore();
 const $emit = defineEmits(['setScene']);
 const cancel = () => {
@@ -84,6 +85,7 @@ const save = async () => {
     return prev;
   }, []);
 
+  //把属性从对象里拿出来，拆分成一个新对象，放到一个数组里去
   skuParams.value.skuSaleAttrValueList = saleAttrList.value.reduce((prev: any, next: any) => {
     if (next.saleIdAndValueId) {
       let [saleAttrId, saleAttrValueId] = next.saleIdAndValueId.split(':');
@@ -97,7 +99,10 @@ const save = async () => {
 
   const data = await addSKU(skuParams.value);
   if (data.code == 200) {
+    ElMessage.success('added success')
     $emit('setScene', 0);
+  }else{
+    ElMessage.error('added failed')
   }
 };
 

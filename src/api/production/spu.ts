@@ -11,6 +11,7 @@ enum API {
   DELETE_SPU = '/admin/product/deleteSpu/',
   ADD_SKU = '/admin/product/saveSkuInfo',
   UPDATE_SKU = '/admin/product/updateSkuInfo',
+  GET_SKU_LIST = '/admin/product/findBySpuId/'
 }
 
 export const getSPUList = (page: number, limit: number, category3Id: string | number) => axiosRequest.get<any, spuReturnType>(`${API.GET_SPU_LIST}/${page}/${limit}?category3Id=${category3Id}`);
@@ -21,3 +22,4 @@ export const getBaseSaleAttrList = () => axiosRequest.get<any, baseSaleAttrRetur
 export const modifySPU = (data: spuData) => (data.id ? axiosRequest.post<any, any>(API.UPDATE_SPU, data) : axiosRequest.post<any, any>(API.ADD_SPU, data));
 export const deleteSpu = (id: number | string) => axiosRequest.delete(API.DELETE_SPU + id);
 export const addSKU = (data: any) => axiosRequest.post<any, any>(API.ADD_SKU, data);
+export const getSKUList = (id: number | string) => axiosRequest.get(API.GET_SKU_LIST + id);

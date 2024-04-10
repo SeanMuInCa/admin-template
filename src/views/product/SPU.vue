@@ -12,7 +12,7 @@
           <template #default="{ row }">
             <el-button type="primary" icon="Plus" size="small" title="Plus SKU" @click="addSku(row)"></el-button>
             <el-button type="warning" icon="Edit" size="small" title="Edit SPU" @click="editSPU(row)"></el-button>
-            <el-button type="info" icon="Warning" size="small" title="SKU Info"></el-button>
+            <el-button type="info" icon="Warning" size="small" title="SKU Info" @click="showList(row)"></el-button>
             <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirmDel(row)">
               <template #reference>
                 <el-button type="danger" icon="Delete" size="small" title="Delete SPU"></el-button>
@@ -40,12 +40,24 @@
     <SPUForm ref="SPUFormRef" v-show="scene === 1" :setScene="setScene"></SPUForm>
     <SKUForm ref="SKUFormRef" v-show="scene === 2" @setScene="setScene"></SKUForm>
   </div>
+  <el-dialog v-model="dialogTableVisible" title="SKU List">
+    <el-table border :data="skuList">
+      <el-table-column label="No." prop="index" type="index" width="80"></el-table-column>
+      <el-table-column label="Sku Name" prop="skuName"></el-table-column>
+      <el-table-column label="Sku weight" prop="weight"></el-table-column>
+      <el-table-column label="Sku logo" width="150">
+        <template #default="{row}">
+          <img :src="row.skuDefaultImg" alt="" style="width:100px; height: 100px">
+        </template>
+      </el-table-column>
+    </el-table>
+  </el-dialog>
 </template>
 
 <script setup lang="ts">
 import { ref, watch, nextTick, onBeforeUnmount } from 'vue';
 import useCategoryStore from '@/store/modules/category';
-import { getSPUList, deleteSpu } from '@/api/production/spu';
+import { getSPUList, deleteSpu,getSKUList } from '@/api/production/spu';
 import type { records, spuReturnType, spuData } from '@/api/production/type';
 import SPUForm from './SPUForm.vue';
 import SKUForm from './SKUForm.vue';
@@ -60,6 +72,14 @@ const tableData = ref<records>([]);
 const scene = ref<number>(0); // 0 table 1 add&edit spu 2 add sku
 const SPUFormRef = ref();
 const SKUFormRef = ref();
+const dialogTableVisible = ref(false);
+const skuList = ref([]);
+const showList = async(row) => {
+  const data = await getSKUList(row.id);
+  console.log(data);
+  dialogTableVisible.value = true;
+  skuList.value = data.data;
+}
 const editSPU = (row: spuData) => {
   scene.value = 1;
   SPUFormRef.value.initSPUData(row);
