@@ -72,8 +72,7 @@ const spuImageList = ref([]);
 
 const setAsDefault = (row) => {
   console.log(row);
-  
-}
+};
 
 const initSKUData = async (row) => {
   console.log(row);
