@@ -99,10 +99,10 @@ const save = async () => {
 
   const data = await addSKU(skuParams.value);
   if (data.code == 200) {
-    ElMessage.success('added success')
+    ElMessage.success('added success');
     $emit('setScene', 0);
-  }else{
-    ElMessage.error('added failed')
+  } else {
+    ElMessage.error('added failed');
   }
 };
 

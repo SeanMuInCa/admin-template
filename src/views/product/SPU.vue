@@ -46,8 +46,8 @@
       <el-table-column label="Sku Name" prop="skuName"></el-table-column>
       <el-table-column label="Sku weight" prop="weight"></el-table-column>
       <el-table-column label="Sku logo" width="150">
-        <template #default="{row}">
-          <img :src="row.skuDefaultImg" alt="" style="width:100px; height: 100px">
+        <template #default="{ row }">
+          <img :src="row.skuDefaultImg" alt="" style="width: 100px; height: 100px" />
         </template>
       </el-table-column>
     </el-table>
@@ -57,7 +57,7 @@
 <script setup lang="ts">
 import { ref, watch, nextTick, onBeforeUnmount } from 'vue';
 import useCategoryStore from '@/store/modules/category';
-import { getSPUList, deleteSpu,getSKUList } from '@/api/production/spu';
+import { getSPUList, deleteSpu, getSKUList } from '@/api/production/spu';
 import type { records, spuReturnType, spuData } from '@/api/production/type';
 import SPUForm from './SPUForm.vue';
 import SKUForm from './SKUForm.vue';
@@ -74,12 +74,12 @@ const SPUFormRef = ref();
 const SKUFormRef = ref();
 const dialogTableVisible = ref(false);
 const skuList = ref([]);
-const showList = async(row) => {
+const showList = async (row) => {
   const data = await getSKUList(row.id);
   console.log(data);
   dialogTableVisible.value = true;
   skuList.value = data.data;
-}
+};
 const editSPU = (row: spuData) => {
   scene.value = 1;
   SPUFormRef.value.initSPUData(row);
