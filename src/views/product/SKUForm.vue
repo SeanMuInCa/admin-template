@@ -33,7 +33,7 @@
         </el-form>
       </el-form-item>
       <el-form-item label="logo name">
-        <el-table border :data="spuImageList">
+        <el-table border :data="spuImageList" ref="imageTable">
           <el-table-column type="selection" width="80" align="center"></el-table-column>
           <el-table-column label="logo" prop="imgUrl">
             <template #default="{ row }">
@@ -43,7 +43,7 @@
           <el-table-column label="name" prop="imgName"></el-table-column>
           <el-table-column label="Operation">
             <template #="{ row }">
-              <el-button type="primary" @click="setAsDefault(row)">set as default</el-button>
+              <el-button :type="buttonStyle" @click="setAsDefault(row)">set as default</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -69,10 +69,14 @@ const cancel = () => {
 const platformAttrList = ref([]);
 const saleAttrList = ref([]);
 const spuImageList = ref([]);
-
+const imageTable = ref();
+const buttonStyle = ref('primary')
 const setAsDefault = (row) => {
   console.log(row);
-
+  console.log(imageTable.value);
+  buttonStyle.value = 'danger'
+  imageTable.value.clearSelection();
+  imageTable.value.toggleRowSelection(row, true);
   skuParams.value.skuDefaultImg = row.imgUrl;
 };
 const initSKUData = async (row) => {
