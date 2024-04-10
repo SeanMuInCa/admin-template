@@ -70,11 +70,11 @@ const platformAttrList = ref([]);
 const saleAttrList = ref([]);
 const spuImageList = ref([]);
 const imageTable = ref();
-const buttonStyle = ref('primary')
+const buttonStyle = ref('primary');
 const setAsDefault = (row) => {
   console.log(row);
   console.log(imageTable.value);
-  buttonStyle.value = 'danger'
+  buttonStyle.value = 'danger';
   imageTable.value.clearSelection();
   imageTable.value.toggleRowSelection(row, true);
   skuParams.value.skuDefaultImg = row.imgUrl;
