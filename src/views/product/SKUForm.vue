@@ -72,36 +72,34 @@ const spuImageList = ref([]);
 const imageTable = ref();
 const buttonStyle = ref('primary');
 
-
-const save = async() => {
-  skuParams.value.skuAttrValueList = platformAttrList.value.reduce((prev:any,next:any)=>{
-    if(next.attrIdAndValueId){
+const save = async () => {
+  skuParams.value.skuAttrValueList = platformAttrList.value.reduce((prev: any, next: any) => {
+    if (next.attrIdAndValueId) {
       let [attrId, valueId] = next.attrIdAndValueId.split(':');
       prev.push({
         attrId,
-        valueId
-      })
+        valueId,
+      });
     }
     return prev;
-  },[])
+  }, []);
 
-  skuParams.value.skuSaleAttrValueList = saleAttrList.value.reduce((prev:any,next:any) =>{
-    if(next.saleIdAndValueId){
+  skuParams.value.skuSaleAttrValueList = saleAttrList.value.reduce((prev: any, next: any) => {
+    if (next.saleIdAndValueId) {
       let [saleAttrId, saleAttrValueId] = next.saleIdAndValueId.split(':');
       prev.push({
         saleAttrId,
-        saleAttrValueId
-      })
+        saleAttrValueId,
+      });
     }
     return prev;
-  },[])
+  }, []);
 
   const data = await addSKU(skuParams.value);
-  if(data.code == 200){
+  if (data.code == 200) {
     $emit('setScene', 0);
   }
-  
-}
+};
 
 const setAsDefault = (row) => {
   console.log(row);
