@@ -70,8 +70,6 @@ const platformAttrList = ref([]);
 const saleAttrList = ref([]);
 const spuImageList = ref([]);
 
-
-
 const setAsDefault = (row) => {
   console.log(row);
 
