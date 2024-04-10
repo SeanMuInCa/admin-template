@@ -33,7 +33,7 @@
         </el-form>
       </el-form-item>
       <el-form-item label="logo name">
-        <el-table border :data="spuImageList" ref="imageTable" >
+        <el-table border :data="spuImageList" ref="imageTable">
           <el-table-column type="selection" width="80" align="center"></el-table-column>
           <el-table-column label="logo" prop="imgUrl">
             <template #default="{ row }">
@@ -42,8 +42,8 @@
           </el-table-column>
           <el-table-column label="name" prop="imgName"></el-table-column>
           <el-table-column label="Operation">
-            <template #="{ row,$index }">
-              <el-button type="primary" @click="setAsDefault(row,$index)" ref="btn">set as default</el-button>
+            <template #="{ row, $index }">
+              <el-button type="primary" @click="setAsDefault(row, $index)" ref="btn">set as default</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -107,9 +107,7 @@ const save = async () => {
   }
 };
 
-
-
-const setAsDefault = (row,index) => {
+const setAsDefault = (row, index) => {
   console.log(imageTable.value);
   btn.value.type = 'danger';
   // buttonStyle.value = 'danger';
