@@ -33,7 +33,7 @@
         </el-form>
       </el-form-item>
       <el-form-item label="logo name">
-        <el-table border :data="spuImageList" ref="imageTable">
+        <el-table border :data="spuImageList" ref="imageTable" >
           <el-table-column type="selection" width="80" align="center"></el-table-column>
           <el-table-column label="logo" prop="imgUrl">
             <template #default="{ row }">
@@ -42,8 +42,8 @@
           </el-table-column>
           <el-table-column label="name" prop="imgName"></el-table-column>
           <el-table-column label="Operation">
-            <template #="{ row }">
-              <el-button :type="buttonStyle" @click="setAsDefault(row)">set as default</el-button>
+            <template #="{ row,$index }">
+              <el-button type="primary" @click="setAsDefault(row,$index)" ref="btn">set as default</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -71,7 +71,8 @@ const platformAttrList = ref([]);
 const saleAttrList = ref([]);
 const spuImageList = ref([]);
 const imageTable = ref();
-const buttonStyle = ref('primary');
+
+const btn = ref();
 
 const save = async () => {
   skuParams.value.skuAttrValueList = platformAttrList.value.reduce((prev: any, next: any) => {
@@ -106,10 +107,12 @@ const save = async () => {
   }
 };
 
-const setAsDefault = (row) => {
-  console.log(row);
+
+
+const setAsDefault = (row,index) => {
   console.log(imageTable.value);
-  buttonStyle.value = 'danger';
+  btn.value.type = 'danger';
+  // buttonStyle.value = 'danger';
   imageTable.value.clearSelection();
   imageTable.value.toggleRowSelection(row, true);
   skuParams.value.skuDefaultImg = row.imgUrl;

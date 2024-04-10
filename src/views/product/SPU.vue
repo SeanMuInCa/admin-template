@@ -45,6 +45,7 @@
       <el-table-column label="No." prop="index" type="index" width="80"></el-table-column>
       <el-table-column label="Sku Name" prop="skuName"></el-table-column>
       <el-table-column label="Sku weight" prop="weight"></el-table-column>
+      <el-table-column label="Sku price" prop="price"></el-table-column>
       <el-table-column label="Sku logo" width="150">
         <template #default="{ row }">
           <img :src="row.skuDefaultImg" alt="" style="width: 100px; height: 100px" />
