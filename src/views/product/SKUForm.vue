@@ -16,8 +16,8 @@
       <el-form-item label="Platform Attribute">
         <el-form inline>
           <el-form-item :label="item.attrName" v-for="(item, index) in platformAttrList" :key="item.id">
-            <el-select placeholder="please select" v-model="temp[index]">
-              <el-option v-for="op in item.attrValueList" :key="op.id" :label="op.valueName" :value="`${op.id}:${op.attrId}`"></el-option>
+            <el-select v-model="item.attrIdAndValueId" placeholder="please select">
+              <el-option v-for="op in item.attrValueList" :key="op.id" :label="op.valueName" :value="`${item.id}:${op.id}`"></el-option>
             </el-select>
           </el-form-item>
         </el-form>
@@ -26,8 +26,8 @@
       <el-form-item label="Sale Attribute">
         <el-form inline>
           <el-form-item :label="item.saleAttrName" v-for="item in saleAttrList" :key="item.id">
-            <el-select placeholder="please select" v-model="skuParams.saleAttrValueNameId">
-              <el-option v-for="op in item.spuSaleAttrValueList" :key="op.id" :label="op.saleAttrValueName" :value="op.id"></el-option>
+            <el-select placeholder="please select" v-model="item.saleIdAndValueId">
+              <el-option v-for="op in item.spuSaleAttrValueList" :key="op.id" :label="op.saleAttrValueName" :value="`${item.id}:${op.id}}}}`"></el-option>
             </el-select>
           </el-form-item>
         </el-form>
@@ -43,7 +43,7 @@
           <el-table-column label="name" prop="imgName"></el-table-column>
           <el-table-column label="Operation">
             <template #="{ row }">
-              <el-button type="primary">set as default</el-button>
+              <el-button type="primary" @click="setAsDefault(row)">set as default</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -70,10 +70,11 @@ const platformAttrList = ref([]);
 const saleAttrList = ref([]);
 const spuImageList = ref([]);
 
-const test = (e) => {
-  console.log(e);
-  console.log(temp);
-};
+const setAsDefault = (row) => {
+  console.log(row);
+  
+}
+
 const initSKUData = async (row) => {
   console.log(row);
 
