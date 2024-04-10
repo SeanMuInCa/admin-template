@@ -109,7 +109,7 @@ const save = async () => {
 
 const setAsDefault = (row, index) => {
   console.log(row);
-  
+
   console.log(imageTable.value);
   btn.value.type = 'danger';
   // buttonStyle.value = 'danger';
