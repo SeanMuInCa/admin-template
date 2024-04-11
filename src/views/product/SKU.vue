@@ -13,14 +13,11 @@
       <el-table-column prop="price" label="Price($)" width="200"></el-table-column>
       <el-table-column fixed="right" label="Operations" width="320">
         <template #default="{ row }">
-          <el-button v-if="!row.isSale" type="primary" icon="Top" size="small" title="OnSale SKU"
-            @click="handleOnSale(row)"></el-button>
-          <el-button v-else type="info" icon="Bottom" size="small" title="OffSale SKU"
-            @click="handleOnSale(row)"></el-button>
+          <el-button v-if="!row.isSale" type="primary" icon="Top" size="small" title="OnSale SKU" @click="handleOnSale(row)"></el-button>
+          <el-button v-else type="info" icon="Bottom" size="small" title="OffSale SKU" @click="handleOnSale(row)"></el-button>
           <el-button type="warning" icon="Edit" size="small" title="Coming soon" disabled></el-button>
           <el-button type="info" icon="Warning" size="small" title="SKU Info" @click="handleInfo(row)"></el-button>
-          <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled"
-            icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirmDel(row)">
+          <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirmDel(row)">
             <template #reference>
               <el-button type="danger" icon="Delete" size="small" title="Delete SKU"></el-button>
             </template>
@@ -31,15 +28,22 @@
     <!-- pagination -->
     <div class="demo-pagination-block">
       <div class="demonstration"></div>
-      <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" :page-sizes="[10, 20, 30]"
-        :background="true" layout="prev, pager, next, jumper,->,sizes,total" :total="total"
-        @size-change="handleSizeChange" @current-change="getData" />
+      <el-pagination
+        v-model:current-page="currentPage"
+        v-model:page-size="pageSize"
+        :page-sizes="[10, 20, 30]"
+        :background="true"
+        layout="prev, pager, next, jumper,->,sizes,total"
+        :total="total"
+        @size-change="handleSizeChange"
+        @current-change="getData"
+      />
     </div>
     <el-drawer v-model="openDrawer" title="SKU Info Details" direction="rtl" size="40%">
       <template #default>
         <el-row :gutter="20">
           <el-col :span="8">
-            <div>Name: </div>
+            <div>Name:</div>
           </el-col>
           <el-col :span="16">
             <div>{{ skuInfoData.skuName }}</div>
@@ -47,7 +51,7 @@
         </el-row>
         <el-row :gutter="20">
           <el-col :span="8">
-            <div>Description: </div>
+            <div>Description:</div>
           </el-col>
           <el-col :span="16">
             <div>{{ skuInfoData.skuDesc }}</div>
@@ -55,7 +59,7 @@
         </el-row>
         <el-row :gutter="20">
           <el-col :span="8">
-            <div>Weight(g): </div>
+            <div>Weight(g):</div>
           </el-col>
           <el-col :span="16">
             <div>{{ skuInfoData.weight }}</div>
@@ -63,7 +67,7 @@
         </el-row>
         <el-row :gutter="20">
           <el-col :span="8">
-            <div>Price($): </div>
+            <div>Price($):</div>
           </el-col>
           <el-col :span="16">
             <div>{{ skuInfoData.price }}</div>
@@ -71,7 +75,7 @@
         </el-row>
         <el-row :gutter="20">
           <el-col :span="8">
-            <div>Status: </div>
+            <div>Status:</div>
           </el-col>
           <el-col :span="16">
             <div>{{ skuInfoData.isSale === 1 ? 'OnSale' : 'OffSale' }}</div>
@@ -79,36 +83,34 @@
         </el-row>
         <el-row :gutter="20">
           <el-col :span="8">
-            <div>Platform Attribute: </div>
+            <div>Platform Attribute:</div>
           </el-col>
           <el-col :span="16">
             <div>
-              <el-tag type="success" v-for="item in skuInfoData.skuAttrValueList" :key="item.id" style="margin: 2px;">{{
-      item.valueName }}</el-tag>
+              <el-tag type="success" v-for="item in skuInfoData.skuAttrValueList" :key="item.id" style="margin: 2px">{{ item.valueName }}</el-tag>
             </div>
           </el-col>
         </el-row>
         <el-row :gutter="20">
           <el-col :span="8">
-            <div>Sale Attribute: </div>
+            <div>Sale Attribute:</div>
           </el-col>
           <el-col :span="16">
             <div>
-              <el-tag type="warning" v-for="item in skuInfoData.skuSaleAttrValueList" :key="item.id"
-                style="margin: 2px;">{{ item.saleAttrValueName }}</el-tag>
+              <el-tag type="warning" v-for="item in skuInfoData.skuSaleAttrValueList" :key="item.id" style="margin: 2px">{{ item.saleAttrValueName }}</el-tag>
             </div>
           </el-col>
         </el-row>
         <el-row :gutter="20">
           <el-col :span="8">
-            <div>Images </div>
+            <div>Images</div>
           </el-col>
           <el-col :span="16">
             <div>
               <el-carousel :interval="2000" type="card" height="200px" autoplay>
                 <el-carousel-item v-for="item in skuInfoData.skuImageList" :key="item">
                   <h3 text="2xl" justify="center">
-                    <img :src="item.imgUrl " alt="" style="width: 100%;">
+                    <img :src="item.imgUrl" alt="" style="width: 100%" />
                   </h3>
                 </el-carousel-item>
               </el-carousel>
@@ -189,7 +191,7 @@ const confirmDel = async (row: skuDataType) => {
 </script>
 
 <style scoped>
-.demo-pagination-block+.demo-pagination-block {
+.demo-pagination-block + .demo-pagination-block {
   margin-top: 10px;
 }
 

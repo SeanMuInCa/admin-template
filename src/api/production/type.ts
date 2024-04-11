@@ -158,7 +158,7 @@ export interface SKUType {
   skuImageList: imageListType[];
   skuAttrValueList: skuAttrValueType[];
   skuSaleAttrValueList: skuSaleAttrValueType[];
-  isSale?:number | string;
+  isSale?: number | string;
 }
 export interface skuDataType {
   id: number | string;
