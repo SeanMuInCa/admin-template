@@ -175,7 +175,7 @@ const handleInfo = async (row: skuDataType) => {
 
 const confirmDel = async (row: skuDataType) => {
   if (row.isSale === 1) {
-    ElMessage.error('this SKU is onSale, can not delete!');
+    ElMessage.error('this SKU is onSale, can not be deleted!');
     return;
   } else {
     const data: any = await deleteSku(row.id);
