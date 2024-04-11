@@ -13,14 +13,11 @@
       <el-table-column prop="price" label="Price($)" width="200"></el-table-column>
       <el-table-column fixed="right" label="Operations" width="320">
         <template #default="{ row }">
-          <el-button v-if="!row.isSale" type="primary" icon="Top" size="small" title="OnSale SKU"
-            @click="handleOnSale(row)"></el-button>
-          <el-button v-else type="info" icon="Bottom" size="small" title="OffSale SKU"
-            @click="handleOnSale(row)"></el-button>
+          <el-button v-if="!row.isSale" type="primary" icon="Top" size="small" title="OnSale SKU" @click="handleOnSale(row)"></el-button>
+          <el-button v-else type="info" icon="Bottom" size="small" title="OffSale SKU" @click="handleOnSale(row)"></el-button>
           <el-button type="warning" icon="Edit" size="small" title="Coming soon" disabled></el-button>
           <el-button type="info" icon="Warning" size="small" title="SKU Info" @click="handleInfo(row)"></el-button>
-          <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled"
-            icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirmDel(row)">
+          <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirmDel(row)">
             <template #reference>
               <el-button type="danger" icon="Delete" size="small" title="Delete SKU"></el-button>
             </template>
@@ -31,13 +28,18 @@
     <!-- pagination -->
     <div class="demo-pagination-block">
       <div class="demonstration"></div>
-      <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" :page-sizes="[10, 20, 30]"
-        :background="true" layout="prev, pager, next, jumper,->,sizes,total" :total="total"
-        @size-change="handleSizeChange" @current-change="getData" />
+      <el-pagination
+        v-model:current-page="currentPage"
+        v-model:page-size="pageSize"
+        :page-sizes="[10, 20, 30]"
+        :background="true"
+        layout="prev, pager, next, jumper,->,sizes,total"
+        :total="total"
+        @size-change="handleSizeChange"
+        @current-change="getData"
+      />
     </div>
-    <el-drawer v-model="openDrawer" title="SKU Info Details" direction="rtl" size="50%">
-
-    </el-drawer>
+    <el-drawer v-model="openDrawer" title="SKU Info Details" direction="rtl" size="50%"></el-drawer>
   </el-card>
 </template>
 
@@ -84,31 +86,31 @@ const handleOnSale = async (row: skuDataType) => {
 };
 
 const handleInfo = async (row: skuDataType) => {
-  const data:any = await getSKUInfo(row.id);
+  const data: any = await getSKUInfo(row.id);
   if (data.code == 200) {
     console.log('====================================');
     console.log(data);
     console.log('====================================');
     openDrawer.value = true;
   }
-}
+};
 
-const confirmDel = async (row:skuDataType) => {
-  if(row.isSale === 1){
+const confirmDel = async (row: skuDataType) => {
+  if (row.isSale === 1) {
     ElMessage.error('this SKU is onSale, can not delete!');
     return;
-  }else{
-    const data:any = await deleteSku(row.id);
-  if (data.code == 200) {
-    ElMessage.success('deleted success!');
-    getData();
-  }
+  } else {
+    const data: any = await deleteSku(row.id);
+    if (data.code == 200) {
+      ElMessage.success('deleted success!');
+      getData();
+    }
   }
 };
 </script>
 
 <style scoped>
-.demo-pagination-block+.demo-pagination-block {
+.demo-pagination-block + .demo-pagination-block {
   margin-top: 10px;
 }
 
