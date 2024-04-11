@@ -220,5 +220,4 @@ const confirmDel = async (row: skuDataType) => {
   margin: 0;
   text-align: center;
 }
-
 </style>
