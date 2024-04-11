@@ -128,3 +128,28 @@ export interface baseSaleAttrType {
 export interface baseSaleAttrReturnType extends returnDataTypeCommon {
   data: baseSaleAttrType[];
 }
+
+export interface SKUType {
+  id: number | string;
+  spuId: number | string;
+  price: number | string;
+  skuName: string;
+  skuDesc: string;
+  weight: number | string;
+  tmId: number | string;
+  category3Id: number | string;
+  skuDefaultImg: string;
+  skuImageList: null;
+  skuAttrValueList: null;
+  skuSaleAttrValueList: null;
+}
+export interface skuDataType {
+  current: number;
+  pages: number;
+  records: SKUType[];
+  size: number;
+  total: number;
+}
+export interface SKUListReturnType extends returnDataTypeCommon {
+  data: skuDataType;
+}
