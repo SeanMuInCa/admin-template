@@ -168,9 +168,6 @@ const handleOnSale = async (row: skuDataType) => {
 const handleInfo = async (row: skuDataType) => {
   const data: any = await getSKUInfo(row.id);
   if (data.code == 200) {
-    console.log('====================================');
-    console.log(data);
-    console.log('====================================');
     openDrawer.value = true;
     skuInfoData.value = data.data;
   }
@@ -224,11 +221,4 @@ const confirmDel = async (row: skuDataType) => {
   text-align: center;
 }
 
-.el-carousel__item:nth-child(2n) {
-  /* background-color: #99a9bf; */
-}
-
-.el-carousel__item:nth-child(2n + 1) {
-  /* background-color: #d3dce6; */
-}
 </style>
