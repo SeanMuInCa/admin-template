@@ -144,11 +144,13 @@ export interface SKUType {
   skuSaleAttrValueList: null;
 }
 export interface skuDataType {
+  id:number | string;
   current: number;
   pages: number;
   records: SKUType[];
   size: number;
   total: number;
+  isSale: number;
 }
 export interface SKUListReturnType extends returnDataTypeCommon {
   data: skuDataType;

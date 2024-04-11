@@ -13,12 +13,13 @@
       <el-table-column prop="price" label="Price($)" width="200"></el-table-column>
       <el-table-column fixed="right" label="Operations" width="320">
         <template #default="{ row }">
-          <el-button type="primary" icon="Plus" size="small" title="Plus SKU"></el-button>
-          <el-button type="warning" icon="Edit" size="small" title="Edit SPU"></el-button>
+          <el-button v-if="!row.isSale" type="primary" icon="Top" size="small" title="OnSale SKU" @click="handleOnSale(row)"></el-button>
+          <el-button v-else type="info" icon="Bottom" size="small" title="OffSale SKU" @click="handleOnSale(row)"></el-button>
+          <el-button type="warning" icon="Edit" size="small" title="Edit SKU"></el-button>
           <el-button type="info" icon="Warning" size="small" title="SKU Info"></el-button>
           <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?">
             <template #reference>
-              <el-button type="danger" icon="Delete" size="small" title="Delete SPU"></el-button>
+              <el-button type="danger" icon="Delete" size="small" title="Delete SKU"></el-button>
             </template>
           </el-popconfirm>
         </template>
@@ -35,16 +36,17 @@
         layout="prev, pager, next, jumper,->,sizes,total"
         :total="total"
         @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
+        @current-change="getData"
       />
     </div>
   </el-card>
 </template>
 
 <script setup lang="ts">
-import { getAllSKU } from '@/api/production/sku';
+import { getAllSKU,onSale,offSale } from '@/api/production/sku';
 import { onMounted, ref } from 'vue';
-import { SKUType, SKUListReturnType } from '@/api/production/type';
+import { SKUType, SKUListReturnType,skuDataType } from '@/api/production/type';
+import { ElMessage } from 'element-plus';
 const tableData = ref<SKUType[]>([]);
 const currentPage = ref<number>(1);
 const pageSize = ref<number>(10);
@@ -52,7 +54,8 @@ const total = ref<number>(0);
 onMounted(() => {
   getData();
 });
-const getData = async () => {
+const getData = async (pager = 1) => {
+  currentPage.value = pager;
   const data: SKUListReturnType = await getAllSKU(currentPage.value, pageSize.value);
   if (data.code == 200) {
     total.value = data.data.total;
@@ -65,9 +68,21 @@ const handleSizeChange = async () => {
   await getData();
 };
 
-const handleCurrentChange = async () => {
-  await getData();
-};
+const handleOnSale = async (row:skuDataType) => {
+  if(row.isSale === 1){
+    const data:any = await offSale(row.id);
+    if(data.code == 200){
+      ElMessage.info('offSale success')
+    }
+  }else{
+    const data:any = await onSale(row.id);
+    if(data.code == 200){
+      ElMessage.success('onSale success')
+    }
+  }
+  row.isSale = row.isSale === 0 ? 1 : 0;
+}
+
 </script>
 
 <style scoped>
