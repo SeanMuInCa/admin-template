@@ -144,7 +144,7 @@ export interface SKUType {
   skuSaleAttrValueList: null;
 }
 export interface skuDataType {
-  id:number | string;
+  id: number | string;
   current: number;
   pages: number;
   records: SKUType[];

@@ -43,9 +43,9 @@
 </template>
 
 <script setup lang="ts">
-import { getAllSKU,onSale,offSale } from '@/api/production/sku';
+import { getAllSKU, onSale, offSale } from '@/api/production/sku';
 import { onMounted, ref } from 'vue';
-import { SKUType, SKUListReturnType,skuDataType } from '@/api/production/type';
+import { SKUType, SKUListReturnType, skuDataType } from '@/api/production/type';
 import { ElMessage } from 'element-plus';
 const tableData = ref<SKUType[]>([]);
 const currentPage = ref<number>(1);
@@ -68,21 +68,20 @@ const handleSizeChange = async () => {
   await getData();
 };
 
-const handleOnSale = async (row:skuDataType) => {
-  if(row.isSale === 1){
-    const data:any = await offSale(row.id);
-    if(data.code == 200){
-      ElMessage.info('offSale success')
+const handleOnSale = async (row: skuDataType) => {
+  if (row.isSale === 1) {
+    const data: any = await offSale(row.id);
+    if (data.code == 200) {
+      ElMessage.info('offSale success');
     }
-  }else{
-    const data:any = await onSale(row.id);
-    if(data.code == 200){
-      ElMessage.success('onSale success')
+  } else {
+    const data: any = await onSale(row.id);
+    if (data.code == 200) {
+      ElMessage.success('onSale success');
     }
   }
   row.isSale = row.isSale === 0 ? 1 : 0;
-}
-
+};
 </script>
 
 <style scoped>
