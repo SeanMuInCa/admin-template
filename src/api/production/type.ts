@@ -128,7 +128,23 @@ export interface baseSaleAttrType {
 export interface baseSaleAttrReturnType extends returnDataTypeCommon {
   data: baseSaleAttrType[];
 }
-
+export interface skuAttrValueType {
+  attrId: number | string;
+  attrName: string;
+  id: number | string;
+  skuId: number | string;
+  valueId: number | string;
+  valueName: string;
+}
+export interface skuSaleAttrValueType {
+  id: number | string;
+  saleAttrId: number | string;
+  saleAttrName: string;
+  saleAttrValueId: number | string;
+  saleAttrValueName: string;
+  skuId: number | string;
+  spuId: number | string;
+}
 export interface SKUType {
   id: number | string;
   spuId: number | string;
@@ -139,9 +155,10 @@ export interface SKUType {
   tmId: number | string;
   category3Id: number | string;
   skuDefaultImg: string;
-  skuImageList: null;
-  skuAttrValueList: null;
-  skuSaleAttrValueList: null;
+  skuImageList: imageListType[];
+  skuAttrValueList: skuAttrValueType[];
+  skuSaleAttrValueList: skuSaleAttrValueType[];
+  isSale?:number | string;
 }
 export interface skuDataType {
   id: number | string;
