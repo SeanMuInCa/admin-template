@@ -83,7 +83,7 @@
 </template>
 
 <script setup lang="ts">
-import { getAllUsers,modifyUser } from '@/api/acl/user';
+import { getAllUsers, modifyUser } from '@/api/acl/user';
 import { ref, onMounted } from 'vue';
 import type { userRecordsType, UserListReturnType } from '@/api/acl/type';
 import { ElMessage } from 'element-plus';
@@ -113,21 +113,21 @@ const handleSizeChange = async () => {
 const cancelAdd = () => {
   openDrawer.value = false;
   userParams.value = {
-    name:'',
-    username:'',
-    password:''
+    name: '',
+    username: '',
+    password: '',
   };
-}
-const confirmAdd = async() => {
+};
+const confirmAdd = async () => {
   const data = await modifyUser(userParams.value);
-  if(data.code == 200){
+  if (data.code == 200) {
     ElMessage.success('added success');
     openDrawer.value = false;
     getData();
-  }else{
-    ElMessage.error('something went wrong')
+  } else {
+    ElMessage.error('something went wrong');
   }
-}
+};
 </script>
 
 <style scoped>
