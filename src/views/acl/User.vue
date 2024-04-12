@@ -141,7 +141,7 @@ const confirmAdd = async () => {
 
 const searchName = () => {
   if (nameToSearch.value.trim()) {
-    userData.value = userData.value.filter((item:userRecordsType) => item.name.includes(nameToSearch.value));
+    userData.value = userData.value.filter((item: userRecordsType) => item.name.includes(nameToSearch.value));
   } else getData();
 };
 const reset = () => {
@@ -150,7 +150,7 @@ const reset = () => {
 };
 
 const massDelete = async () => {
-  let idList = delList.value.map((item:userRecordsType) => item.id);
+  let idList = delList.value.map((item: userRecordsType) => item.id);
   if (idList.length > 0) {
     const data = await massDel({ idList });
     if (data.code == 200) {
@@ -165,8 +165,8 @@ const selectRow = (data: userRecordsType[]) => {
   delList.value = data;
 };
 
-const confirmDel = async (row:userRecordsType) => {
-  const data = await delUser((row.id as number));
+const confirmDel = async (row: userRecordsType) => {
+  const data = await delUser(row.id as number);
   if (data.code == 200) {
     ElMessage.success('deleted!');
   } else {
@@ -175,7 +175,7 @@ const confirmDel = async (row:userRecordsType) => {
   getData(currentPage.value);
 };
 
-const editUser = (row:userRecordsType) => {
+const editUser = (row: userRecordsType) => {
   userParams.value = row;
   openDrawer.value = true;
 };
