@@ -26,7 +26,7 @@
         <el-table-column label="Operation">
           <template #default="{ row }">
             <el-button type="primary" icon="User" size="small">Assign Role</el-button>
-            <el-button type="warning" icon="Edit" size="small">Edit User</el-button>
+            <el-button type="warning" icon="Edit" size="small" @click="editUser(row)">Edit User</el-button>
             <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirmDel(row)">
               <template #reference>
                 <el-button type="danger" icon="Delete" size="small">Delete</el-button>
@@ -48,26 +48,26 @@
           @current-change="getData"
         />
       </div>
-      <el-drawer v-model="openDrawer" title="Add a user" direction="rtl" size="30%">
+      <el-drawer v-model="openDrawer" :title="userParams.id? 'Edit a user' : 'Add a user'" direction="rtl" size="30%">
         <template #default>
           <el-row :gutter="20">
-            <el-col :span="4">
-              <div style="line-height: 30px">Name:</div>
+            <el-col :span="6">
+              <div style="line-height: 30px">Nick Name:</div>
             </el-col>
             <el-col :span="16">
               <el-input v-model="userParams.name"></el-input>
             </el-col>
           </el-row>
           <el-row :gutter="16">
-            <el-col :span="4">
+            <el-col :span="6">
               <div style="line-height: 30px">UserName:</div>
             </el-col>
             <el-col :span="16">
               <el-input v-model="userParams.username"></el-input>
             </el-col>
           </el-row>
-          <el-row :gutter="16">
-            <el-col :span="4">
+          <el-row :gutter="16" v-show="!userParams.id">
+            <el-col :span="6">
               <div style="line-height: 30px">Password:</div>
             </el-col>
             <el-col :span="16">
@@ -83,7 +83,7 @@
 </template>
 
 <script setup lang="ts">
-import { getAllUsers, modifyUser, massDel } from '@/api/acl/user';
+import { getAllUsers, modifyUser, massDel,delUser } from '@/api/acl/user';
 import { ref, onMounted } from 'vue';
 import type { userRecordsType, UserListReturnType } from '@/api/acl/type';
 import { ElMessage } from 'element-plus';
@@ -92,6 +92,7 @@ const pageSize = ref(5);
 const total = ref(0);
 const userData = ref<userRecordsType[]>([]);
 const userParams = ref<userRecordsType>({
+  id:'',
   name: '',
   username: '',
   password: '',
@@ -100,6 +101,8 @@ const openDrawer = ref<boolean>(false);
 const nameToSearch = ref<string>('');
 const tableRef = ref<any>();
 const delList = ref<userRecordsType[]>([]);
+
+
 const getData = async (pager = 1) => {
   currentPage.value = pager;
   const data: UserListReturnType = await getAllUsers(currentPage.value, pageSize.value);
@@ -120,6 +123,7 @@ const handleSizeChange = async () => {
 const cancelAdd = () => {
   openDrawer.value = false;
   userParams.value = {
+    id:'',
     name: '',
     username: '',
     password: '',
@@ -128,7 +132,7 @@ const cancelAdd = () => {
 const confirmAdd = async () => {
   const data = await modifyUser(userParams.value);
   if (data.code == 200) {
-    ElMessage.success('added success');
+    ElMessage.success(userParams.value.id? 'edit success':'added success');
     openDrawer.value = false;
     getData();
   } else {
@@ -161,6 +165,21 @@ const massDelete = async () => {
 const selectRow = (data: userRecordsType[]) => {
   delList.value = data;
 };
+
+const confirmDel = async(row) => {
+  const data = await delUser(row.id);
+  if(data.code == 200){
+    ElMessage.success('deleted!');
+  }else{
+    ElMessage.error('something went wrong')
+  }
+  getData(currentPage.value);
+}
+
+const editUser = (row) => {
+  userParams.value = row;
+  openDrawer.value = true;
+}
 </script>
 
 <style scoped>

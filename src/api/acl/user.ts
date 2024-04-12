@@ -5,8 +5,10 @@ enum API {
   ADD_USER = '/admin/acl/user/save',
   UPDATE_USER = '/admin/acl/user/update',
   MASS_DEL = '/admin/acl/user/batchRemove',
+  DEL_USER = '/admin/acl/user/remove/',
 }
 
 export const getAllUsers = (page: number, limit: number) => axiosRequest.get<any, UserListReturnType>(API.GET_ALL_USERS + `${page}/${limit}`);
 export const modifyUser = (data: userRecordsType) => (data.id ? axiosRequest.put<any, any>(API.UPDATE_USER, data) : axiosRequest.post<any, any>(API.ADD_USER, data));
 export const massDel = (data: any) => axiosRequest.delete<any, any>(API.MASS_DEL, data);
+export const delUser = (id:number) => axiosRequest.delete<any,any>(API.DEL_USER + id); 
