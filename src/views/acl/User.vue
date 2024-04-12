@@ -71,11 +71,11 @@
               <div style="line-height: 30px">Password:</div>
             </el-col>
             <el-col :span="16">
-              <el-input v-model="userParams.password"></el-input>
+              <el-input v-model="userParams.password" type="password"></el-input>
             </el-col>
           </el-row>
-          <el-button type="primary">Confirm</el-button>
-          <el-button>Cancel</el-button>
+          <el-button type="primary" @click="confirmAdd">Confirm</el-button>
+          <el-button @click="cancelAdd">Cancel</el-button>
         </template>
       </el-drawer>
     </el-card>
@@ -83,9 +83,10 @@
 </template>
 
 <script setup lang="ts">
-import { getAllUsers } from '@/api/acl/user';
+import { getAllUsers,modifyUser } from '@/api/acl/user';
 import { ref, onMounted } from 'vue';
 import type { userRecordsType, UserListReturnType } from '@/api/acl/type';
+import { ElMessage } from 'element-plus';
 const currentPage = ref(1);
 const pageSize = ref(5);
 const total = ref(0);
@@ -108,6 +109,25 @@ const handleSizeChange = async () => {
   currentPage.value = 1;
   await getData();
 };
+
+const cancelAdd = () => {
+  openDrawer.value = false;
+  userParams.value = {
+    name:'',
+    username:'',
+    password:''
+  };
+}
+const confirmAdd = async() => {
+  const data = await modifyUser(userParams.value);
+  if(data.code == 200){
+    ElMessage.success('added success');
+    openDrawer.value = false;
+    getData();
+  }else{
+    ElMessage.error('something went wrong')
+  }
+}
 </script>
 
 <style scoped>
