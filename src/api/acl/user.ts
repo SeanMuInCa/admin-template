@@ -9,4 +9,4 @@ enum API {
 
 export const getAllUsers = (page: number, limit: number) => axiosRequest.get<any, UserListReturnType>(API.GET_ALL_USERS + `${page}/${limit}`);
 export const modifyUser = (data: userRecordsType) => (data.id ? axiosRequest.put<any, any>(API.UPDATE_USER, data) : axiosRequest.post<any, any>(API.ADD_USER, data));
-export const massDel = (data:any) => axiosRequest.delete<any,any>(API.MASS_DEL, data); 
+export const massDel = (data: any) => axiosRequest.delete<any, any>(API.MASS_DEL, data);
