@@ -48,7 +48,7 @@
           @current-change="getData"
         />
       </div>
-      <el-drawer v-model="openDrawer" :title="userParams.id? 'Edit a user' : 'Add a user'" direction="rtl" size="30%">
+      <el-drawer v-model="openDrawer" :title="userParams.id ? 'Edit a user' : 'Add a user'" direction="rtl" size="30%">
         <template #default>
           <el-row :gutter="20">
             <el-col :span="6">
@@ -83,7 +83,7 @@
 </template>
 
 <script setup lang="ts">
-import { getAllUsers, modifyUser, massDel,delUser } from '@/api/acl/user';
+import { getAllUsers, modifyUser, massDel, delUser } from '@/api/acl/user';
 import { ref, onMounted } from 'vue';
 import type { userRecordsType, UserListReturnType } from '@/api/acl/type';
 import { ElMessage } from 'element-plus';
@@ -92,7 +92,7 @@ const pageSize = ref(5);
 const total = ref(0);
 const userData = ref<userRecordsType[]>([]);
 const userParams = ref<userRecordsType>({
-  id:'',
+  id: '',
   name: '',
   username: '',
   password: '',
@@ -101,7 +101,6 @@ const openDrawer = ref<boolean>(false);
 const nameToSearch = ref<string>('');
 const tableRef = ref<any>();
 const delList = ref<userRecordsType[]>([]);
-
 
 const getData = async (pager = 1) => {
   currentPage.value = pager;
@@ -123,7 +122,7 @@ const handleSizeChange = async () => {
 const cancelAdd = () => {
   openDrawer.value = false;
   userParams.value = {
-    id:'',
+    id: '',
     name: '',
     username: '',
     password: '',
@@ -132,7 +131,7 @@ const cancelAdd = () => {
 const confirmAdd = async () => {
   const data = await modifyUser(userParams.value);
   if (data.code == 200) {
-    ElMessage.success(userParams.value.id? 'edit success':'added success');
+    ElMessage.success(userParams.value.id ? 'edit success' : 'added success');
     openDrawer.value = false;
     getData();
   } else {
@@ -166,20 +165,20 @@ const selectRow = (data: userRecordsType[]) => {
   delList.value = data;
 };
 
-const confirmDel = async(row) => {
+const confirmDel = async (row) => {
   const data = await delUser(row.id);
-  if(data.code == 200){
+  if (data.code == 200) {
     ElMessage.success('deleted!');
-  }else{
-    ElMessage.error('something went wrong')
+  } else {
+    ElMessage.error('something went wrong');
   }
   getData(currentPage.value);
-}
+};
 
 const editUser = (row) => {
   userParams.value = row;
   openDrawer.value = true;
-}
+};
 </script>
 
 <style scoped>
