@@ -50,7 +50,7 @@ const validateUsername = (_rule: any, value: any, callback: any) => {
   } else callback();
 };
 const validatePassword = (_rule: any, value: any, callback: any) => {
-  if (/^(?:[a-zA-Z]{6,12}|\d{6,12})$/.test(value)) callback();
+  if (/^[a-z0-9_-]{6,12}$/.test(value)) callback();
   else callback(new Error('the password requires 6-12 characters long'));
 };
 //表单校验对象
