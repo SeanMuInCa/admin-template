@@ -63,7 +63,7 @@
               <div style="line-height: 30px">UserName:</div>
             </el-col>
             <el-col :span="16">
-              <el-input v-model="userParams.username"></el-input>
+              <el-input v-model="userParams.username" @blur="checkUsername"></el-input>
             </el-col>
           </el-row>
           <el-row :gutter="16" v-show="!userParams.id">
@@ -71,10 +71,10 @@
               <div style="line-height: 30px">Password:</div>
             </el-col>
             <el-col :span="16">
-              <el-input v-model="userParams.password" type="password"></el-input>
+              <el-input v-model="userParams.password" type="password" @blur="checkPassword"></el-input>
             </el-col>
           </el-row>
-          <el-button type="primary" @click="confirmAdd">Confirm</el-button>
+          <el-button type="primary" @click="confirmAdd" :disabled="!(username && password)">Confirm</el-button>
           <el-button @click="cancelAdd">Cancel</el-button>
         </template>
       </el-drawer>
@@ -101,7 +101,24 @@ const openDrawer = ref<boolean>(false);
 const nameToSearch = ref<string>('');
 const tableRef = ref<any>();
 const delList = ref<userRecordsType[]>([]);
-
+const username = ref(false);//shit i should use form
+const password = ref(false);
+const checkUsername = () => {
+  if(userParams.value.username.length < 5){
+    ElMessage.error('username at least 5');
+    username.value = false;
+  }else{
+    username.value = true;
+  }
+}
+const checkPassword = () => {
+  if(/^[a-z0-9_-]{6,12}$/.test(userParams.value.password)){
+    password.value = true;
+  }else{
+    ElMessage.error('password need 6 to 12');
+    password.value = false;
+  }
+}
 const getData = async (pager = 1) => {
   currentPage.value = pager;
   const data: UserListReturnType = await getAllUsers(currentPage.value, pageSize.value);
