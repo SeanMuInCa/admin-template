@@ -101,24 +101,24 @@ const openDrawer = ref<boolean>(false);
 const nameToSearch = ref<string>('');
 const tableRef = ref<any>();
 const delList = ref<userRecordsType[]>([]);
-const username = ref(false);//shit i should use form
+const username = ref(false); //shit i should use form
 const password = ref(false);
 const checkUsername = () => {
-  if(userParams.value.username.length < 5){
+  if (userParams.value.username.length < 5) {
     ElMessage.error('username at least 5');
     username.value = false;
-  }else{
+  } else {
     username.value = true;
   }
-}
+};
 const checkPassword = () => {
-  if(/^[a-z0-9_-]{6,12}$/.test(userParams.value.password)){
+  if (/^[a-z0-9_-]{6,12}$/.test(userParams.value.password)) {
     password.value = true;
-  }else{
+  } else {
     ElMessage.error('password need 6 to 12');
     password.value = false;
   }
-}
+};
 const getData = async (pager = 1) => {
   currentPage.value = pager;
   const data: UserListReturnType = await getAllUsers(currentPage.value, pageSize.value);
