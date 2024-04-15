@@ -13,4 +13,4 @@ export const getAllUsers = (page: number, limit: number) => axiosRequest.get<any
 export const modifyUser = (data: userRecordsType) => (data.id ? axiosRequest.put<any, any>(API.UPDATE_USER, data) : axiosRequest.post<any, any>(API.ADD_USER, data));
 export const massDel = (data: any) => axiosRequest.delete<any, any>(API.MASS_DEL, data);
 export const delUser = (id: number) => axiosRequest.delete<any, any>(API.DEL_USER + id);
-export const getRoleList = (id:number) => axiosRequest.get<any,any>(API.GET_ROLE_LIST + id);
+export const getRoleList = (id: number) => axiosRequest.get<any, any>(API.GET_ROLE_LIST + id);
