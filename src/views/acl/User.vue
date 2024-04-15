@@ -169,7 +169,7 @@ const reset = () => {
 const massDelete = async () => {
   let idList = delList.value.map((item: userRecordsType) => item.id);
   if (idList.length > 0) {
-    const data = await massDel({ idList });
+    const data = await massDel( idList );
     if (data.code == 200) {
       ElMessage.success('deleted!');
     } else {
