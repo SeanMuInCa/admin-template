@@ -103,7 +103,7 @@
 <script setup lang="ts">
 import { getAllUsers, modifyUser, massDel, delUser, getRoleList } from '@/api/acl/user';
 import { ref, onMounted } from 'vue';
-import type { userRecordsType, UserListReturnType,roleListType,role } from '@/api/acl/type';
+import type { userRecordsType, UserListReturnType, roleListType, role } from '@/api/acl/type';
 import { ElMessage } from 'element-plus';
 const checkAll = ref(false);
 const isIndeterminate = ref(true);
@@ -231,7 +231,7 @@ const editUser = (row: userRecordsType) => {
 const assignRole = async (row: userRecordsType) => {
   showAssign.value = true;
   userParams.value = row;
-  const data:roleListType = await getRoleList((row.id as number));
+  const data: roleListType = await getRoleList(row.id as number);
   if (data.code == 200) {
     allRolesList.value = data.data.allRolesList;
     assignedRoleList.value = data.data.assignRoles;
@@ -243,7 +243,7 @@ const handleCheckAllChange = (val: boolean) => {
   isIndeterminate.value = false;
 };
 
-const handleCheckedRolesChange = (value:role[]) => {
+const handleCheckedRolesChange = (value: role[]) => {
   const checkedCount = value.length;
   checkAll.value = checkedCount === allRolesList.value.length;
   isIndeterminate.value = checkedCount > 0 && checkedCount < allRolesList.value.length;

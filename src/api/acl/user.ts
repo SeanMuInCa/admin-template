@@ -1,5 +1,5 @@
 import axiosRequest from '@/utils/request';
-import type { UserListReturnType, userRecordsType,roleListType } from './type';
+import type { UserListReturnType, userRecordsType, roleListType } from './type';
 enum API {
   GET_ALL_USERS = '/admin/acl/user/',
   ADD_USER = '/admin/acl/user/save',
