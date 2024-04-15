@@ -88,9 +88,9 @@
           </el-form-item>
           <el-form-item label="Roles: ">
             <el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" @change="handleCheckAllChange">Check all</el-checkbox>
-            <el-checkbox-group>
-              <el-checkbox v-for="(role, index) in 10" :key="index" :value="index" :label="index">
-                {{ index }}
+            <el-checkbox-group v-model="assignedRoleList" @change="handleCheckedRolesChange">
+              <el-checkbox v-for="(role, index) in allRolesList" :key="role.id" :value="role" :label="role">
+                {{ role.roleName }}
               </el-checkbox>
             </el-checkbox-group>
           </el-form-item>
@@ -124,6 +124,8 @@ const delList = ref<userRecordsType[]>([]);
 const username = ref(false); //shit i should use form
 const password = ref(false);
 const showAssign = ref<boolean>(false);
+const allRolesList = ref([]);
+const assignedRoleList = ref([]);
 const checkUsername = () => {
   if (userParams.value.username.length < 5) {
     ElMessage.error('username at least 5');
@@ -226,10 +228,26 @@ const editUser = (row: userRecordsType) => {
   openDrawer.value = true;
 };
 
-const assignRole = (row: userRecordsType) => {
+const assignRole = async(row: userRecordsType) => {
   showAssign.value = true;
   userParams.value = row;
+  const data = await getRoleList(row.id);
+  if(data.code == 200){
+    allRolesList.value = data.data.allRolesList;
+    assignedRoleList.value = data.data.assignRoles;
+  }
 };
+
+const handleCheckAllChange = (val: boolean) => {
+  assignedRoleList.value = val ? allRolesList.value : [];
+  isIndeterminate.value = false;
+}
+
+const handleCheckedRolesChange = (value) => {
+  const checkedCount = value.length
+  checkAll.value = checkedCount === allRolesList.value.length
+  isIndeterminate.value = checkedCount > 0 && checkedCount < allRolesList.value.length
+}
 </script>
 
 <style scoped>
