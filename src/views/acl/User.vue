@@ -228,11 +228,11 @@ const editUser = (row: userRecordsType) => {
   openDrawer.value = true;
 };
 
-const assignRole = async(row: userRecordsType) => {
+const assignRole = async (row: userRecordsType) => {
   showAssign.value = true;
   userParams.value = row;
   const data = await getRoleList(row.id);
-  if(data.code == 200){
+  if (data.code == 200) {
     allRolesList.value = data.data.allRolesList;
     assignedRoleList.value = data.data.assignRoles;
   }
@@ -241,13 +241,13 @@ const assignRole = async(row: userRecordsType) => {
 const handleCheckAllChange = (val: boolean) => {
   assignedRoleList.value = val ? allRolesList.value : [];
   isIndeterminate.value = false;
-}
+};
 
 const handleCheckedRolesChange = (value) => {
-  const checkedCount = value.length
-  checkAll.value = checkedCount === allRolesList.value.length
-  isIndeterminate.value = checkedCount > 0 && checkedCount < allRolesList.value.length
-}
+  const checkedCount = value.length;
+  checkAll.value = checkedCount === allRolesList.value.length;
+  isIndeterminate.value = checkedCount > 0 && checkedCount < allRolesList.value.length;
+};
 </script>
 
 <style scoped>
