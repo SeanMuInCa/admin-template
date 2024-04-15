@@ -12,7 +12,7 @@
       </el-form>
     </el-card>
     <el-card style="margin: 10px 0">
-      <el-button type="primary" @click="openDrawer = true">Add One</el-button>
+      <el-button type="primary" @click="handleAdd">Add One</el-button>
       <el-button type="warning" @click="massDelete" :disabled="!delList.length">Mass Delete</el-button>
       <el-table border style="margin: 20px 0" :data="userData" :show-overflow-tooltip="true" ref="tableRef" @selection-change="selectRow">
         <el-table-column type="selection" width="50"></el-table-column>
@@ -74,7 +74,7 @@
               <el-input v-model="userParams.password" type="password" @blur="checkPassword"></el-input>
             </el-col>
           </el-row>
-          <el-button type="primary" @click="confirmAdd" :disabled="!(username && password)">Confirm</el-button>
+          <el-button type="primary" @click="confirmAdd" >Confirm</el-button>
           <el-button @click="cancelAdd">Cancel</el-button>
         </template>
       </el-drawer>
@@ -135,7 +135,15 @@ const handleSizeChange = async () => {
   currentPage.value = 1;
   await getData();
 };
-
+const handleAdd = () => {
+  openDrawer.value = true;
+  userParams.value = {
+    id: '',
+    name: '',
+    username: '',
+    password: '',
+  };
+}
 const cancelAdd = () => {
   openDrawer.value = false;
   userParams.value = {
@@ -150,7 +158,7 @@ const confirmAdd = async () => {
   if (data.code == 200) {
     ElMessage.success(userParams.value.id ? 'edit success' : 'added success');
     openDrawer.value = false;
-    getData();
+    getData(userParams.value.id ? currentPage.value : 1);
   } else {
     ElMessage.error('something went wrong');
   }
