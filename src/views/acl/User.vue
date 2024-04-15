@@ -14,7 +14,8 @@
     <el-card style="margin: 10px 0">
       <el-button type="primary" @click="handleAdd">Add One</el-button>
       <el-button type="warning" @click="massDelete" :disabled="!delList.length">Mass Delete</el-button>
-      <el-table border style="margin: 20px 0" :data="userData" :show-overflow-tooltip="true" ref="tableRef" @selection-change="selectRow">
+      <el-table border style="margin: 20px 0" :data="userData" :show-overflow-tooltip="true" ref="tableRef"
+        @selection-change="selectRow">
         <el-table-column type="selection" width="50"></el-table-column>
         <el-table-column type="index" label="No." width="80" align="center"></el-table-column>
         <el-table-column label="User Id" width="80" prop="id" align="center"></el-table-column>
@@ -25,9 +26,10 @@
         <el-table-column label="Last Update" width="200" prop="updateTime"></el-table-column>
         <el-table-column label="Operation">
           <template #default="{ row }">
-            <el-button type="primary" icon="User" size="small">Assign Role</el-button>
+            <el-button type="primary" icon="User" size="small" @click="assignRole(row)">Assign Role</el-button>
             <el-button type="warning" icon="Edit" size="small" @click="editUser(row)">Edit User</el-button>
-            <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirmDel(row)">
+            <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled"
+              icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirmDel(row)">
               <template #reference>
                 <el-button type="danger" icon="Delete" size="small">Delete</el-button>
               </template>
@@ -37,16 +39,9 @@
       </el-table>
       <div class="demo-pagination-block">
         <div class="demonstration"></div>
-        <el-pagination
-          v-model:current-page="currentPage"
-          v-model:page-size="pageSize"
-          :page-sizes="[5, 10, 15]"
-          :background="true"
-          layout="prev, pager, next, jumper,->,sizes,total"
-          :total="total"
-          @size-change="handleSizeChange"
-          @current-change="getData"
-        />
+        <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" :page-sizes="[5, 10, 15]"
+          :background="true" layout="prev, pager, next, jumper,->,sizes,total" :total="total"
+          @size-change="handleSizeChange" @current-change="getData" />
       </div>
       <el-drawer v-model="openDrawer" :title="userParams.id ? 'Edit a user' : 'Add a user'" direction="rtl" size="30%">
         <template #default>
@@ -79,14 +74,35 @@
         </template>
       </el-drawer>
     </el-card>
+    <!-- assign role -->
+    <el-drawer title="Assign roles" size="30%" v-model="showAssign">
+      <template #default>
+        <el-form label-width="100">
+          <el-form-item label="User Name: ">
+            <el-input disabled v-model="userParams.username"></el-input>
+          </el-form-item>
+          <el-form-item label="Roles: ">
+            <el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" @change="handleCheckAllChange">Check
+              all</el-checkbox>
+            <el-checkbox-group>
+              <el-checkbox v-for="(role,index) in 10" :key="index" :value="index" :label="index">
+                {{index}}
+              </el-checkbox>
+            </el-checkbox-group>
+          </el-form-item>
+        </el-form>
+      </template>
+    </el-drawer>
   </div>
 </template>
 
 <script setup lang="ts">
-import { getAllUsers, modifyUser, massDel, delUser } from '@/api/acl/user';
+import { getAllUsers, modifyUser, massDel, delUser,getRoleList } from '@/api/acl/user';
 import { ref, onMounted } from 'vue';
 import type { userRecordsType, UserListReturnType } from '@/api/acl/type';
 import { ElMessage } from 'element-plus';
+const checkAll = ref(false)
+const isIndeterminate = ref(true)
 const currentPage = ref(1);
 const pageSize = ref(5);
 const total = ref(0);
@@ -103,6 +119,7 @@ const tableRef = ref<any>();
 const delList = ref<userRecordsType[]>([]);
 const username = ref(false); //shit i should use form
 const password = ref(false);
+const showAssign = ref<boolean>(false);
 const checkUsername = () => {
   if (userParams.value.username.length < 5) {
     ElMessage.error('username at least 5');
@@ -204,10 +221,15 @@ const editUser = (row: userRecordsType) => {
   userParams.value = row;
   openDrawer.value = true;
 };
+
+const assignRole = (row: userRecordsType) => {
+  showAssign.value = true;
+  userParams.value = row;
+}
 </script>
 
 <style scoped>
-.demo-pagination-block + .demo-pagination-block {
+.demo-pagination-block+.demo-pagination-block {
   margin-top: 10px;
 }
 
