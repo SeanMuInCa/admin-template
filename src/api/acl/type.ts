@@ -20,3 +20,17 @@ export interface userDataType {
 export interface UserListReturnType extends returnDataTypeCommon {
   data: userDataType;
 }
+
+export interface role{
+  id:number|string,
+  remark?:null,
+  roleName:string,
+  createTime:string,
+  updateTime:string,
+}
+export interface roleListType extends returnDataTypeCommon{
+  data:{
+    allRolesList:role[],
+    assignRoles:role[]
+  }
+}

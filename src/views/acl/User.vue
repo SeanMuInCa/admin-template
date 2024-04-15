@@ -89,7 +89,7 @@
           <el-form-item label="Roles: ">
             <el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" @change="handleCheckAllChange">Check all</el-checkbox>
             <el-checkbox-group v-model="assignedRoleList" @change="handleCheckedRolesChange">
-              <el-checkbox v-for="(role, index) in allRolesList" :key="role.id" :value="role" :label="role">
+              <el-checkbox v-for="role in allRolesList" :key="role.id" :value="role" :label="role">
                 {{ role.roleName }}
               </el-checkbox>
             </el-checkbox-group>
@@ -103,7 +103,7 @@
 <script setup lang="ts">
 import { getAllUsers, modifyUser, massDel, delUser, getRoleList } from '@/api/acl/user';
 import { ref, onMounted } from 'vue';
-import type { userRecordsType, UserListReturnType } from '@/api/acl/type';
+import type { userRecordsType, UserListReturnType,roleListType,role } from '@/api/acl/type';
 import { ElMessage } from 'element-plus';
 const checkAll = ref(false);
 const isIndeterminate = ref(true);
@@ -124,8 +124,8 @@ const delList = ref<userRecordsType[]>([]);
 const username = ref(false); //shit i should use form
 const password = ref(false);
 const showAssign = ref<boolean>(false);
-const allRolesList = ref([]);
-const assignedRoleList = ref([]);
+const allRolesList = ref<role[]>([]);
+const assignedRoleList = ref<role[]>([]);
 const checkUsername = () => {
   if (userParams.value.username.length < 5) {
     ElMessage.error('username at least 5');
@@ -231,7 +231,7 @@ const editUser = (row: userRecordsType) => {
 const assignRole = async (row: userRecordsType) => {
   showAssign.value = true;
   userParams.value = row;
-  const data = await getRoleList(row.id);
+  const data:roleListType = await getRoleList((row.id as number));
   if (data.code == 200) {
     allRolesList.value = data.data.allRolesList;
     assignedRoleList.value = data.data.assignRoles;
@@ -243,7 +243,7 @@ const handleCheckAllChange = (val: boolean) => {
   isIndeterminate.value = false;
 };
 
-const handleCheckedRolesChange = (value) => {
+const handleCheckedRolesChange = (value:role[]) => {
   const checkedCount = value.length;
   checkAll.value = checkedCount === allRolesList.value.length;
   isIndeterminate.value = checkedCount > 0 && checkedCount < allRolesList.value.length;
