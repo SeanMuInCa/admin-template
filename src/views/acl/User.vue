@@ -96,6 +96,10 @@
           </el-form-item>
         </el-form>
       </template>
+      <template #footer>
+        <el-button type="primary">Confirm</el-button>
+        <el-button>Cancel</el-button>
+      </template>
     </el-drawer>
   </div>
 </template>
