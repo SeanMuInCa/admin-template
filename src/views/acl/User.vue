@@ -74,7 +74,7 @@
               <el-input v-model="userParams.password" type="password" @blur="checkPassword"></el-input>
             </el-col>
           </el-row>
-          <el-button type="primary" @click="confirmAdd" >Confirm</el-button>
+          <el-button type="primary" @click="confirmAdd">Confirm</el-button>
           <el-button @click="cancelAdd">Cancel</el-button>
         </template>
       </el-drawer>
@@ -143,7 +143,7 @@ const handleAdd = () => {
     username: '',
     password: '',
   };
-}
+};
 const cancelAdd = () => {
   openDrawer.value = false;
   userParams.value = {
