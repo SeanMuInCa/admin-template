@@ -98,7 +98,7 @@
       </template>
       <template #footer>
         <el-button type="primary">Confirm</el-button>
-        <el-button>Cancel</el-button>
+        <el-button @click="handleCancel">Cancel</el-button>
       </template>
     </el-drawer>
   </div>
@@ -233,13 +233,13 @@ const editUser = (row: userRecordsType) => {
 };
 
 const assignRole = async (row: userRecordsType) => {
-  showAssign.value = true;
   userParams.value = row;
   const data: roleListType = await getRoleList(row.id as number);
   if (data.code == 200) {
     allRolesList.value = data.data.allRolesList;
     assignedRoleList.value = data.data.assignRoles;
   }
+  showAssign.value = true;
 };
 
 const handleCheckAllChange = (val: boolean) => {
@@ -251,6 +251,10 @@ const handleCheckedRolesChange = (value: role[]) => {
   const checkedCount = value.length;
   checkAll.value = checkedCount === allRolesList.value.length;
   isIndeterminate.value = checkedCount > 0 && checkedCount < allRolesList.value.length;
+};
+
+const handleCancel = () => {
+  showAssign.value = false;
 };
 </script>
 
