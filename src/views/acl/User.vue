@@ -210,11 +210,13 @@ const massDelete = async () => {
     const data = await massDel(idList);
     if (data.code == 200) {
       ElMessage.success('deleted!');
+      getData(currentPage.value);
     } else {
       ElMessage.error('something went wrong');
+      getData();
     }
   }
-  getData();
+  
 };
 const selectRow = (data: userRecordsType[]) => {
   delList.value = data;
