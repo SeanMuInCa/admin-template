@@ -105,7 +105,7 @@
 </template>
 
 <script setup lang="ts">
-import { getAllUsers, modifyUser, massDel, delUser, getRoleList,assignToRole } from '@/api/acl/user';
+import { getAllUsers, modifyUser, massDel, delUser, getRoleList, assignToRole } from '@/api/acl/user';
 import { ref, onMounted } from 'vue';
 import type { userRecordsType, UserListReturnType, roleListType, role } from '@/api/acl/type';
 import { ElMessage } from 'element-plus';
@@ -253,20 +253,20 @@ const handleCheckedRolesChange = (value: role[]) => {
   checkAll.value = checkedCount === allRolesList.value.length;
   isIndeterminate.value = checkedCount > 0 && checkedCount < allRolesList.value.length;
 };
-const confirmAssign = async() => {
+const confirmAssign = async () => {
   const assignRoleData = {
-    userId:userParams.value.id,
-    roleIdList:assignedRoleList.value.map(item => item.id)
-  }
+    userId: userParams.value.id,
+    roleIdList: assignedRoleList.value.map((item) => item.id),
+  };
   const data = await assignToRole(assignRoleData);
-  if(data.code == 200){
+  if (data.code == 200) {
     ElMessage.success('assign success');
     showAssign.value = false;
     getData(currentPage.value);
-  }else{
+  } else {
     ElMessage.error('something went wrong');
   }
-}
+};
 const handleCancel = () => {
   showAssign.value = false;
 };

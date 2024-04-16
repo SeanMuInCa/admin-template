@@ -8,7 +8,6 @@ enum API {
   DEL_USER = '/admin/acl/user/remove/',
   GET_ROLE_LIST = '/admin/acl/user/toAssign/',
   ASSIGN_ROLE = '/admin/acl/user/doAssignRole',
-
 }
 
 export const getAllUsers = (page: number, limit: number) => axiosRequest.get<any, UserListReturnType>(API.GET_ALL_USERS + `${page}/${limit}`);
@@ -16,4 +15,4 @@ export const modifyUser = (data: userRecordsType) => (data.id ? axiosRequest.put
 export const massDel = (data: any) => axiosRequest.delete<any, any>(API.MASS_DEL, data);
 export const delUser = (id: number) => axiosRequest.delete<any, any>(API.DEL_USER + id);
 export const getRoleList = (id: number = 1) => axiosRequest.get<any, roleListType>(API.GET_ROLE_LIST + id);
-export const assignToRole = (data:any) => axiosRequest.post<any,any>(API.ASSIGN_ROLE,data);
+export const assignToRole = (data: any) => axiosRequest.post<any, any>(API.ASSIGN_ROLE, data);
