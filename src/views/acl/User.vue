@@ -203,7 +203,9 @@ const reset = () => {
 };
 
 const massDelete = async () => {
-  let idList = delList.value.map((item: userRecordsType) => item.id);
+  let idList:number[] = delList.value.map((item: userRecordsType) => {
+    return (item.id as number)
+  });
   if (idList.length > 0) {
     const data = await massDel(idList);
     if (data.code == 200) {
