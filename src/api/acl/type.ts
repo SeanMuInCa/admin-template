@@ -22,7 +22,7 @@ export interface UserListReturnType extends returnDataTypeCommon {
 }
 
 export interface role {
-  id: number | string;
+  id?: number | string;
   remark?: null;
   roleName: string;
   createTime: string;

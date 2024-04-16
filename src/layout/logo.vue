@@ -2,7 +2,7 @@
   <div class="logo_container">
     <h1>
       <img src="../assets/images/logo.png" alt="" />
-      <p v-show="!settingStore.isFold">Raina的家</p>
+      <p v-show="!settingStore.isFold">Raina's</p>
     </h1>
   </div>
 </template>
