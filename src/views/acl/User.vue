@@ -109,7 +109,7 @@ import { getAllUsers, modifyUser, massDel, delUser, getRoleList, assignToRole } 
 import { ref, onMounted } from 'vue';
 import type { userRecordsType, UserListReturnType, roleListType, role } from '@/api/acl/type';
 import { ElMessage } from 'element-plus';
-import { fa } from 'element-plus/es/locale/index.mjs';
+
 const checkAll = ref(false);
 const isIndeterminate = ref(true);
 const currentPage = ref(1);
@@ -256,7 +256,7 @@ const handleCheckedRolesChange = (value: role[]) => {
 const confirmAssign = async () => {
   const assignRoleData = {
     userId: userParams.value.id,
-    roleIdList: assignedRoleList.value.map((item) => item.id),
+    roleIdList: assignedRoleList.value.map((item:role) => item.id),
   };
   const data = await assignToRole(assignRoleData);
   if (data.code == 200) {
