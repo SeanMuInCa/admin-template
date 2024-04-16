@@ -6,7 +6,7 @@
           <el-input placeholder="input a user's name to search" style="width: 300px" v-model="nameToSearch"></el-input>
         </el-form-item>
         <el-form-item style="margin: auto 10px">
-          <el-button type="primary" @click="searchName">Search</el-button>
+          <el-button type="primary" @click="searchName" :disabled="!nameToSearch.trim().length">Search</el-button>
           <el-button @click="reset">Reset</el-button>
         </el-form-item>
       </el-form>
@@ -195,6 +195,7 @@ const confirmAdd = async () => {
 const searchName = () => {
   if (nameToSearch.value.trim()) {
     userData.value = userData.value.filter((item: userRecordsType) => item.name.includes(nameToSearch.value));
+    nameToSearch.value = '';
   } else getData();
 };
 const reset = () => {
