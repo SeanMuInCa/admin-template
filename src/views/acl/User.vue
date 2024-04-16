@@ -256,7 +256,7 @@ const handleCheckedRolesChange = (value: role[]) => {
 const confirmAssign = async () => {
   const assignRoleData = {
     userId: userParams.value.id,
-    roleIdList: assignedRoleList.value.map((item:role) => item.id),
+    roleIdList: assignedRoleList.value.map((item: role) => item.id),
   };
   const data = await assignToRole(assignRoleData);
   if (data.code == 200) {
