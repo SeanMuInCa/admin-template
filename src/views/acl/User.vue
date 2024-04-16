@@ -216,7 +216,6 @@ const massDelete = async () => {
       getData();
     }
   }
-  
 };
 const selectRow = (data: userRecordsType[]) => {
   delList.value = data;
