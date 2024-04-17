@@ -26,7 +26,7 @@
         >
         <el-table-column label="operation">
           <template #default="{ row }">
-            <el-button type="primary" icon="User" size="small">Assign Permission</el-button>
+            <el-button type="primary" icon="User" size="small" @click="assignPermit(row)">Assign Permission</el-button>
             <el-button type="warning" icon="Edit" size="small" @click="editRole(row)">Edit Role</el-button>
             <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirmDel(row)">
               <template #reference>
@@ -64,14 +64,25 @@
         </div>
       </template>
     </el-dialog>
+    <el-drawer title="Assign Permission" size="30%" v-model="showAssign">
+      <template #default>
+        <el-tree :data="allMenu" default-expand-all show-checkbox node-key="id" :props="defaultProps" ref="tree">
+        </el-tree>
+      </template>
+      <template #footer>
+        <el-button type="primary" >Confirm</el-button>
+        <el-button @click="showAssign = false">Cancel</el-button>
+      </template>
+    </el-drawer>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, reactive } from 'vue';
-import { getAllRoles, delRole, saveRole } from '@/api/acl/role';
+import { getAllRoles, delRole, saveRole,getRoleMenu,getAllMenu } from '@/api/acl/role';
 import { getRoleReturnType, role } from '@/api/acl/type';
 import { ElMessage } from 'element-plus';
+const tree = ref();
 const roleToSearch = ref<string>('');
 const currentPage = ref<number>(1);
 const pageSize = ref<number>(5);
@@ -79,18 +90,20 @@ const total = ref<number>(0);
 const roleRecords = ref<role[]>([]);
 const centerDialogVisible = ref(false);
 const searchMode = ref(false);
+const showAssign = ref(false);
 const roleParams = reactive({
   id: '',
   roleName: '',
 });
 const formRef = ref();
-
+const allMenu = ref([]);
+const roleMenu = ref([]);
 const handleCurrectChange = async () => {
   if (searchMode.value) {
     const data = await getAllRoles(currentPage.value, pageSize.value, roleToSearch.value);
     roleRecords.value = data.data.records;
   } else {
-    getData();
+    getData(currentPage.value);
   }
 };
 
@@ -149,7 +162,15 @@ const reset = () => {
 
 onMounted(() => {
   getData();
+  getMenu();
 });
+
+const getMenu = async() => {
+  const data = await getAllMenu();
+  if(data.code == 200){
+    allMenu.value = data.data;
+  }
+}
 
 const getData = async (pager = 1) => {
   currentPage.value = pager;
@@ -175,7 +196,7 @@ const confirmDel = async (row: role) => {
   }
 };
 
-const validatorRoleName = (rule: any, value: any, callback: any) => {
+const validatorRoleName = (_rule: any, value: any, callback: any) => {
   if (value.trim().length >= 2) {
     callback();
   } else {
@@ -187,6 +208,36 @@ const validatorRoleName = (rule: any, value: any, callback: any) => {
 const rules = {
   roleName: [{ required: true, trigger: 'blur', validator: validatorRoleName }],
 };
+
+
+const assignPermit = async(row:role) => {
+  roleMenu.value = [];
+  showAssign.value = true;
+  const data = await getRoleMenu(row.id as number);
+  console.log(data);
+  // roleMenu.value = data.data[0].children.map(item => item.id);
+  getId(data.data);
+
+}
+
+const getId = (arr) => {
+  for (let index = 0; index < arr.length; index++) {
+    const element = arr[index];
+    if(element.children.length){
+      getId(element.children)
+    }else{
+      if(element.select === true){
+        roleMenu.value.push(element.id);
+      }
+    }
+  }
+}
+
+const defaultProps = {
+  children: 'children',
+  label: 'name',
+}
+
 </script>
 
 <style scoped>
