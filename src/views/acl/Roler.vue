@@ -28,8 +28,7 @@
           <template #default="{ row }">
             <el-button type="primary" icon="User" size="small">Assign Role</el-button>
             <el-button type="warning" icon="Edit" size="small" @click="editRole(row)">Edit Role</el-button>
-            <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled"
-              icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirmDel(row)">
+            <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirmDel(row)">
               <template #reference>
                 <el-button type="danger" icon="Delete" size="small">Delete</el-button>
               </template>
@@ -40,13 +39,19 @@
       </el-table>
       <div class="demo-pagination-block">
         <div class="demonstration"></div>
-        <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" :page-sizes="[5, 10, 15]"
-          :background="true" layout="prev, pager, next, jumper,->,sizes,total" :total="total"
-          @size-change="handleSizeChange" @current-change="handleCurrectChange" />
+        <el-pagination
+          v-model:current-page="currentPage"
+          v-model:page-size="pageSize"
+          :page-sizes="[5, 10, 15]"
+          :background="true"
+          layout="prev, pager, next, jumper,->,sizes,total"
+          :total="total"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrectChange"
+        />
       </div>
     </el-card>
-    <el-dialog v-model="centerDialogVisible" :title="roleParams.roleName ? 'edit a role' : 'add a role'" width="500"
-      align-center>
+    <el-dialog v-model="centerDialogVisible" :title="roleParams.roleName ? 'edit a role' : 'add a role'" width="500" align-center>
       <el-form inline>
         <el-form-item label="Role Name">
           <el-input v-model="roleParams.roleName"></el-input>
@@ -82,12 +87,11 @@ const roleParams = ref({
 const handleCurrectChange = async () => {
   if (searchMode.value) {
     const data = await getAllRoles(currentPage.value, pageSize.value, roleToSearch.value);
-    roleRecords.value = data.data.records
+    roleRecords.value = data.data.records;
   } else {
     getData();
   }
-
-}
+};
 
 const handleAdd = () => {
   roleParams.value.roleName = '';
@@ -109,21 +113,20 @@ const handleSizeChange = async () => {
   if (searchMode.value) {
     const data = await getAllRoles(1, pageSize.value, roleToSearch.value);
     if (data.code == 200) {
-      roleRecords.value = data.data.records
+      roleRecords.value = data.data.records;
     }
   } else {
     currentPage.value = 1;
     await getData();
   }
-
 };
 const searchRole = async () => {
   searchMode.value = true;
   if (roleToSearch.value.trim()) {
     const data = await getAllRoles(1, pageSize.value, roleToSearch.value);
     if (data.code == 200) {
-      total.value = data.data.total
-      roleRecords.value = data.data.records
+      total.value = data.data.total;
+      roleRecords.value = data.data.records;
     }
   } else getData();
 };
@@ -162,7 +165,7 @@ const confirmDel = async (row: role) => {
 </script>
 
 <style scoped>
-.demo-pagination-block+.demo-pagination-block {
+.demo-pagination-block + .demo-pagination-block {
   margin-top: 10px;
 }
 
