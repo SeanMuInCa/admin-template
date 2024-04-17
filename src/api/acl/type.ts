@@ -35,9 +35,9 @@ export interface roleListType extends returnDataTypeCommon {
   };
 }
 
-export interface getRoleReturnType extends returnDataTypeCommon{
+export interface getRoleReturnType extends returnDataTypeCommon {
   data: {
-    records: role[],
-    total:number
-  }
+    records: role[];
+    total: number;
+  };
 }
