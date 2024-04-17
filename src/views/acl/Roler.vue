@@ -66,7 +66,7 @@
     </el-dialog>
     <el-drawer title="Assign Permission" size="30%" v-model="showAssign">
       <template #default>
-        <el-tree :data="allMenu" default-expand-all show-checkbox node-key="id" :props="defaultProps" ref="tree"></el-tree>
+        <el-tree :data="allMenu" default-expand-all show-checkbox node-key="id" :props="defaultProps" ref="tree" :default-checked-keys="roleMenu"></el-tree>
       </template>
       <template #footer>
         <el-button type="primary">Confirm</el-button>
@@ -79,7 +79,7 @@
 <script setup lang="ts">
 import { ref, onMounted, reactive } from 'vue';
 import { getAllRoles, delRole, saveRole, getRoleMenu, getAllMenu } from '@/api/acl/role';
-import { getRoleReturnType, role } from '@/api/acl/type';
+import { getRoleReturnType, role,permissionReturnType,permit } from '@/api/acl/type';
 import { ElMessage } from 'element-plus';
 const tree = ref();
 const roleToSearch = ref<string>('');
@@ -95,8 +95,8 @@ const roleParams = reactive({
   roleName: '',
 });
 const formRef = ref();
-const allMenu = ref([]);
-const roleMenu = ref([]);
+const allMenu = ref<permit[]>([]);
+const roleMenu = ref<number[]>([]);
 const handleCurrectChange = async () => {
   if (searchMode.value) {
     const data = await getAllRoles(currentPage.value, pageSize.value, roleToSearch.value);
@@ -210,22 +210,24 @@ const rules = {
 
 const assignPermit = async (row: role) => {
   roleMenu.value = [];
-  showAssign.value = true;
+  console.log(roleMenu.value);
+  
   const data = await getRoleMenu(row.id as number);
   console.log(data);
   // roleMenu.value = data.data[0].children.map(item => item.id);
   getId(data.data);
+  showAssign.value = true;
 };
 
-const getId = (arr) => {
+const getId = (arr:permit[]) => {
   for (let index = 0; index < arr.length; index++) {
     const element = arr[index];
-    if (element.children.length) {
+    if (!element.select) {
       getId(element.children);
     } else {
-      if (element.select === true) {
+      
         roleMenu.value.push(element.id);
-      }
+      
     }
   }
 };

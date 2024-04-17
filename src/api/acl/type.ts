@@ -41,3 +41,14 @@ export interface getRoleReturnType extends returnDataTypeCommon {
     total: number;
   };
 }
+
+export interface permit {
+  children:permit[],
+  id:number,
+  level:number,
+  name:string,
+  select:boolean
+}
+export interface permissionReturnType extends returnDataTypeCommon{
+  data: permit[];
+}
