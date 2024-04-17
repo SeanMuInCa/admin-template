@@ -79,7 +79,7 @@
 <script setup lang="ts">
 import { ref, onMounted, reactive } from 'vue';
 import { getAllRoles, delRole, saveRole, getRoleMenu, getAllMenu } from '@/api/acl/role';
-import { getRoleReturnType, role,permissionReturnType,permit } from '@/api/acl/type';
+import { getRoleReturnType, role, permissionReturnType, permit } from '@/api/acl/type';
 import { ElMessage } from 'element-plus';
 const tree = ref();
 const roleToSearch = ref<string>('');
@@ -211,7 +211,7 @@ const rules = {
 const assignPermit = async (row: role) => {
   roleMenu.value = [];
   console.log(roleMenu.value);
-  
+
   const data = await getRoleMenu(row.id as number);
   console.log(data);
   // roleMenu.value = data.data[0].children.map(item => item.id);
@@ -219,15 +219,13 @@ const assignPermit = async (row: role) => {
   showAssign.value = true;
 };
 
-const getId = (arr:permit[]) => {
+const getId = (arr: permit[]) => {
   for (let index = 0; index < arr.length; index++) {
     const element = arr[index];
     if (!element.select) {
       getId(element.children);
     } else {
-      
-        roleMenu.value.push(element.id);
-      
+      roleMenu.value.push(element.id);
     }
   }
 };

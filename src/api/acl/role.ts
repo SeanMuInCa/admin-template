@@ -1,5 +1,5 @@
 import axiosRequest from '@/utils/request';
-import { getRoleReturnType,permissionReturnType } from './type';
+import { getRoleReturnType, permissionReturnType } from './type';
 enum API {
   GET_ALL_ROLES = '/admin/acl/role/',
   DELETE_ROLE = '/admin/acl/role/remove/',
@@ -13,4 +13,4 @@ export const getAllRoles = (page: number, limit: number, roleName: string = '') 
 export const delRole = (id: number) => axiosRequest.delete<any, any>(API.DELETE_ROLE + id);
 export const saveRole = (data: any) => (data.id ? axiosRequest.put<any, any>(API.UPDATE_ROLE, data) : axiosRequest.post<any, any>(API.SAVE_ROLE, data));
 export const getRoleMenu = (id: number) => axiosRequest.get<any, permissionReturnType>(API.GET_ROLE_MENU + id);
-export const getAllMenu = () => axiosRequest.get<any,permissionReturnType>(API.GET_ALL_MENU);
+export const getAllMenu = () => axiosRequest.get<any, permissionReturnType>(API.GET_ALL_MENU);
