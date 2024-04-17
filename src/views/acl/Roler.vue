@@ -66,11 +66,10 @@
     </el-dialog>
     <el-drawer title="Assign Permission" size="30%" v-model="showAssign">
       <template #default>
-        <el-tree :data="allMenu" default-expand-all show-checkbox node-key="id" :props="defaultProps" ref="tree">
-        </el-tree>
+        <el-tree :data="allMenu" default-expand-all show-checkbox node-key="id" :props="defaultProps" ref="tree"></el-tree>
       </template>
       <template #footer>
-        <el-button type="primary" >Confirm</el-button>
+        <el-button type="primary">Confirm</el-button>
         <el-button @click="showAssign = false">Cancel</el-button>
       </template>
     </el-drawer>
@@ -79,7 +78,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, reactive } from 'vue';
-import { getAllRoles, delRole, saveRole,getRoleMenu,getAllMenu } from '@/api/acl/role';
+import { getAllRoles, delRole, saveRole, getRoleMenu, getAllMenu } from '@/api/acl/role';
 import { getRoleReturnType, role } from '@/api/acl/type';
 import { ElMessage } from 'element-plus';
 const tree = ref();
@@ -165,12 +164,12 @@ onMounted(() => {
   getMenu();
 });
 
-const getMenu = async() => {
+const getMenu = async () => {
   const data = await getAllMenu();
-  if(data.code == 200){
+  if (data.code == 200) {
     allMenu.value = data.data;
   }
-}
+};
 
 const getData = async (pager = 1) => {
   currentPage.value = pager;
@@ -209,35 +208,32 @@ const rules = {
   roleName: [{ required: true, trigger: 'blur', validator: validatorRoleName }],
 };
 
-
-const assignPermit = async(row:role) => {
+const assignPermit = async (row: role) => {
   roleMenu.value = [];
   showAssign.value = true;
   const data = await getRoleMenu(row.id as number);
   console.log(data);
   // roleMenu.value = data.data[0].children.map(item => item.id);
   getId(data.data);
-
-}
+};
 
 const getId = (arr) => {
   for (let index = 0; index < arr.length; index++) {
     const element = arr[index];
-    if(element.children.length){
-      getId(element.children)
-    }else{
-      if(element.select === true){
+    if (element.children.length) {
+      getId(element.children);
+    } else {
+      if (element.select === true) {
         roleMenu.value.push(element.id);
       }
     }
   }
-}
+};
 
 const defaultProps = {
   children: 'children',
   label: 'name',
-}
-
+};
 </script>
 
 <style scoped>
