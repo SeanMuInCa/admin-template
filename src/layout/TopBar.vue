@@ -39,7 +39,6 @@
 
 <script setup lang="ts">
 import { ArrowRight, FullScreen, Refresh, Setting } from '@element-plus/icons-vue';
-import { ref, toRef } from 'vue';
 import useSettingStore from '@/store/modules/setting';
 import useUserStore from '@/store/modules/user';
 import { router } from '@/router';

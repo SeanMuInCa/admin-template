@@ -26,7 +26,7 @@
         >
         <el-table-column label="operation">
           <template #default="{ row }">
-            <el-button type="primary" icon="User" size="small">Assign Role</el-button>
+            <el-button type="primary" icon="User" size="small">Assign Permission</el-button>
             <el-button type="warning" icon="Edit" size="small" @click="editRole(row)">Edit Role</el-button>
             <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirmDel(row)">
               <template #reference>
@@ -54,7 +54,7 @@
     <el-dialog v-model="centerDialogVisible" :title="roleParams.roleName ? 'edit a role' : 'add a role'" width="500" align-center>
       <el-form inline>
         <el-form-item label="Role Name">
-          <el-input v-model="roleParams.roleName"></el-input>
+          <el-input v-model="roleParams.roleName" placeholder="new role name"></el-input>
         </el-form-item>
       </el-form>
       <template #footer>
