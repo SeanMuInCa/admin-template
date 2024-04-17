@@ -34,3 +34,10 @@ export interface roleListType extends returnDataTypeCommon {
     assignRoles: role[];
   };
 }
+
+export interface getRoleReturnType extends returnDataTypeCommon{
+  data: {
+    records: role[],
+    total:number
+  }
+}
