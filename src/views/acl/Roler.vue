@@ -52,8 +52,8 @@
       </div>
     </el-card>
     <el-dialog v-model="centerDialogVisible" :title="roleParams.roleName ? 'edit a role' : 'add a role'" width="500" align-center>
-      <el-form inline>
-        <el-form-item label="Role Name">
+      <el-form inline :model="roleParams" :rules="rules" ref="formRef">
+        <el-form-item label="Role Name" prop="roleName">
           <el-input v-model="roleParams.roleName" placeholder="new role name"></el-input>
         </el-form-item>
       </el-form>
@@ -68,7 +68,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted,reactive } from 'vue';
 import { getAllRoles, delRole, saveRole } from '@/api/acl/role';
 import { getRoleReturnType, role } from '@/api/acl/type';
 import { ElMessage } from 'element-plus';
@@ -79,10 +79,11 @@ const total = ref<number>(0);
 const roleRecords = ref<role[]>([]);
 const centerDialogVisible = ref(false);
 const searchMode = ref(false);
-const roleParams = ref({
+const roleParams = reactive({
   id: '',
   roleName: '',
 });
+const formRef = ref();
 
 const handleCurrectChange = async () => {
   if (searchMode.value) {
@@ -94,20 +95,30 @@ const handleCurrectChange = async () => {
 };
 
 const handleAdd = () => {
-  roleParams.value.roleName = '';
+  Object.assign(roleParams, {
+  id: '',
+  roleName: '',
+})
   centerDialogVisible.value = true;
+  formRef.value?.clearValidate('roleName');
 };
 const confirmAdd = async () => {
-  if (roleParams.value.roleName.trim()) {
-    const data = await saveRole(roleParams.value);
+  formRef.value.validate().then(async() => {
+    if (roleParams.roleName.trim()) {
+    const data = await saveRole(roleParams);
     if (data.code == 200) {
-      ElMessage.success(roleParams.value.id ? 'updated' : 'added');
+      ElMessage.success(roleParams.id ? 'updated' : 'added');
       centerDialogVisible.value = false;
       getData();
     } else {
       ElMessage.error('something went wrong');
     }
   }
+  }).catch((err:any) => {
+    console.log(err);
+    
+  })
+  
 };
 const handleSizeChange = async () => {
   if (searchMode.value) {
@@ -149,7 +160,7 @@ const getData = async (pager = 1) => {
 };
 
 const editRole = (row: role) => {
-  Object.assign(roleParams.value, row);
+  Object.assign(roleParams, row);
   centerDialogVisible.value = true;
 };
 
@@ -162,6 +173,21 @@ const confirmDel = async (row: role) => {
     ElMessage.error('something went wrong');
   }
 };
+
+const validatorRoleName = (rule:any, value:any, callback:any) => {
+  if(value.trim().length >= 2){
+    callback();
+  }else{
+    callback(new Error('role name should at least two characters'))
+  }
+}
+
+//校验规则，职位名不能小于两个字符
+const rules = {
+  roleName:[
+    {required: true, trigger: 'blur', validator:validatorRoleName}
+  ]
+}
 </script>
 
 <style scoped>
