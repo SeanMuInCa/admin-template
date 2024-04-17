@@ -68,7 +68,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted,reactive } from 'vue';
+import { ref, onMounted, reactive } from 'vue';
 import { getAllRoles, delRole, saveRole } from '@/api/acl/role';
 import { getRoleReturnType, role } from '@/api/acl/type';
 import { ElMessage } from 'element-plus';
@@ -96,29 +96,30 @@ const handleCurrectChange = async () => {
 
 const handleAdd = () => {
   Object.assign(roleParams, {
-  id: '',
-  roleName: '',
-})
+    id: '',
+    roleName: '',
+  });
   centerDialogVisible.value = true;
   formRef.value?.clearValidate('roleName');
 };
 const confirmAdd = async () => {
-  formRef.value.validate().then(async() => {
-    if (roleParams.roleName.trim()) {
-    const data = await saveRole(roleParams);
-    if (data.code == 200) {
-      ElMessage.success(roleParams.id ? 'updated' : 'added');
-      centerDialogVisible.value = false;
-      getData();
-    } else {
-      ElMessage.error('something went wrong');
-    }
-  }
-  }).catch((err:any) => {
-    console.log(err);
-    
-  })
-  
+  formRef.value
+    .validate()
+    .then(async () => {
+      if (roleParams.roleName.trim()) {
+        const data = await saveRole(roleParams);
+        if (data.code == 200) {
+          ElMessage.success(roleParams.id ? 'updated' : 'added');
+          centerDialogVisible.value = false;
+          getData();
+        } else {
+          ElMessage.error('something went wrong');
+        }
+      }
+    })
+    .catch((err: any) => {
+      console.log(err);
+    });
 };
 const handleSizeChange = async () => {
   if (searchMode.value) {
@@ -174,20 +175,18 @@ const confirmDel = async (row: role) => {
   }
 };
 
-const validatorRoleName = (rule:any, value:any, callback:any) => {
-  if(value.trim().length >= 2){
+const validatorRoleName = (rule: any, value: any, callback: any) => {
+  if (value.trim().length >= 2) {
     callback();
-  }else{
-    callback(new Error('role name should at least two characters'))
+  } else {
+    callback(new Error('role name should at least two characters'));
   }
-}
+};
 
 //校验规则，职位名不能小于两个字符
 const rules = {
-  roleName:[
-    {required: true, trigger: 'blur', validator:validatorRoleName}
-  ]
-}
+  roleName: [{ required: true, trigger: 'blur', validator: validatorRoleName }],
+};
 </script>
 
 <style scoped>
