@@ -100,7 +100,7 @@ const handleAdd = () => {
     roleName: '',
   });
   centerDialogVisible.value = true;
-  formRef.value?.clearValidate('roleName');//也可以用nextTick
+  formRef.value?.clearValidate('roleName'); //也可以用nextTick
 };
 const confirmAdd = async () => {
   formRef.value
