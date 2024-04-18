@@ -78,7 +78,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, reactive } from 'vue';
-import { getAllRoles, delRole, saveRole, getRoleMenu, getAllMenu } from '@/api/acl/role';
+import { getAllRoles, delRole, saveRole, getRoleMenu } from '@/api/acl/role';
 import { getRoleReturnType, role, permissionReturnType, permit } from '@/api/acl/type';
 import { ElMessage } from 'element-plus';
 const tree = ref();
@@ -161,15 +161,8 @@ const reset = () => {
 
 onMounted(() => {
   getData();
-  getMenu();
 });
 
-const getMenu = async () => {
-  const data: permissionReturnType = await getAllMenu();
-  if (data.code == 200) {
-    allMenu.value = data.data;
-  }
-};
 
 const getData = async (pager = 1) => {
   currentPage.value = pager;
@@ -209,14 +202,10 @@ const rules = {
 };
 
 const assignPermit = async (row: role) => {
-  console.log(row);
-
   const data: permissionReturnType = await getRoleMenu(row.id as number);
   if (data.code == 200) {
-    console.log(allMenu.value);
-
-    roleMenu.value = getId(allMenu.value, []);
-    console.log(roleMenu.value);
+    allMenu.value = data.data;
+    roleMenu.value = getId(data.data, []);
     // roleMenu.value = [41,55];
     showAssign.value = true;
   }
