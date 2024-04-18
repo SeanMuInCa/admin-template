@@ -163,7 +163,6 @@ onMounted(() => {
   getData();
 });
 
-
 const getData = async (pager = 1) => {
   currentPage.value = pager;
   const data: getRoleReturnType = await getAllRoles(currentPage.value, pageSize.value);
