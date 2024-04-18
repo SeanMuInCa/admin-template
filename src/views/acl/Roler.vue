@@ -28,8 +28,7 @@
           <template #default="{ row }">
             <el-button type="primary" icon="User" size="small" @click="assignPermit(row)">Assign Permission</el-button>
             <el-button type="warning" icon="Edit" size="small" @click="editRole(row)">Edit Role</el-button>
-            <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled"
-              icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirmDel(row)">
+            <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirmDel(row)">
               <template #reference>
                 <el-button type="danger" icon="Delete" size="small">Delete</el-button>
               </template>
@@ -40,13 +39,19 @@
       </el-table>
       <div class="demo-pagination-block">
         <div class="demonstration"></div>
-        <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" :page-sizes="[5, 10, 15]"
-          :background="true" layout="prev, pager, next, jumper,->,sizes,total" :total="total"
-          @size-change="handleSizeChange" @current-change="handleCurrectChange" />
+        <el-pagination
+          v-model:current-page="currentPage"
+          v-model:page-size="pageSize"
+          :page-sizes="[5, 10, 15]"
+          :background="true"
+          layout="prev, pager, next, jumper,->,sizes,total"
+          :total="total"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrectChange"
+        />
       </div>
     </el-card>
-    <el-dialog v-model="centerDialogVisible" :title="roleParams.roleName ? 'edit a role' : 'add a role'" width="500"
-      align-center>
+    <el-dialog v-model="centerDialogVisible" :title="roleParams.roleName ? 'edit a role' : 'add a role'" width="500" align-center>
       <el-form inline :model="roleParams" :rules="rules" ref="formRef">
         <el-form-item label="Role Name" prop="roleName">
           <el-input v-model="roleParams.roleName" placeholder="new role name"></el-input>
@@ -61,8 +66,7 @@
     </el-dialog>
     <el-drawer title="Assign Permission" size="30%" v-model="showAssign">
       <template #default>
-        <el-tree :data="allMenu" default-expand-all show-checkbox node-key="id" :props="defaultProps" ref="tree"
-          :default-checked-keys="roleMenu" @check-change="checked"></el-tree>
+        <el-tree :data="allMenu" default-expand-all show-checkbox node-key="id" :props="defaultProps" ref="tree" :default-checked-keys="roleMenu" @check-change="checked"></el-tree>
       </template>
       <template #footer>
         <el-button type="primary">Confirm</el-button>
@@ -206,35 +210,33 @@ const rules = {
 
 const assignPermit = async (row: role) => {
   console.log(row);
-  
+
   const data: permissionReturnType = await getRoleMenu(row.id as number);
   if (data.code == 200) {
     console.log(allMenu.value);
-    
+
     roleMenu.value = getId(allMenu.value, []);
     console.log(roleMenu.value);
     // roleMenu.value = [41,55];
     showAssign.value = true;
   }
-
 };
 
 const getId = (arr: permit[], initArr: number[]) => {
-  arr.forEach(item => {
+  arr.forEach((item) => {
     if (item.select && item.level == 4) {
       initArr.push(item.id);
     }
     if (item.children && item.children.length > 0) {
       getId(item.children, initArr);
     }
-  })
+  });
   return initArr;
 };
 
-const checked = (a,b,c) => {
-  console.log(a,b,c);
-  
-}
+const checked = (a, b, c) => {
+  console.log(a, b, c);
+};
 
 const defaultProps = {
   children: 'children',
@@ -243,7 +245,7 @@ const defaultProps = {
 </script>
 
 <style scoped>
-.demo-pagination-block+.demo-pagination-block {
+.demo-pagination-block + .demo-pagination-block {
   margin-top: 10px;
 }
 
