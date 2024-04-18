@@ -78,7 +78,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, reactive } from 'vue';
-import { getAllRoles, delRole, saveRole, getRoleMenu } from '@/api/acl/role';
+import { getAllRoles, delRole, saveRole, getRoleMenu,reqSetPermisstion } from '@/api/acl/role';
 import { getRoleReturnType, role, permissionReturnType, permit } from '@/api/acl/type';
 import { ElMessage } from 'element-plus';
 const tree = ref();
