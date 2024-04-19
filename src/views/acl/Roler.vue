@@ -69,7 +69,7 @@
         <el-tree :data="allMenu" default-expand-all show-checkbox node-key="id" :props="defaultProps" ref="tree" :default-checked-keys="roleMenu" @check-change="checked"></el-tree>
       </template>
       <template #footer>
-        <el-button type="primary">Confirm</el-button>
+        <el-button type="primary" @click="confirmAssign">Confirm</el-button>
         <el-button @click="showAssign = false">Cancel</el-button>
       </template>
     </el-drawer>
@@ -201,6 +201,7 @@ const rules = {
 };
 
 const assignPermit = async (row: role) => {
+  Object.assign(roleParams, row);
   const data: permissionReturnType = await getRoleMenu(row.id as number);
   if (data.code == 200) {
     allMenu.value = data.data;
@@ -222,14 +223,26 @@ const getId = (arr: permit[], initArr: number[]) => {
   return initArr;
 };
 
-const checked = (a, b, c) => {
-  console.log(a, b, c);
+const checked = (item:permit) => {
+  if(item.level == 4){
+    roleMenu.value.push(item.id);
+  }
 };
 
 const defaultProps = {
   children: 'children',
   label: 'name',
 };
+
+const confirmAssign = async() => {
+  const data:any = await reqSetPermisstion(parseInt(roleParams.id), roleMenu.value);
+  if(data.code == 200){
+    ElMessage.success('set!');
+    showAssign.value = false;
+  }else{
+    ElMessage.error('something went wrong');
+  }
+}
 </script>
 
 <style scoped>
