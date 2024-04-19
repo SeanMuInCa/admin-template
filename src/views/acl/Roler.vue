@@ -233,7 +233,7 @@ const confirmAssign = async () => {
   const arr = tree.value.getCheckedKeys();
   const arr1 = tree.value.getHalfCheckedKeys();
   const permissionId = arr.concat(arr1);
-  const data: any = await reqSetPermisstion(parseInt(roleParams.id),permissionId);
+  const data: any = await reqSetPermisstion(parseInt(roleParams.id), permissionId);
   if (data.code == 200) {
     ElMessage.success('set!');
     showAssign.value = false;
