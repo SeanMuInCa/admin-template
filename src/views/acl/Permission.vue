@@ -2,7 +2,7 @@
   <div>
     <el-table :data="allMenu" row-key="id">
       <el-table-column label="Name" prop="name"></el-table-column>
-      <el-table-column label="Permission" prop="level"></el-table-column>
+      <el-table-column label="Permission" prop="code"></el-table-column>
       <el-table-column label="Last updated" prop="updateTime"></el-table-column>
       <el-table-column label="Operation">
         <template #default="{ row }">
@@ -22,13 +22,14 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { getAllMenu } from '@/api/acl/permission';
-const allMenu = ref([]);
+import {permit, permissionReturnType} from '@/api/acl/type';
+const allMenu = ref<permit[]>([]);
 onMounted(() => {
   getData();
 });
 
 const getData = async () => {
-  const data = await getAllMenu();
+  const data:permissionReturnType = await getAllMenu();
   if (data.code == 200) {
     console.log(data);
     allMenu.value = data.data;
