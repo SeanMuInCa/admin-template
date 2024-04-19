@@ -47,10 +47,11 @@ export interface permit {
   id?: number | string;
   level: number | string;
   name: string;
-  select: boolean;
+  select?: boolean;
   updateTime?: string;
   code: string;
   type: string | number;
+  pid:string|number;
 }
 export interface permissionReturnType extends returnDataTypeCommon {
   data: permit[];
