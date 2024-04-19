@@ -44,11 +44,13 @@ export interface getRoleReturnType extends returnDataTypeCommon {
 
 export interface permit {
   children?: permit[];
-  id?: number;
-  level: number;
+  id?: number | string;
+  level: number|string;
   name: string;
   select: boolean;
-  updateTime: string;
+  updateTime?: string;
+  code:string;
+  type:string|number;
 }
 export interface permissionReturnType extends returnDataTypeCommon {
   data: permit[];
