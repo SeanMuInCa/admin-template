@@ -48,7 +48,7 @@ export interface permit {
   level: number;
   name: string;
   select: boolean;
-  updateTime:string,
+  updateTime: string;
 }
 export interface permissionReturnType extends returnDataTypeCommon {
   data: permit[];

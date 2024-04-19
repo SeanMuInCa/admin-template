@@ -22,14 +22,14 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { getAllMenu } from '@/api/acl/permission';
-import {permit, permissionReturnType} from '@/api/acl/type';
+import { permit, permissionReturnType } from '@/api/acl/type';
 const allMenu = ref<permit[]>([]);
 onMounted(() => {
   getData();
 });
 
 const getData = async () => {
-  const data:permissionReturnType = await getAllMenu();
+  const data: permissionReturnType = await getAllMenu();
   if (data.code == 200) {
     console.log(data);
     allMenu.value = data.data;
