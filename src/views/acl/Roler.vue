@@ -237,6 +237,7 @@ const confirmAssign = async () => {
   if (data.code == 200) {
     ElMessage.success('set!');
     showAssign.value = false;
+    window.location.reload();
   } else {
     ElMessage.error('something went wrong');
   }
