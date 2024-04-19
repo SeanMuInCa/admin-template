@@ -230,7 +230,10 @@ const defaultProps = {
 };
 
 const confirmAssign = async () => {
-  const data: any = await reqSetPermisstion(parseInt(roleParams.id), tree.value.getCheckedKeys());
+  const arr = tree.value.getCheckedKeys();
+  const arr1 = tree.value.getHalfCheckedKeys();
+  const permissionId = arr.concat(arr1);
+  const data: any = await reqSetPermisstion(parseInt(roleParams.id),permissionId);
   if (data.code == 200) {
     ElMessage.success('set!');
     showAssign.value = false;
