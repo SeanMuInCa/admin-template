@@ -66,7 +66,7 @@
     </el-dialog>
     <el-drawer title="Assign Permission" size="30%" v-model="showAssign">
       <template #default>
-        <el-tree :data="allMenu" default-expand-all show-checkbox node-key="id" :props="defaultProps" ref="tree" :default-checked-keys="roleMenu" @check-change="checked"></el-tree>
+        <el-tree :data="allMenu" default-expand-all show-checkbox node-key="id" :props="defaultProps" ref="tree" :default-checked-keys="roleMenu"></el-tree>
       </template>
       <template #footer>
         <el-button type="primary" @click="confirmAssign">Confirm</el-button>
@@ -201,6 +201,7 @@ const rules = {
 };
 
 const assignPermit = async (row: role) => {
+  roleMenu.value = [];
   Object.assign(roleParams, row);
   const data: permissionReturnType = await getRoleMenu(row.id as number);
   if (data.code == 200) {
@@ -223,19 +224,13 @@ const getId = (arr: permit[], initArr: number[]) => {
   return initArr;
 };
 
-const checked = (item: permit) => {
-  if (item.level == 4) {
-    roleMenu.value.push(item.id);
-  }
-};
-
 const defaultProps = {
   children: 'children',
   label: 'name',
 };
 
 const confirmAssign = async () => {
-  const data: any = await reqSetPermisstion(parseInt(roleParams.id), roleMenu.value);
+  const data: any = await reqSetPermisstion(parseInt(roleParams.id), tree.value.getCheckedKeys());
   if (data.code == 200) {
     ElMessage.success('set!');
     showAssign.value = false;
