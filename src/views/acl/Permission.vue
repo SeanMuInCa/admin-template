@@ -18,7 +18,7 @@
     </el-table>
     <el-dialog v-model="centerDialogVisible" :title="permitParams.id ? 'Edit' : 'Add'">
       <el-form label-width="200" style="max-width: 600px">
-        <el-form-item :label="permitParams.level === 4 ? 'Feature name':'Menu name'">
+        <el-form-item :label="permitParams.level === 4 ? 'Feature name' : 'Menu name'">
           <el-input v-model="permitParams.name" />
         </el-form-item>
         <el-form-item label="Permission code">
@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { getAllMenu,modifyMenu } from '@/api/acl/permission';
+import { getAllMenu, modifyMenu } from '@/api/acl/permission';
 import { permit, permissionReturnType } from '@/api/acl/type';
 import { ElMessage } from 'element-plus';
 const allMenu = ref<permit[]>([]);
@@ -48,7 +48,7 @@ const permitParams = ref<permit>({
   name: '',
   code: '',
   type: '',
-  pid:''
+  pid: '',
 });
 const resetPermitParams = () => {
   permitParams.value = {
@@ -57,7 +57,7 @@ const resetPermitParams = () => {
     name: '',
     code: '',
     type: '',
-    pid:''
+    pid: '',
   };
 };
 onMounted(() => {
@@ -85,19 +85,18 @@ const editPermit = (row: permit) => {
   centerDialogVisible.value = true;
   permitParams.value = row;
   console.log(permitParams.value);
-  
-}
-const confirm = async() => {
+};
+const confirm = async () => {
   console.log(permitParams.value);
-  
+
   const data = await modifyMenu(permitParams.value);
-  if(data.code == 200){
-    ElMessage.success(permitParams.value.id?'updated':'added');
+  if (data.code == 200) {
+    ElMessage.success(permitParams.value.id ? 'updated' : 'added');
     centerDialogVisible.value = false;
-  }else{
+  } else {
     ElMessage.error('something went wrong');
   }
-}
+};
 </script>
 
 <style scoped></style>

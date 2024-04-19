@@ -51,7 +51,7 @@ export interface permit {
   updateTime?: string;
   code: string;
   type: string | number;
-  pid:string|number;
+  pid: string | number;
 }
 export interface permissionReturnType extends returnDataTypeCommon {
   data: permit[];
