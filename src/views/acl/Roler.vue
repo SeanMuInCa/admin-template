@@ -223,8 +223,8 @@ const getId = (arr: permit[], initArr: number[]) => {
   return initArr;
 };
 
-const checked = (item:permit) => {
-  if(item.level == 4){
+const checked = (item: permit) => {
+  if (item.level == 4) {
     roleMenu.value.push(item.id);
   }
 };
@@ -234,15 +234,15 @@ const defaultProps = {
   label: 'name',
 };
 
-const confirmAssign = async() => {
-  const data:any = await reqSetPermisstion(parseInt(roleParams.id), roleMenu.value);
-  if(data.code == 200){
+const confirmAssign = async () => {
+  const data: any = await reqSetPermisstion(parseInt(roleParams.id), roleMenu.value);
+  if (data.code == 200) {
     ElMessage.success('set!');
     showAssign.value = false;
-  }else{
+  } else {
     ElMessage.error('something went wrong');
   }
-}
+};
 </script>
 
 <style scoped>
