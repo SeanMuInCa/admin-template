@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref, reactive } from 'vue';
-import { getAllMenu, modifyMenu,deleteMenu } from '@/api/acl/permission';
+import { getAllMenu, modifyMenu, deleteMenu } from '@/api/acl/permission';
 import { permit, permissionReturnType } from '@/api/acl/type';
 import { ElMessage } from 'element-plus';
 import type { FormInstance, FormRules } from 'element-plus';
@@ -86,7 +86,7 @@ const editPermit = (row: permit) => {
 };
 const confirm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
-  formEl.validate(async (valid:any) => {
+  formEl.validate(async (valid: any) => {
     if (valid) {
       const data = await modifyMenu(permitParams.value);
       if (data.code == 200) {
@@ -121,13 +121,13 @@ const rules = reactive<FormRules>({
   name: [{ required: true, validator: validateName, trigger: 'blur' }],
 });
 
-const delMenu = async(row: permit) => {
+const delMenu = async (row: permit) => {
   const data = await deleteMenu(row.id as number);
-  if(data.code == 200){
-    ElMessage.success('deleted')
+  if (data.code == 200) {
+    ElMessage.success('deleted');
     getData();
-  }else ElMessage.error('something went wrong')
-}
+  } else ElMessage.error('something went wrong');
+};
 </script>
 
 <style scoped></style>
