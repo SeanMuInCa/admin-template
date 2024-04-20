@@ -6,12 +6,9 @@
       <el-table-column label="Last updated" prop="updateTime"></el-table-column>
       <el-table-column label="Operation">
         <template #default="{ row }">
-          <el-button type="primary" icon="Plus" size="small" :disabled="row.level === 4" @click="handleAdd(row)">{{
-      row.level === 3 ? 'Add feature' : 'Add Menu' }}</el-button>
-          <el-button type="warning" icon="Edit" size="small" :disabled="row.level === 1"
-            @click="editPermit(row)">Edit</el-button>
-          <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled"
-            icon-color="#626AEF" title="Are you sure to delete this?">
+          <el-button type="primary" icon="Plus" size="small" :disabled="row.level === 4" @click="handleAdd(row)">{{ row.level === 3 ? 'Add feature' : 'Add Menu' }}</el-button>
+          <el-button type="warning" icon="Edit" size="small" :disabled="row.level === 1" @click="editPermit(row)">Edit</el-button>
+          <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?">
             <template #reference>
               <el-button type="danger" icon="Delete" size="small" :disabled="row.level === 1">Delete</el-button>
             </template>
@@ -100,27 +97,25 @@ const confirm = async (formEl: FormInstance | undefined) => {
         ElMessage.error('something went wrong');
       }
     } else {
-      console.log('error submit!')
-      return false
+      console.log('error submit!');
+      return false;
     }
-  })
-
+  });
 };
 const validateCode = (_rule: any, value: any, callback: any) => {
   if (!value || value.trim().length < 2) {
-    callback(new Error('the length should be at least two chars'))
+    callback(new Error('the length should be at least two chars'));
   } else callback();
-}
+};
 const validateName = (_rule: any, value: any, callback: any) => {
   if (!value || value.trim().length < 2) {
-    callback(new Error('the length should be at least two chars'))
+    callback(new Error('the length should be at least two chars'));
   } else callback();
-}
+};
 const rules = reactive<FormRules>({
   code: [{ required: true, validator: validateCode, trigger: 'blur' }],
   name: [{ required: true, validator: validateName, trigger: 'blur' }],
-})
-
+});
 </script>
 
 <style scoped></style>
