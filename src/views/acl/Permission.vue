@@ -47,7 +47,6 @@ const permitParams = ref<permit>({
   level: '',
   name: '',
   code: '',
-  type: '',
   pid: '',
 });
 const resetPermitParams = () => {
@@ -56,7 +55,6 @@ const resetPermitParams = () => {
     level: '',
     name: '',
     code: '',
-    type: '',
     pid: '',
   };
 };
@@ -77,9 +75,8 @@ const handleAdd = (row: permit) => {
   centerDialogVisible.value = true;
   console.log(row);
   permitParams.value.level = parseInt(row.level as string) + 1;
-  permitParams.value.type = row.level === 3 ? 2 : 1;
   permitParams.value.code = row.code;
-  permitParams.value.pid = row.pid;
+  permitParams.value.pid = row.id as number;
 };
 const editPermit = (row: permit) => {
   centerDialogVisible.value = true;
@@ -93,6 +90,7 @@ const confirm = async () => {
   if (data.code == 200) {
     ElMessage.success(permitParams.value.id ? 'updated' : 'added');
     centerDialogVisible.value = false;
+    getData();
   } else {
     ElMessage.error('something went wrong');
   }
