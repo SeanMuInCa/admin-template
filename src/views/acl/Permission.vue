@@ -17,7 +17,7 @@
       </el-table-column>
     </el-table>
     <el-dialog v-model="centerDialogVisible" :title="permitParams.id ? 'Edit' : 'Add'">
-      <el-form label-width="200" style="max-width: 600px" :rules="rules" ref="ruleFormRef">
+      <el-form label-width="200" style="max-width: 600px" :rules="rules" ref="ruleFormRef" :model="permitParams">
         <el-form-item :label="permitParams.level === 4 ? 'Feature name' : 'Menu name'" prop="name">
           <el-input v-model="permitParams.name" />
         </el-form-item>
@@ -103,14 +103,18 @@ const confirm = async (formEl: FormInstance | undefined) => {
   });
 };
 const validateCode = (_rule: any, value: any, callback: any) => {
-  if (!value || value.trim().length < 2) {
-    callback(new Error('the length should be at least two chars'));
-  } else callback();
+  if (value.trim().length >= 2) {
+    callback();
+  } else {
+    callback(new Error('name should at least two characters'));
+  }
 };
 const validateName = (_rule: any, value: any, callback: any) => {
-  if (!value || value.trim().length < 2) {
-    callback(new Error('the length should be at least two chars'));
-  } else callback();
+  if (value.trim().length >= 2) {
+    callback();
+  } else {
+    callback(new Error('code should at least two characters'));
+  }
 };
 const rules = reactive<FormRules>({
   code: [{ required: true, validator: validateCode, trigger: 'blur' }],

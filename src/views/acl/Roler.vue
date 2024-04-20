@@ -215,7 +215,7 @@ const assignPermit = async (row: role) => {
 const getId = (arr: permit[], initArr: number[]) => {
   arr.forEach((item) => {
     if (item.select && item.level == 4) {
-      initArr.push(item.id);
+      initArr.push(item.id as number);
     }
     if (item.children && item.children.length > 0) {
       getId(item.children, initArr);

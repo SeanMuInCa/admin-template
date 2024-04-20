@@ -48,6 +48,8 @@ export interface permit {
   name: string;
   code: string;
   pid: string | number;
+  select?: boolean;
+  children?:[];
 }
 export interface permissionReturnType extends returnDataTypeCommon {
   data: permit[];
