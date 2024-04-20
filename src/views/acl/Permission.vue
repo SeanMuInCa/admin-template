@@ -8,7 +8,7 @@
         <template #default="{ row }">
           <el-button type="primary" icon="Plus" size="small" :disabled="row.level === 4" @click="handleAdd(row)">{{ row.level === 3 ? 'Add feature' : 'Add Menu' }}</el-button>
           <el-button type="warning" icon="Edit" size="small" :disabled="row.level === 1" @click="editPermit(row)">Edit</el-button>
-          <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?">
+          <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="delMenu(row)">
             <template #reference>
               <el-button type="danger" icon="Delete" size="small" :disabled="row.level === 1">Delete</el-button>
             </template>
@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref, reactive } from 'vue';
-import { getAllMenu, modifyMenu } from '@/api/acl/permission';
+import { getAllMenu, modifyMenu,deleteMenu } from '@/api/acl/permission';
 import { permit, permissionReturnType } from '@/api/acl/type';
 import { ElMessage } from 'element-plus';
 import type { FormInstance, FormRules } from 'element-plus';
@@ -86,7 +86,7 @@ const editPermit = (row: permit) => {
 };
 const confirm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
-  formEl.validate(async (valid) => {
+  formEl.validate(async (valid:any) => {
     if (valid) {
       const data = await modifyMenu(permitParams.value);
       if (data.code == 200) {
@@ -120,6 +120,14 @@ const rules = reactive<FormRules>({
   code: [{ required: true, validator: validateCode, trigger: 'blur' }],
   name: [{ required: true, validator: validateName, trigger: 'blur' }],
 });
+
+const delMenu = async(row: permit) => {
+  const data = await deleteMenu(row.id as number);
+  if(data.code == 200){
+    ElMessage.success('deleted')
+    getData();
+  }else ElMessage.error('something went wrong')
+}
 </script>
 
 <style scoped></style>
