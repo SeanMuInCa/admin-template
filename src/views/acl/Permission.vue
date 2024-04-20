@@ -27,7 +27,7 @@
       </el-form>
       <template #footer>
         <div class="dialog-footer">
-          <el-button @click="centerDialogVisible = false">Cancel</el-button>
+          <el-button @click="cancel">Cancel</el-button>
           <el-button type="primary" @click="confirm(ruleFormRef)">Confirm</el-button>
         </div>
       </template>
@@ -81,6 +81,7 @@ const handleAdd = (row: permit) => {
   permitParams.value.pid = row.id as number;
 };
 const editPermit = (row: permit) => {
+  resetPermitParams();
   centerDialogVisible.value = true;
   permitParams.value = row;
 };
@@ -102,6 +103,12 @@ const confirm = async (formEl: FormInstance | undefined) => {
     }
   });
 };
+
+const cancel = () => {
+  resetPermitParams();
+  centerDialogVisible.value = false;
+  getData();
+}
 const validateCode = (_rule: any, value: any, callback: any) => {
   if (value.trim().length >= 2) {
     callback();
