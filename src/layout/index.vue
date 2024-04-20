@@ -84,7 +84,6 @@ const menuRoutes = useRoutesStore();
     position: absolute;
     top: $top_height;
     left: $slider_width;
-    padding: 20px;
     scroll-behavior: smooth;
     overflow: auto;
     transition: all 0.3s;

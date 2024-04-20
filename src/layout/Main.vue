@@ -1,9 +1,11 @@
 <template>
+<div style="width: 100%; height: 100%; background-color: white; padding: 20px;">
   <router-view v-slot="{ Component }">
     <transition name="fade">
       <component :is="Component" v-if="!settingStore.refresh" />
     </transition>
   </router-view>
+</div>
 </template>
 
 <script setup lang="ts">
