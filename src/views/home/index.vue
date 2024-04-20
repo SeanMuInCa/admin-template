@@ -7,7 +7,7 @@
           {{ getWelcome() }}!
           <p style="margin: 10px 0">
             Welcome back
-            <span style="color: blue;">{{ userStore.userInfo.username }}</span>
+            <span style="color: blue">{{ userStore.userInfo.username }}</span>
             [
             <span v-for="(item, index) in userStore.userInfo.roles" :key="index" style="font-weight: 500">{{ item + ' ' }}</span>
             ]
