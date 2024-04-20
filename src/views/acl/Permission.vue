@@ -108,7 +108,7 @@ const cancel = () => {
   resetPermitParams();
   centerDialogVisible.value = false;
   getData();
-}
+};
 const validateCode = (_rule: any, value: any, callback: any) => {
   if (value.trim().length >= 2) {
     callback();
