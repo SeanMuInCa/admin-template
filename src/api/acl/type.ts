@@ -49,7 +49,7 @@ export interface permit {
   code: string;
   pid: string | number;
   select?: boolean;
-  children?:[];
+  children?: [];
 }
 export interface permissionReturnType extends returnDataTypeCommon {
   data: permit[];
