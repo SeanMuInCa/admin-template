@@ -1,5 +1,5 @@
 <template>
-  <div class="topBar" style="border-bottom: 1px solid">
+  <div class="topBar" style="border-bottom: 1px solid" :class="{dark: settingStore.darkMode}">
     <div class="left">
       <el-icon size="24" @click="collapse">
         <!-- <Fold v-if="!isFold" ></Fold>
@@ -7,7 +7,8 @@
         <component :is="settingStore.isFold ? 'Expand' : 'Fold'"></component>
       </el-icon>
       <el-breadcrumb :separator-icon="ArrowRight" style="margin-left: 10px">
-        <el-breadcrumb-item :to="item.path" v-for="(item, index) in router.currentRoute.value.matched" :key="index" class="bread" v-show="item.meta.title">
+        <el-breadcrumb-item :to="item.path" v-for="(item, index) in router.currentRoute.value.matched" :key="index"
+          class="bread" v-show="item.meta.title">
           <el-icon size="18">
             <component :is="item.meta.icon"></component>
           </el-icon>
@@ -18,7 +19,7 @@
     <div class="right">
       <el-button :icon="Refresh" circle @click="goRefresh" />
       <el-button :icon="FullScreen" circle @click="goFullScreen" />
-      <el-button :icon="Setting" circle />
+      <el-button :icon="Setting" circle @click="goSetting"/>
       <div class="user">
         <img :src="userStore.userInfo.avatar" alt="" style="width: 32px; height: 32px; border-radius: 50%" />
         <el-dropdown @command="handleCommand">
@@ -42,11 +43,16 @@ import { ArrowRight, FullScreen, Refresh, Setting } from '@element-plus/icons-vu
 import useSettingStore from '@/store/modules/setting';
 import useUserStore from '@/store/modules/user';
 import { router } from '@/router';
-
+import {ref} from 'vue';
+const drawer = ref(false);
 const settingStore = useSettingStore();
 const userStore = useUserStore();
 
-defineProps(['url']);
+const props = defineProps(['url','callDrawer']);
+
+const goSetting = () => {
+  props.callDrawer(true);
+}
 
 const goRefresh = () => {
   settingStore.refresh = !settingStore.refresh;
@@ -81,7 +87,10 @@ const handleCommand = async () => {
   align-items: center;
   padding: 20px;
   background-color: white;
-
+  &.dark{
+      color: $white;
+      background-color: $black;
+    }
   .left {
     display: flex;
     justify-content: space-evenly;

@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 100%; height: 100%; background-color: white; padding: 20px">
+  <div class="container" :class="{dark:settingStore.darkMode}">
     <router-view v-slot="{ Component }">
       <transition name="fade">
         <component :is="Component" v-if="!settingStore.refresh" />
@@ -39,5 +39,15 @@ onMounted(() => {
 }
 .fade-enter-to {
   opacity: 1;
+}
+.container{
+  width: 100%; 
+  height: 100%; 
+  background-color: white; 
+  padding: 20px;
+  &.dark{
+      color: $white;
+      background-color: $black;
+    }
 }
 </style>

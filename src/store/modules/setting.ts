@@ -5,6 +5,7 @@ const useSettingStore = defineStore('Setting', {
     return {
       isFold: false,
       refresh: false,
+      darkMode: JSON.parse(localStorage.getItem('dark') as string) || false,
     };
   },
 
