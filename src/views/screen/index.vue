@@ -14,12 +14,12 @@
 <script setup lang="ts"></script>
 
 <style scoped lang="scss">
-.container{
+.container {
   width: 100vw;
   height: 100vh;
   background: url('./images/bg.png') no-repeat;
   background-size: cover;
-  .screen{
+  .screen {
     width: 1920px;
     height: 1080px;
     background-color: red;
