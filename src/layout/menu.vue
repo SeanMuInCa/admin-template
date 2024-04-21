@@ -1,5 +1,5 @@
 <template>
-  <div class="menulist" :class="{dark:settingStore.darkMode}">
+  <div class="menulist" :class="{ dark: settingStore.darkMode }">
     <template v-for="(item, index) in menuList" :key="index">
       <template v-if="!item.children">
         <el-menu-item :index="item.path" v-if="item.meta.showInMenu" @click="goRoute">
@@ -77,10 +77,10 @@ export default {
       --el-menu-level: 1;
     }
   }
-  &.dark{
-      color: $white;
-      background-color: $black;
-    }
+  &.dark {
+    color: $white;
+    background-color: $black;
+  }
 }
 
 // .is-active {
