@@ -14,20 +14,20 @@
 </template>
 
 <script setup lang="ts">
-import {ref, onMounted} from 'vue';
+import { ref, onMounted } from 'vue';
 import Top from './components/Top.vue';
 
 const screenRef = ref();
 onMounted(() => {
   screenRef.value.style.transform = `scale(${getScale()}) translate(-50%,-50%)`;
-})
+});
 
 //大屏缩放比例函数
-const getScale = (w=1920, h=1080) => {
+const getScale = (w = 1920, h = 1080) => {
   let ww = window.innerWidth / w;
   let wh = window.innerHeight / h;
   return ww < wh ? ww : wh;
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -44,19 +44,19 @@ const getScale = (w=1920, h=1080) => {
     height: 1080px;
     // background-color: red;
     transform-origin: left top;
-    .top{
+    .top {
       width: 100%;
       height: 40px;
     }
-    .main{
+    .main {
       display: flex;
       .left {
         flex: 1;
       }
-      .center{
+      .center {
         flex: 3;
       }
-      .right{
+      .right {
         flex: 1;
       }
     }
