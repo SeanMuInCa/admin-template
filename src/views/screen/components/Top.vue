@@ -3,13 +3,11 @@
     <div class="left">
       <span class="lbtn" @click="goHome">Home Page</span>
     </div>
-    <div class="center">
-        Data Screen for Duesytech System
-    </div>
+    <div class="center">Data Screen for Duesytech System</div>
     <div class="right">
       <div class="rbtn">Report</div>
       <div></div>
-      <div style="margin-right: 40px;">{{ time }}</div>
+      <div style="margin-right: 40px">{{ time }}</div>
     </div>
   </div>
 </template>
@@ -18,15 +16,14 @@
 import { router } from '@/router/index';
 import moment from 'moment';
 import { ref } from 'vue';
-const time = ref('')
+const time = ref('');
 setInterval(() => {
-    time.value = moment().format('YYYY-MM-DD hh-mm-ss');
-},1000)
+  time.value = moment().format('YYYY-MM-DD hh-mm-ss');
+}, 1000);
 
 const goHome = () => {
-    router.push('/home');
-}
-
+  router.push('/home');
+};
 </script>
 
 <style scoped lang="scss">
