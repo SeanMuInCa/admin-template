@@ -81,12 +81,12 @@ const getScale = (w = 1920, h = 1080) => {
         display: flex;
         flex-direction: column;
         color: #fff;
-        .centerTop{
+        .centerTop {
           flex: 4;
           width: 100%;
           margin-top: 50px;
         }
-        .centerBottom{
+        .centerBottom {
           flex: 1;
           width: 100%;
           background-color: aqua;
