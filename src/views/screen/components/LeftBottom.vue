@@ -36,8 +36,8 @@ onMounted(() => {
         center: ['30%', '50%'],
         itemStyle: {
           borderRadius: 10,
-          borderColor: '#fff',
-          borderWidth: 2,
+          borderColor: '',
+          borderWidth: '-1',
         },
         label: {
           show: true,
