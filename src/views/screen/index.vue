@@ -5,7 +5,11 @@
         <Top></Top>
       </div>
       <div class="main">
-        <div class="left">1</div>
+        <div class="left">
+          <LeftTop class="leftTop"></LeftTop>
+          <LeftMid class="leftMid"></LeftMid>
+          <LeftBottom class="leftBottom"></LeftBottom>
+        </div>
         <div class="center">2</div>
         <div class="right">3</div>
       </div>
@@ -16,6 +20,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import Top from './components/Top.vue';
+import LeftTop from './components/LeftTop.vue';
+import LeftMid from '@/views/screen/components/LeftMid.vue';
+import LeftBottom from '@/views/screen/components/LeftBottom.vue';
 
 const screenRef = ref();
 onMounted(() => {
@@ -42,7 +49,6 @@ const getScale = (w = 1920, h = 1080) => {
     top: 50%;
     width: 1920px;
     height: 1080px;
-    // background-color: red;
     transform-origin: left top;
     .top {
       width: 100%;
@@ -52,6 +58,18 @@ const getScale = (w = 1920, h = 1080) => {
       display: flex;
       .left {
         flex: 1;
+        height: 1040px;
+        display: flex;
+        flex-direction: column;
+        .leftTop{
+          flex: 1.5;
+        }
+        .leftMid{
+          flex: 1;
+        }
+        .leftBottom{
+          flex: 1;
+        }
       }
       .center {
         flex: 3;
