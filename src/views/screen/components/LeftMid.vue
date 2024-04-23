@@ -67,7 +67,7 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .box {
-  margin: 10px 0;
+  margin: 5px 0;
   background-color: aqua;
   background: url('../images/dataScreen-main-lc.png') no-repeat;
   background-size: 100% 100%;
