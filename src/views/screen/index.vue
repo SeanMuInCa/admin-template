@@ -61,13 +61,13 @@ const getScale = (w = 1920, h = 1080) => {
         height: 1040px;
         display: flex;
         flex-direction: column;
-        .leftTop{
+        .leftTop {
           flex: 1.5;
         }
-        .leftMid{
+        .leftMid {
           flex: 1;
         }
-        .leftBottom{
+        .leftBottom {
           flex: 1;
         }
       }
