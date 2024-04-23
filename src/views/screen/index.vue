@@ -10,7 +10,10 @@
           <LeftMid class="leftMid"></LeftMid>
           <LeftBottom class="leftBottom"></LeftBottom>
         </div>
-        <div class="center">2</div>
+        <div class="center">
+          <CenterTop class="centerTop"></CenterTop>
+          <CenterBottom class="centerBottom"></CenterBottom>
+        </div>
         <div class="right">3</div>
       </div>
     </div>
@@ -23,6 +26,8 @@ import Top from './components/Top.vue';
 import LeftTop from './components/LeftTop.vue';
 import LeftMid from '@/views/screen/components/LeftMid.vue';
 import LeftBottom from '@/views/screen/components/LeftBottom.vue';
+import CenterTop from './components/CenterTop.vue';
+import CenterBottom from './components/CenterBottom.vue';
 
 const screenRef = ref();
 onMounted(() => {
@@ -73,6 +78,19 @@ const getScale = (w = 1920, h = 1080) => {
       }
       .center {
         flex: 3;
+        display: flex;
+        flex-direction: column;
+        color: #fff;
+        .centerTop{
+          flex: 4;
+          width: 100%;
+          margin-top: 50px;
+        }
+        .centerBottom{
+          flex: 1;
+          width: 100%;
+          background-color: aqua;
+        }
       }
       .right {
         flex: 1;
