@@ -23,7 +23,7 @@
 import { ref, onMounted } from 'vue';
 import * as echarts from 'echarts';
 import 'echarts-liquidfill';
-console.log(echarts);
+
 const num = ref('2169088');
 const chart1 = ref();
 onMounted(() => {

@@ -1,7 +1,11 @@
 <template>
-  <div>3</div>
+  <div class="box">
+    <div class="top">
+
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts"></script>
 
-<style scoped></style>
+<style scoped lang="scss"></style>
