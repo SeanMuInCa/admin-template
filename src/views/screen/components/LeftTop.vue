@@ -56,7 +56,7 @@ onMounted(() => {
           borderDistance: 8,
           itemStyle: {
             color: 'none',
-            borderColor: '#294D99',
+            borderColor: '#29fcff',
             borderWidth: 5,
             shadowBlur: 20,
             shadowColor: 'rgba(0, 0, 0, 0.25)',
