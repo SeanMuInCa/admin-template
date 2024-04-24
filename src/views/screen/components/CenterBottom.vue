@@ -1,7 +1,7 @@
 <template>
   <div class="box">
     <div class="top">
-      <p style="line-height: 20px;">Next 30 days</p>
+      <p style="line-height: 20px">Next 30 days</p>
       <p class="title"></p>
     </div>
     <div class="chart" ref="chart1"></div>
@@ -16,22 +16,22 @@ onMounted(() => {
   const myChart = echarts.init(chart1.value);
   myChart.setOption({
     title: {
-      text: 'visitors'
+      text: 'visitors',
     },
     xAxis: {
       type: 'category',
-      splitLine:{
-        show:false
+      splitLine: {
+        show: false,
       },
-      boundaryGap: false
+      boundaryGap: false,
       // axisLine:{
       //   show:false
       // }
     },
     yAxis: {
       type: 'value',
-      splitLine:{
-        show:false
+      splitLine: {
+        show: false,
       },
     },
     grid: {
@@ -43,7 +43,7 @@ onMounted(() => {
     series: [
       {
         type: 'line',
-        data: [120, 210, 888, 222, 333, 444, 888, 120, 210, 888, 222, 333, 444, 888, 324, 62, 551, 113, 209, 123,442,525,1222,353,434,343,111,333,144,921,113],
+        data: [120, 210, 888, 222, 333, 444, 888, 120, 210, 888, 222, 333, 444, 888, 324, 62, 551, 113, 209, 123, 442, 525, 1222, 353, 434, 343, 111, 333, 144, 921, 113],
         smooth: true,
         areaStyle: {
           color: {
@@ -52,21 +52,25 @@ onMounted(() => {
             y: 0,
             x2: 0,
             y2: 1,
-            colorStops: [{
-              offset: 0, color: '#0176f5'// 0% 处的颜色
-            }, {
-              offset: 1, color: '#11144e'  // 100% 处的颜色
-            }],
-            global: false // 缺省为 false
-          }
+            colorStops: [
+              {
+                offset: 0,
+                color: '#0176f5', // 0% 处的颜色
+              },
+              {
+                offset: 1,
+                color: '#11144e', // 100% 处的颜色
+              },
+            ],
+            global: false, // 缺省为 false
+          },
         },
-        emphasis:{
-        focus:'self'
-      }
+        emphasis: {
+          focus: 'self',
+        },
       },
-      
-    ]
-  })
+    ],
+  });
 });
 </script>
 
