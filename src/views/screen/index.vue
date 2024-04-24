@@ -90,8 +90,6 @@ const getScale = (w = 1920, h = 1080) => {
         }
         .centerBottom {
           flex: 1;
-          width: 100%;
-          background-color: aqua;
         }
       }
       .right {
