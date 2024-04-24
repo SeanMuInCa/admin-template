@@ -62,124 +62,124 @@ onMounted(() => {
               width: 2,
               type: 'dashed',
               curveness: -0.4,
-              trailLength:0
+              trailLength: 0,
             },
           },
           {
             coords: [
-            [126.642464, 45.756967],
-            [121.472644, 31.231706]
+              [126.642464, 45.756967],
+              [121.472644, 31.231706],
             ],
             lineStyle: {
               color: '#fff',
               width: 2,
               type: 'dashed',
               curveness: 0.4,
-              trailLength:0
+              trailLength: 0,
             },
           },
           {
             coords: [
-            [116.405285, 39.904989],
-            [121.472644, 31.231706]
+              [116.405285, 39.904989],
+              [121.472644, 31.231706],
             ],
             lineStyle: {
               color: '#fff',
               width: 2,
               type: 'dashed',
               curveness: -0.4,
-              trailLength:0
+              trailLength: 0,
             },
           },
           {
             coords: [
-            [116.405285, 39.904989],
-            [118.767413, 32.041544],
+              [116.405285, 39.904989],
+              [118.767413, 32.041544],
             ],
             lineStyle: {
               color: '#fff',
               width: 2,
               type: 'dashed',
               curveness: 0.4,
-              trailLength:0
+              trailLength: 0,
             },
           },
           {
             coords: [
-            [116.405285, 39.904989],
-            [120.153576, 30.287459],
+              [116.405285, 39.904989],
+              [120.153576, 30.287459],
             ],
             lineStyle: {
               color: '#fff',
               width: 2,
               type: 'dashed',
               curveness: -0.5,
-              trailLength:0
+              trailLength: 0,
             },
           },
           {
             coords: [
-            [116.405285, 39.904989],
-            [114.298572, 30.584355],
+              [116.405285, 39.904989],
+              [114.298572, 30.584355],
             ],
             lineStyle: {
               color: '#fff',
               width: 2,
               type: 'dashed',
               curveness: 0.2,
-              trailLength:0
+              trailLength: 0,
             },
           },
           {
             coords: [
-            [116.405285, 39.904989],
-            [112.982279, 28.19409],
+              [116.405285, 39.904989],
+              [112.982279, 28.19409],
             ],
             lineStyle: {
               color: '#fff',
               width: 2,
               type: 'dashed',
               curveness: -0.1,
-              trailLength:0
+              trailLength: 0,
             },
           },
           {
             coords: [
-            [116.405285, 39.904989],
-            [110.33119, 20.031971],
+              [116.405285, 39.904989],
+              [110.33119, 20.031971],
             ],
             lineStyle: {
               color: '#fff',
               width: 2,
               type: 'dashed',
               curveness: 0.9,
-              trailLength:0
+              trailLength: 0,
             },
           },
           {
             coords: [
-            [116.405285, 39.904989],
-            [106.504962, 29.533155],
+              [116.405285, 39.904989],
+              [106.504962, 29.533155],
             ],
             lineStyle: {
               color: '#fff',
               width: 2,
               type: 'dashed',
               curveness: -0.8,
-              trailLength:0
+              trailLength: 0,
             },
           },
           {
             coords: [
-            [116.405285, 39.904989],
-            [102.712251, 25.040609],
+              [116.405285, 39.904989],
+              [102.712251, 25.040609],
             ],
             lineStyle: {
               color: '#fff',
               width: 2,
               type: 'dashed',
               curveness: 0.4,
-              trailLength:0
+              trailLength: 0,
             },
           },
         ],
