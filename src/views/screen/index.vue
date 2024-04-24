@@ -46,10 +46,10 @@ const getScale = (w = 1920, h = 1080) => {
 .container {
   width: 100vw;
   height: 100vh;
-  background-color: rgba(255, 255, 255, 0.5); 
+  background-color: rgba(255, 255, 255, 0.5);
   background: url('./images/bg.png') no-repeat;
   background-size: cover;
-  
+
   .screen {
     position: fixed;
     left: 50%;
