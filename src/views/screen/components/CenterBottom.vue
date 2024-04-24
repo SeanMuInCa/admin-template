@@ -78,7 +78,7 @@ onMounted(() => {
 <style scoped lang="scss">
 .box {
   margin: 0 20px;
-  width: 100%;
+  width: 95%;
   height: 100%;
   background: url('../images/dataScreen-main-cb.png') no-repeat;
   background-size: 100% 100%;

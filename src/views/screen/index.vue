@@ -14,7 +14,11 @@
           <CenterTop class="centerTop"></CenterTop>
           <CenterBottom class="centerBottom"></CenterBottom>
         </div>
-        <div class="right">3</div>
+        <div class="right">
+          <RightTop class="rightTop"></RightTop>
+          <RightMid class="rightMid"></RightMid>
+          <RightBottom class="rightBottom"></RightBottom>
+        </div>
       </div>
     </div>
   </div>
@@ -28,6 +32,9 @@ import LeftMid from '@/views/screen/components/LeftMid.vue';
 import LeftBottom from '@/views/screen/components/LeftBottom.vue';
 import CenterTop from './components/CenterTop.vue';
 import CenterBottom from './components/CenterBottom.vue';
+import RightTop from '@/views/screen/components/RightTop.vue';
+import RightMid from '@/views/screen/components/RightMid.vue';
+import RightBottom from './components/RightBottom.vue';
 
 const screenRef = ref();
 onMounted(() => {
@@ -94,17 +101,29 @@ const getScale = (w = 1920, h = 1080) => {
       }
       .right {
         flex: 1;
+        display: flex;
+        flex-direction: column;
+        color: #fff;
+        .rightTop{
+          flex: 1.5;
+        }
+        .rightMid{
+          flex: 1;
+        }
+        .rightBottom{
+          flex: 1;
+        }
       }
     }
   }
 }
-.container::before {
-  content: ''; /* 必须有内容，才能显示伪元素 */
-  position: absolute; /* 设置绝对定位 */
-  top: 0;
-  left: 0;
-  width: 100%; /* 充满整个父元素 */
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
-}
+// .container::before {
+//   content: ''; /* 必须有内容，才能显示伪元素 */
+//   position: absolute; /* 设置绝对定位 */
+//   top: 0;
+//   left: 0;
+//   width: 100%; /* 充满整个父元素 */
+//   height: 100%;
+//   background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
+// }
 </style>
