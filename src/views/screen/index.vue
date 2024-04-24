@@ -46,8 +46,10 @@ const getScale = (w = 1920, h = 1080) => {
 .container {
   width: 100vw;
   height: 100vh;
+  background-color: rgba(255, 255, 255, 0.5); 
   background: url('./images/bg.png') no-repeat;
   background-size: cover;
+  
   .screen {
     position: fixed;
     left: 50%;
@@ -97,5 +99,14 @@ const getScale = (w = 1920, h = 1080) => {
       }
     }
   }
+}
+.container::before {
+  content: ''; /* 必须有内容，才能显示伪元素 */
+  position: absolute; /* 设置绝对定位 */
+  top: 0;
+  left: 0;
+  width: 100%; /* 充满整个父元素 */
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
 }
 </style>
