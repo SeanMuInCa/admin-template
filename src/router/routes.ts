@@ -1,3 +1,4 @@
+//常量路由
 export const staticRoutes = [
   {
     path: '/login',
@@ -46,16 +47,6 @@ export const staticRoutes = [
     },
   },
   {
-    path: '/:pathMatch(.*)*',
-    redirect: '/404',
-    name: 'redirect404',
-    meta: {
-      id: '4',
-      title: 'Redirect404',
-      showInMenu: false,
-    },
-  },
-  {
     path: '/screen',
     component: () => import('@/views/screen/index.vue'),
     name: 'Screen',
@@ -66,6 +57,11 @@ export const staticRoutes = [
       icon: 'Platform',
     },
   },
+  
+];
+
+//异步路由
+export const asyncRoute = [
   {
     path: '/acl',
     component: () => import('@/layout/index.vue'),
@@ -128,7 +124,7 @@ export const staticRoutes = [
       {
         path: '/product/brand',
         component: () => import('@/views/product/Brand.vue'),
-        name: 'Brand',
+        name: 'TradeMark',
         meta: {
           id: '7-1',
           title: 'Brand Management',
@@ -139,7 +135,7 @@ export const staticRoutes = [
       {
         path: '/product/attitude',
         component: () => import('@/views/product/Attitude.vue'),
-        name: 'Attitude',
+        name: 'Attr',
         meta: {
           id: '7-2',
           title: 'Attitude Management',
@@ -171,4 +167,16 @@ export const staticRoutes = [
       },
     ],
   },
-];
+]
+
+//任意路由
+export const anyRoute = {
+  path: '/:pathMatch(.*)*',
+  redirect: '/404',
+  name: 'redirect404',
+  meta: {
+    id: '4',
+    title: 'Redirect404',
+    showInMenu: false,
+  },
+}
