@@ -1,59 +1,59 @@
 <template>
   <div>
     <div>
-    <Category :showTable="scene == 0"></Category>
-    <el-card style="width: 100%; height: 100%; margin: 10px 0" v-show="scene === 0">
-      <el-button type="primary" icon="Plus" @click="handleAdd(categoryStore.c3_id)" :disabled="!categoryStore.c3_id">add a SPU</el-button>
-      <!-- main data table -->
-      <el-table :data="tableData" style="width: 100%; margin: 20px 0" height="600" border v-loading="categoryStore.loading">
-        <el-table-column fixed type="index" prop="index" label="No." width="100" align="center" />
-        <el-table-column prop="spuName" label="SPU name" width="200" />
-        <el-table-column prop="description" label="description" style="height: '220px'"></el-table-column>
-        <el-table-column fixed="right" label="Operations">
+      <Category :showTable="scene == 0"></Category>
+      <el-card style="width: 100%; height: 100%; margin: 10px 0" v-show="scene === 0">
+        <el-button type="primary" icon="Plus" @click="handleAdd(categoryStore.c3_id)" :disabled="!categoryStore.c3_id">add a SPU</el-button>
+        <!-- main data table -->
+        <el-table :data="tableData" style="width: 100%; margin: 20px 0" height="600" border v-loading="categoryStore.loading">
+          <el-table-column fixed type="index" prop="index" label="No." width="100" align="center" />
+          <el-table-column prop="spuName" label="SPU name" width="200" />
+          <el-table-column prop="description" label="description" style="height: '220px'"></el-table-column>
+          <el-table-column fixed="right" label="Operations">
+            <template #default="{ row }">
+              <el-button type="primary" icon="Plus" size="small" title="Plus SKU" @click="addSku(row)"></el-button>
+              <el-button type="warning" icon="Edit" size="small" title="Edit SPU" @click="editSPU(row)"></el-button>
+              <el-button type="info" icon="Warning" size="small" title="SKU Info" @click="showList(row)"></el-button>
+              <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirmDel(row)">
+                <template #reference>
+                  <el-button type="danger" icon="Delete" size="small" title="Delete SPU"></el-button>
+                </template>
+              </el-popconfirm>
+            </template>
+          </el-table-column>
+        </el-table>
+
+        <!-- pagination -->
+        <div class="demo-pagination-block">
+          <div class="demonstration"></div>
+          <el-pagination
+            v-model:current-page="currentPage"
+            v-model:page-size="pageSize"
+            :page-sizes="[3, 5, 7, 10]"
+            :background="true"
+            layout="prev, pager, next, jumper,->,sizes,total"
+            :total="total"
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+          />
+        </div>
+      </el-card>
+      <SPUForm ref="SPUFormRef" v-show="scene === 1" :setScene="setScene"></SPUForm>
+      <SKUForm ref="SKUFormRef" v-show="scene === 2" @setScene="setScene"></SKUForm>
+    </div>
+    <el-dialog v-model="dialogTableVisible" title="SKU List">
+      <el-table border :data="skuList">
+        <el-table-column label="No." prop="index" type="index" width="80"></el-table-column>
+        <el-table-column label="Sku Name" prop="skuName"></el-table-column>
+        <el-table-column label="Sku weight" prop="weight"></el-table-column>
+        <el-table-column label="Sku price" prop="price"></el-table-column>
+        <el-table-column label="Sku logo" width="150">
           <template #default="{ row }">
-            <el-button type="primary" icon="Plus" size="small" title="Plus SKU" @click="addSku(row)"></el-button>
-            <el-button type="warning" icon="Edit" size="small" title="Edit SPU" @click="editSPU(row)"></el-button>
-            <el-button type="info" icon="Warning" size="small" title="SKU Info" @click="showList(row)"></el-button>
-            <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirmDel(row)">
-              <template #reference>
-                <el-button type="danger" icon="Delete" size="small" title="Delete SPU"></el-button>
-              </template>
-            </el-popconfirm>
+            <img :src="row.skuDefaultImg" alt="" style="width: 100px; height: 100px" />
           </template>
         </el-table-column>
       </el-table>
-
-      <!-- pagination -->
-      <div class="demo-pagination-block">
-        <div class="demonstration"></div>
-        <el-pagination
-          v-model:current-page="currentPage"
-          v-model:page-size="pageSize"
-          :page-sizes="[3, 5, 7, 10]"
-          :background="true"
-          layout="prev, pager, next, jumper,->,sizes,total"
-          :total="total"
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-        />
-      </div>
-    </el-card>
-    <SPUForm ref="SPUFormRef" v-show="scene === 1" :setScene="setScene"></SPUForm>
-    <SKUForm ref="SKUFormRef" v-show="scene === 2" @setScene="setScene"></SKUForm>
-  </div>
-  <el-dialog v-model="dialogTableVisible" title="SKU List">
-    <el-table border :data="skuList">
-      <el-table-column label="No." prop="index" type="index" width="80"></el-table-column>
-      <el-table-column label="Sku Name" prop="skuName"></el-table-column>
-      <el-table-column label="Sku weight" prop="weight"></el-table-column>
-      <el-table-column label="Sku price" prop="price"></el-table-column>
-      <el-table-column label="Sku logo" width="150">
-        <template #default="{ row }">
-          <img :src="row.skuDefaultImg" alt="" style="width: 100px; height: 100px" />
-        </template>
-      </el-table-column>
-    </el-table>
-  </el-dialog>
+    </el-dialog>
   </div>
 </template>
 

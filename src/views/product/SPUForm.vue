@@ -15,14 +15,7 @@
     </el-form-item>
 
     <el-form-item label-width="135" label="Brand Logo">
-      <el-upload
-        v-model:file-list="SpuStore.imgList"
-        action="/api/admin/product/fileUpload"
-        list-type="picture-card"
-        :on-success="handleAvatarSuccess"
-        :before-upload="beforeAvatarUpload"
-        :on-preview="handlePictureCardPreview"
-      >
+      <el-upload v-model:file-list="SpuStore.imgList" action="/api/admin/product/fileUpload" list-type="picture-card" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload" :on-preview="handlePictureCardPreview">
         <el-icon><Plus /></el-icon>
       </el-upload>
       <el-dialog v-model="dialogVisible">
@@ -61,7 +54,7 @@
 
 <script setup lang="ts">
 import type { UploadProps, UploadUserFile } from 'element-plus';
-import {ref, nextTick, computed } from 'vue';
+import { ref, nextTick, computed } from 'vue';
 import { ElMessage } from 'element-plus';
 import { getTrademarkList, getSPUImageList, getSPUSaleAttrList, getBaseSaleAttrList, modifySPU } from '@/api/production/spu';
 import type { getImageListReturnType, spuData, brandListType, saleAttrListReturnType, baseSaleAttrReturnType } from '@/api/production/type';
@@ -72,7 +65,7 @@ const newAttrValue = ref('');
 let SpuParams = ref<spuData>({});
 const tempAttr = ref('');
 
-const handleClose = (row:any, item:any) => {
+const handleClose = (row: any, item: any) => {
   row.spuSaleAttrValueList.splice(row.spuSaleAttrValueList.indexOf(item), 1);
 };
 const pushAttrValue = () => {
@@ -90,16 +83,16 @@ const setBlank = () => {
   tempAttr.value = '';
   SpuStore.$reset();
 };
-const attrInput = (element:any) => {
+const attrInput = (element: any) => {
   element &&
     nextTick(() => {
       element.focus();
     });
 };
 
-const addValue = (row:any) => {
+const addValue = (row: any) => {
   if (
-    row.spuSaleAttrValueList.find((item:any) => {
+    row.spuSaleAttrValueList.find((item: any) => {
       return item.saleAttrValueName === newAttrValue.value;
     })
   ) {
@@ -118,7 +111,7 @@ const addValue = (row:any) => {
   newAttrValue.value = '';
 };
 
-const deleteAttr = (index:number) => {
+const deleteAttr = (index: number) => {
   SpuStore.saleAttrList.splice(index, 1);
 };
 
@@ -127,14 +120,14 @@ const modifySPUSave = async () => {
   //imageList
   // SpuParams.value.spuImageList =
   console.log(SpuStore.imgList);
-  let temp:any = [];
+  let temp: any = [];
   // SpuStore.imgList.forEach((item) => {
   //     temp.push({
   //         imgName:item.name,
   //         imgUrl:item.url.startsWith('http') ? item.url : item.url.slice(item.url.indexOf('http'))
   //     })
   // })
-  temp = SpuStore.imgList.map((item:any) => {
+  temp = SpuStore.imgList.map((item: any) => {
     return {
       imgName: item.name,
       imgUrl: item.response ? item.response.data : item.url,
@@ -153,9 +146,9 @@ const modifySPUSave = async () => {
 /**
  * 计算剩余属性
  */
-const spuAttrLeftList:any = computed(() => {
-  return SpuStore.baseAttrList.filter((item:any) => {
-    return SpuStore.saleAttrList.every((ele:any) => {
+const spuAttrLeftList: any = computed(() => {
+  return SpuStore.baseAttrList.filter((item: any) => {
+    return SpuStore.saleAttrList.every((ele: any) => {
       return ele.saleAttrName !== item.name;
     });
   });
@@ -169,13 +162,13 @@ const initSPUData = async (row: spuData) => {
   const data2: saleAttrListReturnType = await getSPUSaleAttrList(row.id as number);
   const data3: baseSaleAttrReturnType = await getBaseSaleAttrList();
   SpuStore.allBrands = data.data as any;
-  SpuStore.imgList = (data1.data as any).map((item:any) => {
+  SpuStore.imgList = (data1.data as any).map((item: any) => {
     return {
       name: item.imgName,
       url: item.imgUrl,
     };
   });
-  SpuStore.saleAttrList = (data2.data as any).map((item:any) => {
+  SpuStore.saleAttrList = (data2.data as any).map((item: any) => {
     item.flag = false;
     return item;
   });
@@ -183,7 +176,7 @@ const initSPUData = async (row: spuData) => {
   tempAttr.value = null as any;
 };
 
-const initSPUDataForAdd = async (id:any) => {
+const initSPUDataForAdd = async (id: any) => {
   const data: brandListType = await getTrademarkList();
   SpuStore.allBrands = data.data as any;
   const data3: baseSaleAttrReturnType = await getBaseSaleAttrList();
