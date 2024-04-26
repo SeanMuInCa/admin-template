@@ -1,3 +1,4 @@
+<!-- @ts-ignore -->
 <template>
   <el-card style="margin: 10px 0">
     <el-form-item label="Spu name" label-width="135">
@@ -6,7 +7,8 @@
 
     <el-form-item label="Spu brand" label-width="135">
       <el-select placeholder="select your brand" style="width: 240px" v-model="SpuParams.tmId">
-        <el-option v-for="item in SpuStore.allBrands" :key="item.id" :label="item.tmName" :value="item.id"></el-option>
+        <!-- @ts-ignore -->
+        <el-option v-for="(item) in allBrands" :key="item.id" :label="item.tmName" :value="item.id"></el-option>
       </el-select>
     </el-form-item>
 
@@ -57,14 +59,15 @@ import type { UploadProps, UploadUserFile } from 'element-plus';
 import { ref, nextTick, computed } from 'vue';
 import { ElMessage } from 'element-plus';
 import { getTrademarkList, getSPUImageList, getSPUSaleAttrList, getBaseSaleAttrList, modifySPU } from '@/api/production/spu';
-import type { getImageListReturnType, spuData, brandListType, saleAttrListReturnType, baseSaleAttrReturnType } from '@/api/production/type';
+import type {brandType, getImageListReturnType, spuData, brandListType, saleAttrListReturnType, baseSaleAttrReturnType } from '@/api/production/type';
 import useSPUStore from '@/store/modules/spu';
 const SpuStore = useSPUStore();
 const props = defineProps(['setScene']);
 const newAttrValue = ref('');
+//@ts-expect-error
 let SpuParams = ref<spuData>({});
 const tempAttr = ref('');
-
+let allBrands = ref<brandType[]>([]);
 const handleClose = (row: any, item: any) => {
   row.spuSaleAttrValueList.splice(row.spuSaleAttrValueList.indexOf(item), 1);
 };
@@ -161,7 +164,8 @@ const initSPUData = async (row: spuData) => {
   const data1: getImageListReturnType = await getSPUImageList(row.id as number);
   const data2: saleAttrListReturnType = await getSPUSaleAttrList(row.id as number);
   const data3: baseSaleAttrReturnType = await getBaseSaleAttrList();
-  SpuStore.allBrands = data.data as any;
+
+  allBrands.value = data.data as brandType[];
   SpuStore.imgList = (data1.data as any).map((item: any) => {
     return {
       name: item.imgName,
@@ -178,7 +182,7 @@ const initSPUData = async (row: spuData) => {
 
 const initSPUDataForAdd = async (id: any) => {
   const data: brandListType = await getTrademarkList();
-  SpuStore.allBrands = data.data as any;
+  allBrands.value = data.data as any;
   const data3: baseSaleAttrReturnType = await getBaseSaleAttrList();
   SpuStore.baseAttrList = data3.data as any;
   SpuParams.value.category3Id = id;

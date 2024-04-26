@@ -123,7 +123,7 @@ export const asyncRoute = [
       {
         path: '/product/brand',
         component: () => import('@/views/product/Brand.vue'),
-        name: 'TradeMark',
+        name: 'Trademark',
         meta: {
           id: '7-1',
           title: 'Brand Management',

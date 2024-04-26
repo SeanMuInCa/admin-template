@@ -33,7 +33,6 @@ import Main from '@/layout/Main.vue';
 import TopBar from '@/layout/TopBar.vue';
 import { router } from '@/router/index';
 import { ref, onMounted } from 'vue';
-import useRoutesStore from '@/store/modules/menuRoutes';
 import useSettingStore from '@/store/modules/setting';
 import useUserStore from '@/store/modules/user';
 let userStore = useUserStore();

@@ -132,6 +132,7 @@ const currentPage = ref<number>(1);
 const pageSize = ref<number>(10);
 const total = ref<number>(0);
 const openDrawer = ref(false);
+//@ts-expect-error
 const skuInfoData = ref<SKUType>({});
 onMounted(() => {
   getData();

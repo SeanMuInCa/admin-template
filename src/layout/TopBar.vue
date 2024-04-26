@@ -42,8 +42,8 @@ import { ArrowRight, FullScreen, Refresh, Setting } from '@element-plus/icons-vu
 import useSettingStore from '@/store/modules/setting';
 import useUserStore from '@/store/modules/user';
 import { router } from '@/router';
-import { ref } from 'vue';
-const drawer = ref(false);
+// import { ref } from 'vue';
+// const drawer = ref(false);
 const settingStore = useSettingStore();
 const userStore = useUserStore();
 

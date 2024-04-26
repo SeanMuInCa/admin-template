@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-
 const useSPUStore = defineStore('SpuStore', {
   state: () => {
     return {

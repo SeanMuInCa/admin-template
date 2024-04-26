@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-unused-vars -->
 <template>
   <div>
     <Category :showTable="showTable"></Category>
@@ -37,7 +38,7 @@
         <el-table border style="margin: 10px 0" :data="AttributeObj.attrValueList">
           <el-table-column label="No." width="100px" align="center" type="index"></el-table-column>
           <el-table-column label="Attribute Value">
-            <template #default="{ row, column, $index }">
+            <template #default="{ row}">
               <div class="tags">
                 <el-input v-model="row.valueName" v-show="edit == 1" :ref="handleFocus"></el-input>
                 <div style="background-color: red; width: 100%" v-show="edit == 0">{{ row.valueName }}</div>
@@ -45,7 +46,7 @@
             </template>
           </el-table-column>
           <el-table-column label="Operation">
-            <template #default="{ row, column, $index }">
+            <template #default="{ row, $index }">
               <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="deleteAttrName(row, $index)">
                 <template #reference>
                   <el-button type="danger" icon="Delete"></el-button>
@@ -111,7 +112,7 @@ watch(
     if (!showTable.value) AttributeObj.categoryId = categoryStore.c3_id;
   }
 );
-const handleFocus = (element) => {
+const handleFocus = (element:any) => {
   element && element.focus();
 };
 
@@ -148,7 +149,7 @@ const handleNewAttrName = () => {
   }
 };
 
-const deleteAttrName = (row, index: number) => {
+const deleteAttrName = (_row:any, index: number) => {
   AttributeObj.attrValueList.splice(index, 1);
 };
 
@@ -168,7 +169,7 @@ const handleEdit = (row: attr) => {
 };
 const deleteAttribute = async (row: attr) => {
   console.log(row);
-  const data = await deleteAttr(row.id);
+  const data = await deleteAttr(row.id as number);
   if (data.code == 200) {
     ElMessage.success('deleted');
   } else ElMessage.error('something went wrong, try again');

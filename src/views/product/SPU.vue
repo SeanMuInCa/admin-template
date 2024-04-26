@@ -64,9 +64,9 @@ import { getSPUList, deleteSpu, getSKUList } from '@/api/production/spu';
 import type { records, spuReturnType, spuData } from '@/api/production/type';
 import SPUForm from './SPUForm.vue';
 import SKUForm from './SKUForm.vue';
-import useSPUStore from '@/store/modules/spu';
+// import useSPUStore from '@/store/modules/spu';
 import { ElMessage } from 'element-plus';
-const SpuStore = useSPUStore();
+// const SpuStore = useSPUStore();
 const categoryStore = useCategoryStore();
 const currentPage = ref<number>(1);
 const pageSize = ref<number>(3);
@@ -77,7 +77,7 @@ const SPUFormRef = ref();
 const SKUFormRef = ref();
 const dialogTableVisible = ref(false);
 const skuList = ref([]);
-const showList = async (row) => {
+const showList = async (row:any) => {
   const data = await getSKUList(row.id);
   console.log(data);
   dialogTableVisible.value = true;
@@ -93,13 +93,14 @@ const addSku = (row: spuData) => {
   console.log(row);
   SKUFormRef.value.initSKUData(row);
 };
-const setScene = (value) => {
+const setScene = (value:any) => {
   scene.value = value;
 };
 
-const confirmDel = async (row) => {
+const confirmDel = async (row:any) => {
   const data = await deleteSpu(row.id);
-  if (data.code == 200) {
+  //@ts-expect-error
+  if ((data.code) == 200) {
     ElMessage.success('deleted success!');
     getList();
   }
@@ -136,7 +137,7 @@ watch(
   }
 );
 
-const handleAdd = (id) => {
+const handleAdd = (id:number|string) => {
   scene.value = 1;
   SPUFormRef.value.setBlank();
   SPUFormRef.value.initSpuParams();

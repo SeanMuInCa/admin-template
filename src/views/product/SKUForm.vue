@@ -15,7 +15,7 @@
       </el-form-item>
       <el-form-item label="Platform Attribute">
         <el-form inline>
-          <el-form-item :label="item.attrName" v-for="(item, index) in platformAttrList" :key="item.id">
+          <el-form-item :label="item.attrName" v-for="(item) in platformAttrList" :key="item.id">
             <el-select v-model="item.attrIdAndValueId" placeholder="please select">
               <el-option v-for="op in item.attrValueList" :key="op.id" :label="op.valueName" :value="`${item.id}:${op.id}`"></el-option>
             </el-select>
@@ -42,7 +42,7 @@
           </el-table-column>
           <el-table-column label="name" prop="imgName"></el-table-column>
           <el-table-column label="Operation">
-            <template #="{ row, $index }">
+            <template #default="{ row, $index }">
               <el-button type="primary" @click="setAsDefault(row, $index)" ref="btn">set as default</el-button>
             </template>
           </el-table-column>
@@ -67,10 +67,10 @@ const $emit = defineEmits(['setScene']);
 const cancel = () => {
   $emit('setScene', 0);
 };
-const platformAttrList = ref([]);
-const saleAttrList = ref([]);
-const spuImageList = ref([]);
-const imageTable = ref();
+const platformAttrList = ref<any>([]);
+const saleAttrList = ref<any>([]);
+const spuImageList = ref<any>([]);
+const imageTable = ref<any>();
 
 const btn = ref();
 
@@ -107,9 +107,10 @@ const save = async () => {
   }
 };
 
-const setAsDefault = (row, index) => {
+const setAsDefault = (row:any, index:any) => {
   console.log(row);
-
+  console.log(index);
+  
   console.log(imageTable.value);
   btn.value.type = 'danger';
   // buttonStyle.value = 'danger';
@@ -117,9 +118,9 @@ const setAsDefault = (row, index) => {
   imageTable.value.toggleRowSelection(row, true);
   skuParams.value.skuDefaultImg = row.imgUrl;
 };
-const initSKUData = async (row) => {
+const initSKUData = async (row:any) => {
   console.log(row);
-
+//@ts-expect-error
   const data: any = await getAttrList(categoryStore.c1_id, categoryStore.c2_id, categoryStore.c3_id);
   if (data.code == 200) {
     platformAttrList.value = data.data;
@@ -136,7 +137,7 @@ const initSKUData = async (row) => {
   skuParams.value.tmId = row.tmId;
   skuParams.value.spuId = row.id;
 };
-
+//@ts-expect-error
 let temp = ref(['', '']);
 const skuParams = ref({
   category3Id: '',

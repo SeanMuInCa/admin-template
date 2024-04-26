@@ -7,7 +7,7 @@ import type { loginData, loginReturnData, userinfoData, logoutReturnData } from 
 import { SET_TOKEN, GET_TOKEN, DEL_TOKEN } from '@/utils/token';
 import { staticRoutes, asyncRoute, anyRoute } from '@/router/routes';
 import { router } from '@/router';
-
+//@ts-expect-error
 import cloneDeep from 'lodash/cloneDeep';
 
 //定义筛选方法
