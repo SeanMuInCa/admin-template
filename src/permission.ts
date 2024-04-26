@@ -12,7 +12,7 @@ const userStore = useUserStore(pinia); //不加入pinia会报错
 //全局守卫
 
 //前置守卫
-router.beforeEach(async (to: any, from: any, next: any) => {
+router.beforeEach(async (to: any, _from: any, next: any) => {
   document.title = `Raina's Home - ${to.meta.title}`;
   // to and from are both route objects. must call `next`.
   const token = userStore.token;
@@ -75,7 +75,7 @@ router.beforeEach(async (to: any, from: any, next: any) => {
 });
 
 //后置守卫
-router.afterEach((to: any, from: any) => {
+router.afterEach((_to: any, _from: any) => {
   // to and from are both route objects.
   nprogress.done();
 });

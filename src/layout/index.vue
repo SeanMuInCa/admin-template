@@ -56,7 +56,7 @@ console.log(router.currentRoute.value.path);
 
 const url = router.currentRoute.value.path;
 
-const menuRoutes = useRoutesStore();
+
 
 onMounted(() => {
   settingStore.darkMode && switchDark(true);

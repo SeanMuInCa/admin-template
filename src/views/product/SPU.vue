@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div>
     <Category :showTable="scene == 0"></Category>
     <el-card style="width: 100%; height: 100%; margin: 10px 0" v-show="scene === 0">
       <el-button type="primary" icon="Plus" @click="handleAdd(categoryStore.c3_id)" :disabled="!categoryStore.c3_id">add a SPU</el-button>
@@ -53,6 +54,7 @@
       </el-table-column>
     </el-table>
   </el-dialog>
+  </div>
 </template>
 
 <script setup lang="ts">

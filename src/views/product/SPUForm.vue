@@ -22,7 +22,6 @@
         :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload"
         :on-preview="handlePictureCardPreview"
-        :on-remove="handleRemove"
       >
         <el-icon><Plus /></el-icon>
       </el-upload>
@@ -49,7 +48,7 @@
           </template>
         </el-table-column>
         <el-table-column label="Operation" width="100px">
-          <template #default="{ row, $index }">
+          <template #default="{ $index }">
             <el-button type="danger" icon="Delete" @click="deleteAttr($index)"></el-button>
           </template>
         </el-table-column>
@@ -62,7 +61,7 @@
 
 <script setup lang="ts">
 import type { UploadProps, UploadUserFile } from 'element-plus';
-import { reactive, ref, nextTick, computed, onMounted } from 'vue';
+import {ref, nextTick, computed } from 'vue';
 import { ElMessage } from 'element-plus';
 import { getTrademarkList, getSPUImageList, getSPUSaleAttrList, getBaseSaleAttrList, modifySPU } from '@/api/production/spu';
 import type { getImageListReturnType, spuData, brandListType, saleAttrListReturnType, baseSaleAttrReturnType } from '@/api/production/type';
@@ -73,13 +72,13 @@ const newAttrValue = ref('');
 let SpuParams = ref<spuData>({});
 const tempAttr = ref('');
 
-const handleClose = (row, item) => {
+const handleClose = (row:any, item:any) => {
   row.spuSaleAttrValueList.splice(row.spuSaleAttrValueList.indexOf(item), 1);
 };
 const pushAttrValue = () => {
   let id = tempAttr.value.split(':')[0];
   let name = tempAttr.value.split(':')[1];
-  SpuStore.saleAttrList.push({
+  (SpuStore.saleAttrList as any).push({
     baseSaleAttrId: id,
     flag: false,
     saleAttrName: name,
@@ -91,16 +90,16 @@ const setBlank = () => {
   tempAttr.value = '';
   SpuStore.$reset();
 };
-const attrInput = (element) => {
+const attrInput = (element:any) => {
   element &&
     nextTick(() => {
       element.focus();
     });
 };
 
-const addValue = (row) => {
+const addValue = (row:any) => {
   if (
-    row.spuSaleAttrValueList.find((item) => {
+    row.spuSaleAttrValueList.find((item:any) => {
       return item.saleAttrValueName === newAttrValue.value;
     })
   ) {
@@ -119,7 +118,7 @@ const addValue = (row) => {
   newAttrValue.value = '';
 };
 
-const deleteAttr = (index) => {
+const deleteAttr = (index:number) => {
   SpuStore.saleAttrList.splice(index, 1);
 };
 
@@ -128,14 +127,14 @@ const modifySPUSave = async () => {
   //imageList
   // SpuParams.value.spuImageList =
   console.log(SpuStore.imgList);
-  let temp = [];
+  let temp:any = [];
   // SpuStore.imgList.forEach((item) => {
   //     temp.push({
   //         imgName:item.name,
   //         imgUrl:item.url.startsWith('http') ? item.url : item.url.slice(item.url.indexOf('http'))
   //     })
   // })
-  temp = SpuStore.imgList.map((item) => {
+  temp = SpuStore.imgList.map((item:any) => {
     return {
       imgName: item.name,
       imgUrl: item.response ? item.response.data : item.url,
@@ -154,9 +153,9 @@ const modifySPUSave = async () => {
 /**
  * 计算剩余属性
  */
-const spuAttrLeftList = computed(() => {
-  return SpuStore.baseAttrList.filter((item) => {
-    return SpuStore.saleAttrList.every((ele) => {
+const spuAttrLeftList:any = computed(() => {
+  return SpuStore.baseAttrList.filter((item:any) => {
+    return SpuStore.saleAttrList.every((ele:any) => {
       return ele.saleAttrName !== item.name;
     });
   });
@@ -169,31 +168,31 @@ const initSPUData = async (row: spuData) => {
   const data1: getImageListReturnType = await getSPUImageList(row.id as number);
   const data2: saleAttrListReturnType = await getSPUSaleAttrList(row.id as number);
   const data3: baseSaleAttrReturnType = await getBaseSaleAttrList();
-  SpuStore.allBrands = data.data;
-  SpuStore.imgList = data1.data.map((item) => {
+  SpuStore.allBrands = data.data as any;
+  SpuStore.imgList = (data1.data as any).map((item:any) => {
     return {
       name: item.imgName,
       url: item.imgUrl,
     };
   });
-  SpuStore.saleAttrList = data2.data.map((item) => {
+  SpuStore.saleAttrList = (data2.data as any).map((item:any) => {
     item.flag = false;
     return item;
   });
-  SpuStore.baseAttrList = data3.data;
-  tempAttr.value = null;
+  SpuStore.baseAttrList = data3.data as any;
+  tempAttr.value = null as any;
 };
 
-const initSPUDataForAdd = async (id) => {
+const initSPUDataForAdd = async (id:any) => {
   const data: brandListType = await getTrademarkList();
-  SpuStore.allBrands = data.data;
+  SpuStore.allBrands = data.data as any;
   const data3: baseSaleAttrReturnType = await getBaseSaleAttrList();
-  SpuStore.baseAttrList = data3.data;
+  SpuStore.baseAttrList = data3.data as any;
   SpuParams.value.category3Id = id;
 };
 
 const initSpuParams = () => {
-  SpuParams.value = {};
+  SpuParams.value = {} as any;
 };
 defineExpose({ initSPUData, setBlank, initSPUDataForAdd, initSpuParams }); //向父组件暴露该方法
 
@@ -204,24 +203,24 @@ const cancel = () => {
 const dialogImageUrl = ref('');
 const dialogVisible = ref(false);
 
-const handleRemove: UploadProps['onRemove'] = (uploadFile: UploadUserFile, uploadFiles: UploadUserFile) => {
-  console.log(uploadFile, uploadFiles);
-};
+// const handleRemove: UploadProps['onRemove'] = (uploadFile: UploadUserFile, uploadFiles: UploadUserFile) => {
+//   console.log(uploadFile, uploadFiles);
+// };
 
 const handlePictureCardPreview: UploadProps['onPreview'] = (uploadFile: UploadUserFile) => {
   dialogImageUrl.value = uploadFile.url!;
   dialogVisible.value = true;
 };
-const newSPUDataParams = reactive<any>({
-  id: undefined,
-  spuName: '',
-  tmId: '',
-  category3Id: '',
-  description: '',
-  spuImageList: [],
-  spuPosterList: null,
-  spuSaleAttrList: null,
-});
+// const newSPUDataParams = reactive<any>({
+//   id: undefined,
+//   spuName: '',
+//   tmId: '',
+//   category3Id: '',
+//   description: '',
+//   spuImageList: [],
+//   spuPosterList: null,
+//   spuSaleAttrList: null,
+// });
 const handleAvatarSuccess: UploadProps['onSuccess'] = async (response: any) => {
   const data = await response;
   if (data.code == 200) {

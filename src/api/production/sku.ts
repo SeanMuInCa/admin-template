@@ -1,5 +1,5 @@
 import axiosRequest from '@/utils/request';
-import type { SKUType, SKUListReturnType } from './type';
+import type { SKUListReturnType } from './type';
 enum API {
   GET_SKU_LIST = '/admin/product/list/',
   ON_SALE = '/admin/product/onSale/',

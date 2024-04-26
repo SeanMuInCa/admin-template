@@ -25,7 +25,7 @@ import { onMounted } from 'vue';
 import useCategoryStore from '@/store/modules/category';
 
 const categoryStore = useCategoryStore();
-const props = defineProps(['showTable']);
+defineProps(['showTable']);
 
 onMounted(() => {
   getCategoryInit();
