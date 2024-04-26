@@ -87,7 +87,7 @@ export const asyncRoute = [
       {
         path: '/acl/roler',
         component: () => import('@/views/acl/Roler.vue'),
-        name: 'Roler',
+        name: 'Role',
         meta: {
           id: '6-2',
           title: 'Roles Management',
@@ -145,7 +145,7 @@ export const asyncRoute = [
       {
         path: '/product/spu',
         component: () => import('@/views/product/SPU.vue'),
-        name: 'SPU',
+        name: 'Spu',
         meta: {
           id: '7-3',
           title: 'SPU Management',
@@ -156,7 +156,7 @@ export const asyncRoute = [
       {
         path: '/product/sku',
         component: () => import('@/views/product/SKU.vue'),
-        name: 'SKU',
+        name: 'Sku',
         meta: {
           id: '7-4',
           title: 'SKU Management',

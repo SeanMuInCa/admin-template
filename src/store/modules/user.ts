@@ -5,11 +5,25 @@ import { loginRequest, userInfoRequest, logoutRequest } from '@/api/user';
 import { UserState } from './types/type';
 import type { loginData, loginReturnData, userinfoData, logoutReturnData } from '@/api/user/type';
 import { SET_TOKEN, GET_TOKEN, DEL_TOKEN } from '@/utils/token';
+import {staticRoutes, asyncRoute,anyRoute} from '@/router/routes';
+
+//定义筛选方法
+const filterRoutes = (asyncRoute:any, routes:any) => {
+  return asyncRoute.filter((item:any)=>{
+    if(routes.includes(item.name)){
+      if(item.children && item.children.length > 0){
+        item.children = filterRoutes(item.children, routes);
+      }
+      return true;
+    }
+  })
+}
 
 const useUserStore = defineStore('User', {
   state: (): UserState => {
     return {
       token: GET_TOKEN(),
+      menuRoutes: staticRoutes,
       userInfo: {
         roles: [],
         username: '',
@@ -36,6 +50,10 @@ const useUserStore = defineStore('User', {
         this.userInfo.username = data.data.name;
         this.userInfo.roles = data.data.roles;
         this.userInfo.avatar = data.data.avatar;
+        console.log(data);
+        const userRoutes = filterRoutes(asyncRoute, data.data.routes);
+        //菜单数据
+        this.menuRoutes = [...staticRoutes, ...userRoutes, anyRoute];
         return Promise.resolve(data.code);
       } else {
         return Promise.reject('failed to get user info');

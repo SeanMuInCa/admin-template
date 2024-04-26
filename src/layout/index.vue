@@ -5,7 +5,7 @@
       <Logo></Logo>
       <el-scrollbar class="scrollbar">
         <el-menu background-color="#87b679" text-color="white" :default-active="url" :collapse="settingStore.isFold ? true : false">
-          <Menu :menuList="menuRoutes.menuRoutes" :url="url"></Menu>
+          <Menu :menuList="userStore.menuRoutes" :url="url"></Menu>
         </el-menu>
       </el-scrollbar>
     </div>
@@ -35,7 +35,8 @@ import { router } from '@/router/index';
 import { ref, onMounted } from 'vue';
 import useRoutesStore from '@/store/modules/menuRoutes';
 import useSettingStore from '@/store/modules/setting';
-
+import useUserStore from '@/store/modules/user';
+let userStore = useUserStore();
 const settingStore = useSettingStore();
 const drawer = ref(false);
 const callDrawer = (value: boolean) => {
