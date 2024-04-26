@@ -20,5 +20,7 @@ app.use(globaleComponent);
 
 app.use(router);
 app.use(pinia);
-
+//引入自定义指令,判断按钮是否应该显示
+import { hasButtons } from './directive/orders';
+hasButtons(app);
 app.mount('#app');

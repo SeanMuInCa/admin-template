@@ -12,7 +12,7 @@
       </el-form>
     </el-card>
     <el-card style="margin: 10px 0">
-      <el-button type="primary" @click="handleAdd" icon="Plus">Add a new role</el-button>
+      <el-button type="primary" @click="handleAdd" icon="Plus" v-has="'btn.Role.add'">Add a new role</el-button>
       <el-table border style="margin: 20px 0" :data="roleRecords">
         <el-table-column label="No." width="100" type="index"></el-table-column>
         >
@@ -27,7 +27,7 @@
         <el-table-column label="operation">
           <template #default="{ row }">
             <el-button type="primary" icon="User" size="small" @click="assignPermit(row)">Assign Permission</el-button>
-            <el-button type="warning" icon="Edit" size="small" @click="editRole(row)">Edit Role</el-button>
+            <el-button type="warning" icon="Edit" size="small" @click="editRole(row)" >Edit Role</el-button>
             <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="confirmDel(row)">
               <template #reference>
                 <el-button type="danger" icon="Delete" size="small">Delete</el-button>

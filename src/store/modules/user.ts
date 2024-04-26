@@ -7,6 +7,7 @@ import type { loginData, loginReturnData, userinfoData, logoutReturnData } from 
 import { SET_TOKEN, GET_TOKEN, DEL_TOKEN } from '@/utils/token';
 import { staticRoutes, asyncRoute, anyRoute } from '@/router/routes';
 import { router } from '@/router';
+
 import cloneDeep from 'lodash/cloneDeep';
 
 //定义筛选方法
@@ -26,7 +27,10 @@ const useUserStore = defineStore('User', {
   state: (): UserState => {
     return {
       token: GET_TOKEN(),
+      //菜单
       menuRoutes: staticRoutes,
+      //按钮
+      buttons:[],
       userInfo: {
         roles: [],
         username: '',
@@ -53,6 +57,7 @@ const useUserStore = defineStore('User', {
         this.userInfo.username = data.data.name;
         this.userInfo.roles = data.data.roles;
         this.userInfo.avatar = data.data.avatar;
+        this.buttons = data.data.buttons;
         console.log(data);
         const userRoutes = filterRoutes(cloneDeep(asyncRoute), data.data.routes);
         //菜单数据仅仅是菜单数据
