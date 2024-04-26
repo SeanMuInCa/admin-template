@@ -57,7 +57,6 @@ export const staticRoutes = [
       icon: 'Platform',
     },
   },
-  
 ];
 
 //异步路由
@@ -167,7 +166,7 @@ export const asyncRoute = [
       },
     ],
   },
-]
+];
 
 //任意路由
 export const anyRoute = {
@@ -179,4 +178,4 @@ export const anyRoute = {
     title: 'Redirect404',
     showInMenu: false,
   },
-}
+};
