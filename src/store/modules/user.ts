@@ -30,7 +30,7 @@ const useUserStore = defineStore('User', {
       //菜单
       menuRoutes: staticRoutes,
       //按钮
-      buttons:[],
+      buttons: [],
       userInfo: {
         roles: [],
         username: '',

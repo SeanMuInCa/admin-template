@@ -10,7 +10,7 @@
           <el-button type="warning" icon="Edit" size="small" :disabled="row.level === 1" @click="editPermit(row)">Edit</el-button>
           <el-popconfirm width="220" confirm-button-text="OK" cancel-button-text="No, Thanks" icon="InfoFilled" icon-color="#626AEF" title="Are you sure to delete this?" @confirm="delMenu(row)">
             <template #reference>
-              <el-button type="danger" icon="Delete" size="small" :disabled="row.level === 1" >Delete</el-button>
+              <el-button type="danger" icon="Delete" size="small" :disabled="row.level === 1">Delete</el-button>
             </template>
           </el-popconfirm>
         </template>

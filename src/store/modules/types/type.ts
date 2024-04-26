@@ -5,7 +5,7 @@ export interface UserState {
   token: string | null;
   userInfo: userInfo;
   menuRoutes: RouteRecordRaw[];
-  buttons:string[];
+  buttons: string[];
 }
 
 interface userInfo {
