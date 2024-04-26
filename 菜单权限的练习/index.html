@@ -179,7 +179,7 @@
     return asnycRoute.filter((item) => {
       if (routes.includes(item.name)) {
         if (item.children && item.children.length > 0) {
-          item.children = filterAsyncRoute(item.children, routes);//这里改动了async路由的数据
+          item.children = filterAsyncRoute(item.children, routes); //这里改动了async路由的数据
         }
         return true;
       }

@@ -5,19 +5,19 @@ import { loginRequest, userInfoRequest, logoutRequest } from '@/api/user';
 import { UserState } from './types/type';
 import type { loginData, loginReturnData, userinfoData, logoutReturnData } from '@/api/user/type';
 import { SET_TOKEN, GET_TOKEN, DEL_TOKEN } from '@/utils/token';
-import {staticRoutes, asyncRoute,anyRoute} from '@/router/routes';
+import { staticRoutes, asyncRoute, anyRoute } from '@/router/routes';
 
 //定义筛选方法
-const filterRoutes = (asyncRoute:any, routes:any) => {
-  return asyncRoute.filter((item:any)=>{
-    if(routes.includes(item.name)){
-      if(item.children && item.children.length > 0){
+const filterRoutes = (asyncRoute: any, routes: any) => {
+  return asyncRoute.filter((item: any) => {
+    if (routes.includes(item.name)) {
+      if (item.children && item.children.length > 0) {
         item.children = filterRoutes(item.children, routes);
       }
       return true;
     }
-  })
-}
+  });
+};
 
 const useUserStore = defineStore('User', {
   state: (): UserState => {
