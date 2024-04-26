@@ -29,7 +29,7 @@ router.beforeEach(async (to: any, from: any, next: any) => {
       } else {
         try {
           await userStore.userInfoRequest();
-          next({...to});//这样写就能确保路由加载完成再刷新
+          next({ ...to }); //这样写就能确保路由加载完成再刷新
         } catch (error) {
           //发了请求又没有获取到用户信息，说明只能是token过期
           //或者是token被修改了，验证没通过

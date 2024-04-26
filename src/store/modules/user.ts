@@ -9,7 +9,6 @@ import { staticRoutes, asyncRoute, anyRoute } from '@/router/routes';
 import { router } from '@/router';
 import cloneDeep from 'lodash/cloneDeep';
 
-
 //定义筛选方法
 const filterRoutes = (asyncRoute: any, routes: any) => {
   return asyncRoute.filter((item: any) => {
@@ -59,9 +58,9 @@ const useUserStore = defineStore('User', {
         //菜单数据仅仅是菜单数据
         this.menuRoutes = [...staticRoutes, ...userRoutes, anyRoute];
         //追加路由
-        [...userRoutes, anyRoute].forEach((route:any) => {
+        [...userRoutes, anyRoute].forEach((route: any) => {
           router.addRoute(route);
-        })
+        });
         return Promise.resolve(data.code);
       } else {
         return Promise.reject('failed to get user info');
