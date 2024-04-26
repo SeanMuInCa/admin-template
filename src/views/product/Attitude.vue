@@ -38,7 +38,7 @@
         <el-table border style="margin: 10px 0" :data="AttributeObj.attrValueList">
           <el-table-column label="No." width="100px" align="center" type="index"></el-table-column>
           <el-table-column label="Attribute Value">
-            <template #default="{ row}">
+            <template #default="{ row }">
               <div class="tags">
                 <el-input v-model="row.valueName" v-show="edit == 1" :ref="handleFocus"></el-input>
                 <div style="background-color: red; width: 100%" v-show="edit == 0">{{ row.valueName }}</div>
@@ -112,7 +112,7 @@ watch(
     if (!showTable.value) AttributeObj.categoryId = categoryStore.c3_id;
   }
 );
-const handleFocus = (element:any) => {
+const handleFocus = (element: any) => {
   element && element.focus();
 };
 
@@ -149,7 +149,7 @@ const handleNewAttrName = () => {
   }
 };
 
-const deleteAttrName = (_row:any, index: number) => {
+const deleteAttrName = (_row: any, index: number) => {
   AttributeObj.attrValueList.splice(index, 1);
 };
 

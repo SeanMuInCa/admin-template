@@ -15,7 +15,7 @@
       </el-form-item>
       <el-form-item label="Platform Attribute">
         <el-form inline>
-          <el-form-item :label="item.attrName" v-for="(item) in platformAttrList" :key="item.id">
+          <el-form-item :label="item.attrName" v-for="item in platformAttrList" :key="item.id">
             <el-select v-model="item.attrIdAndValueId" placeholder="please select">
               <el-option v-for="op in item.attrValueList" :key="op.id" :label="op.valueName" :value="`${item.id}:${op.id}`"></el-option>
             </el-select>
@@ -107,10 +107,10 @@ const save = async () => {
   }
 };
 
-const setAsDefault = (row:any, index:any) => {
+const setAsDefault = (row: any, index: any) => {
   console.log(row);
   console.log(index);
-  
+
   console.log(imageTable.value);
   btn.value.type = 'danger';
   // buttonStyle.value = 'danger';
@@ -118,9 +118,9 @@ const setAsDefault = (row:any, index:any) => {
   imageTable.value.toggleRowSelection(row, true);
   skuParams.value.skuDefaultImg = row.imgUrl;
 };
-const initSKUData = async (row:any) => {
+const initSKUData = async (row: any) => {
   console.log(row);
-//@ts-expect-error
+  //@ts-expect-error
   const data: any = await getAttrList(categoryStore.c1_id, categoryStore.c2_id, categoryStore.c3_id);
   if (data.code == 200) {
     platformAttrList.value = data.data;

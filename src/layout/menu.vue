@@ -1,6 +1,6 @@
 <template>
   <div class="menulist" :class="{ dark: settingStore.darkMode }">
-    <template v-for="(item) in menuList" :key="item.path">
+    <template v-for="item in menuList" :key="item.path">
       <template v-if="!item.children">
         <el-menu-item :index="item.path" v-if="item.meta.showInMenu" @click="goRoute">
           <el-icon :size="100">

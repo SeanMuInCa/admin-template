@@ -77,7 +77,7 @@ const SPUFormRef = ref();
 const SKUFormRef = ref();
 const dialogTableVisible = ref(false);
 const skuList = ref([]);
-const showList = async (row:any) => {
+const showList = async (row: any) => {
   const data = await getSKUList(row.id);
   console.log(data);
   dialogTableVisible.value = true;
@@ -93,14 +93,14 @@ const addSku = (row: spuData) => {
   console.log(row);
   SKUFormRef.value.initSKUData(row);
 };
-const setScene = (value:any) => {
+const setScene = (value: any) => {
   scene.value = value;
 };
 
-const confirmDel = async (row:any) => {
+const confirmDel = async (row: any) => {
   const data = await deleteSpu(row.id);
   //@ts-expect-error
-  if ((data.code) == 200) {
+  if (data.code == 200) {
     ElMessage.success('deleted success!');
     getList();
   }
@@ -137,7 +137,7 @@ watch(
   }
 );
 
-const handleAdd = (id:number|string) => {
+const handleAdd = (id: number | string) => {
   scene.value = 1;
   SPUFormRef.value.setBlank();
   SPUFormRef.value.initSpuParams();

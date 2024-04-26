@@ -8,7 +8,7 @@
     <el-form-item label="Spu brand" label-width="135">
       <el-select placeholder="select your brand" style="width: 240px" v-model="SpuParams.tmId">
         <!-- @ts-ignore -->
-        <el-option v-for="(item) in allBrands" :key="item.id" :label="item.tmName" :value="item.id"></el-option>
+        <el-option v-for="item in allBrands" :key="item.id" :label="item.tmName" :value="item.id"></el-option>
       </el-select>
     </el-form-item>
 
@@ -59,7 +59,7 @@ import type { UploadProps, UploadUserFile } from 'element-plus';
 import { ref, nextTick, computed } from 'vue';
 import { ElMessage } from 'element-plus';
 import { getTrademarkList, getSPUImageList, getSPUSaleAttrList, getBaseSaleAttrList, modifySPU } from '@/api/production/spu';
-import type {brandType, getImageListReturnType, spuData, brandListType, saleAttrListReturnType, baseSaleAttrReturnType } from '@/api/production/type';
+import type { brandType, getImageListReturnType, spuData, brandListType, saleAttrListReturnType, baseSaleAttrReturnType } from '@/api/production/type';
 import useSPUStore from '@/store/modules/spu';
 const SpuStore = useSPUStore();
 const props = defineProps(['setScene']);

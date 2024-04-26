@@ -97,10 +97,10 @@ const getData = async () => {
     })
     .catch(() => {});
 };
-const confirm = async (row:any) => {
+const confirm = async (row: any) => {
   await productStore
     .deleteBrand(row.id)
-    .then((data:any) => {
+    .then((data: any) => {
       console.log('data', data);
       if (data.code == 200) {
         ElMessage.success('deleted');
@@ -114,13 +114,12 @@ const confirm = async (row:any) => {
     });
 };
 
-const editBrand = (row:any) => {
+const editBrand = (row: any) => {
   title.value = 'Edit Brand';
   show.value = true;
   addFlag.value = false;
   rowData = row;
 };
-
 </script>
 
 <style scoped lang="scss">
